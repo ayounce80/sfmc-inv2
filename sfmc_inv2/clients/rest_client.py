@@ -328,3 +328,9 @@ def rest_patch(path: str, **kwargs: Any) -> dict[str, Any]:
 def rest_delete(path: str, **kwargs: Any) -> dict[str, Any]:
     """Make a DELETE request using the default client."""
     return get_rest_client().delete(path, **kwargs)
+
+
+def reset_rest_client() -> None:
+    """Reset the default REST client singleton."""
+    global _default_client
+    _default_client = None

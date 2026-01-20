@@ -50,10 +50,10 @@ htmlcov/
 .dmypy.json
 dmypy.json
 
-# Output directories
-inventory/
+# Output directories (inventory extraction results)
+/inventory/
 inventory_*/
-output/
+/output/
 
 # Logs
 *.log

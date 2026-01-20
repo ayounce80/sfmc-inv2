@@ -609,3 +609,9 @@ def get_soap_client(config: Optional[SFMCConfig] = None) -> SOAPClient:
     if _default_client is None:
         _default_client = SOAPClient(config)
     return _default_client
+
+
+def reset_soap_client() -> None:
+    """Reset the default SOAP client singleton."""
+    global _default_client
+    _default_client = None

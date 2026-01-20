@@ -15,7 +15,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 from rich.table import Table
 
 from . import __version__
-from .core.config import get_config
+from .core.config import get_config, get_config_with_account
 from .extractors import list_extractors, EXTRACTORS
 from .orchestration import (
     ExtractorRunner,
@@ -78,6 +78,12 @@ def run(
         "-p",
         help="Use preset: quick, full, content, or journey",
     ),
+    account_id: Optional[str] = typer.Option(
+        None,
+        "--account-id",
+        "-a",
+        help="Override SFMC Account/MID (Business Unit ID)",
+    ),
     output_dir: Path = typer.Option(
         Path("./inventory"),
         "--output-dir",
@@ -129,6 +135,22 @@ def run(
         console.print("See .env.example for required variables.")
         raise typer.Exit(1)
 
+    # Handle account_id override
+    effective_account_id = account_id or config.account_id
+    if account_id:
+        # Reset client singletons when switching BUs
+        from .clients.auth import reset_token_manager
+        from .clients.rest_client import reset_rest_client
+        from .clients.soap_client import reset_soap_client
+
+        reset_token_manager()
+        reset_rest_client()
+        reset_soap_client()
+
+        # Create config with overridden account_id
+        config = get_config_with_account(account_id)
+        console.print(f"[cyan]Using Business Unit (MID): {account_id}[/cyan]")
+
     # Determine extractors to run
     extractors: list[str] = []
 
@@ -168,6 +190,7 @@ def run(
                 output_format,
                 include_details,
                 include_content,
+                effective_account_id,
             )
         )
     else:
@@ -184,9 +207,13 @@ async def run_cli_extraction(
     output_format: str,
     include_details: bool,
     include_content: bool,
+    account_id: Optional[str] = None,
 ) -> None:
     """Run extraction in CLI mode with progress display."""
-    config = get_config()
+    if account_id:
+        config = get_config_with_account(account_id)
+    else:
+        config = get_config()
 
     console.print(f"\n[bold]SFMC Inventory Extraction[/bold]")
     console.print(f"Extractors: {', '.join(extractors)}")

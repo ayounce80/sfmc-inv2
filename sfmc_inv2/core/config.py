@@ -73,3 +73,24 @@ def get_config() -> SFMCConfig:
         rest_debug=os.environ.get("SFMC_REST_DEBUG", "").lower() == "true",
         soap_max_pages=int(os.environ.get("SFMC_SOAP_MAX_PAGES", "100")),
     )
+
+
+def get_config_with_account(account_id: str) -> SFMCConfig:
+    """Load config from environment but override account_id.
+
+    Args:
+        account_id: The SFMC Account/MID to use.
+
+    Returns:
+        SFMCConfig instance with overridden account_id.
+    """
+    base = get_config()
+    return SFMCConfig(
+        subdomain=base.subdomain,
+        client_id=base.client_id,
+        client_secret=base.client_secret,
+        account_id=account_id,
+        soap_debug=base.soap_debug,
+        rest_debug=base.rest_debug,
+        soap_max_pages=base.soap_max_pages,
+    )
