@@ -31,14 +31,14 @@ class SenderProfileExtractor(BaseExtractor):
         "AutoForwardToEmailAddress",
         "AutoForwardToName",
         "DirectForward",
-        "AutoForwardTriggeredSend.CustomerKey",
+        # "AutoForwardTriggeredSend.CustomerKey",  # Fails at enterprise level
         "AutoReply",
-        "AutoReplyTriggeredSend.CustomerKey",
+        # "AutoReplyTriggeredSend.CustomerKey",  # Fails at enterprise level
         "SenderHeaderEmailAddress",
         "SenderHeaderName",
         "DataRetentionPeriodLength",
         "DataRetentionPeriodUnitOfMeasure",
-        "ReplyManagementRuleSet.CustomerKey",
+        # "ReplyManagementRuleSet.CustomerKey",  # Fails at enterprise level
         "CreatedDate",
         "ModifiedDate",
     ]

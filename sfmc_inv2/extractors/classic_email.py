@@ -30,7 +30,7 @@ class ClassicEmailExtractor(BaseExtractor):
     # Properties to retrieve (excludes HTMLBody/TextBody by default for performance)
     SOAP_PROPERTIES = [
         "ID",
-        "ObjectID",
+        # "ObjectID",  # Fails at enterprise level
         "CustomerKey",
         "Name",
         "Subject",

@@ -36,10 +36,10 @@ class TemplateExtractor(BaseExtractor):
         "Cellpadding",
         "Cellspacing",
         "Width",
-        "IsBlank",
+        # "IsBlank",  # Fails at enterprise level
         "IsTemplateSubjectLocked",
-        "CreatedDate",
-        "ModifiedDate",
+        # "CreatedDate",  # Fails at enterprise level
+        # "ModifiedDate",  # Fails at enterprise level
     ]
 
     # Additional properties when include_content is True

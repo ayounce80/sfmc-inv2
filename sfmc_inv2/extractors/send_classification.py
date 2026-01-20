@@ -29,12 +29,12 @@ class SendClassificationExtractor(BaseExtractor):
         "Description",
         "SenderProfile.ObjectID",
         "SenderProfile.CustomerKey",
-        "SenderProfile.Name",
+        # "SenderProfile.Name",  # Fails at enterprise level
         "DeliveryProfile.ObjectID",
         "DeliveryProfile.CustomerKey",
-        "DeliveryProfile.Name",
-        "HonorPublicationListOptOutsForTransactionalSends",
-        "SendPriority",
+        # "DeliveryProfile.Name",  # Fails at enterprise level
+        # "HonorPublicationListOptOutsForTransactionalSends",  # Fails at enterprise level
+        # "SendPriority",  # Fails at enterprise level
         "CreatedDate",
         "ModifiedDate",
     ]

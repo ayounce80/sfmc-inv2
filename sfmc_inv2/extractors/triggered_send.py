@@ -30,15 +30,15 @@ class TriggeredSendExtractor(BaseExtractor):
         "Description",
         "TriggeredSendStatus",
         "Email.ID",
-        "Email.Name",
+        # "Email.Name",  # Fails at enterprise level
         "List.ID",
-        "List.ListName",
+        # "List.ListName",  # Fails at enterprise level
         "SendClassification.CustomerKey",
-        "SendClassification.Name",
+        # "SendClassification.Name",  # Fails at enterprise level
         "SenderProfile.CustomerKey",
-        "SenderProfile.Name",
+        # "SenderProfile.Name",  # Fails at enterprise level
         "DeliveryProfile.CustomerKey",
-        "DeliveryProfile.Name",
+        # "DeliveryProfile.Name",  # Fails at enterprise level
         "CategoryID",
         "FromName",
         "FromAddress",
