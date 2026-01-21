@@ -139,9 +139,9 @@ def run(
     effective_account_id = account_id or config.account_id
     if account_id:
         # Reset client singletons when switching BUs
-        from .clients.auth import reset_token_manager
-        from .clients.rest_client import reset_rest_client
-        from .clients.soap_client import reset_soap_client
+        from .clients.auth import reset_token_manager, get_token_manager
+        from .clients.rest_client import reset_rest_client, get_rest_client
+        from .clients.soap_client import reset_soap_client, get_soap_client
 
         reset_token_manager()
         reset_rest_client()
@@ -149,6 +149,12 @@ def run(
 
         # Create config with overridden account_id
         config = get_config_with_account(account_id)
+
+        # Re-initialize clients with new config (important!)
+        get_token_manager(config)
+        get_rest_client(config)
+        get_soap_client(config)
+
         console.print(f"[cyan]Using Business Unit (MID): {account_id}[/cyan]")
 
     # Determine extractors to run
