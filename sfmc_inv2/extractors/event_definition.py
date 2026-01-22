@@ -137,6 +137,6 @@ class EventDefinitionExtractor(BaseExtractor):
                     target_id=str(de_id),
                     target_type="data_extension",
                     target_name=de_name,
-                    relationship_type=RelationshipType.DEPENDS_ON,
+                    relationship_type=RelationshipType.EVENT_DEFINITION_USES_DE,
                     metadata={"usage": "entry_source"},
                 )

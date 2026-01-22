@@ -78,31 +78,31 @@ class FilterExtractor(BaseExtractor):
         transformed = []
 
         for item in items:
-            # Extract source and destination DE info
-            source_de = item.get("sourceDataExtension", {})
-            dest_de = item.get("destinationDataExtension", {})
-
+            # API returns sourceObjectId/destinationObjectId (DE IDs)
+            # and resultDEName/resultDEKey for destination DE info
             output = {
                 "id": item.get("filterActivityId"),
                 "name": item.get("name"),
-                "customerKey": item.get("key"),
+                "customerKey": item.get("customerKey") or item.get("key"),
                 "description": item.get("description"),
                 "categoryId": item.get("categoryId"),
                 "folderPath": item.get("folderPath"),
-                # Source Data Extension
-                "sourceDataExtensionId": source_de.get("id") if source_de else None,
-                "sourceDataExtensionName": source_de.get("name") if source_de else None,
-                "sourceDataExtensionKey": source_de.get("key") if source_de else None,
-                # Destination Data Extension
-                "destinationDataExtensionId": dest_de.get("id") if dest_de else None,
-                "destinationDataExtensionName": dest_de.get("name") if dest_de else None,
-                "destinationDataExtensionKey": dest_de.get("key") if dest_de else None,
+                # Source Data Extension (reads from)
+                "sourceDataExtensionId": item.get("sourceObjectId"),
+                "sourceDataExtensionName": item.get("sourceDEName"),
+                "sourceDataExtensionKey": item.get("sourceDEKey"),
+                # Destination Data Extension (writes to)
+                "destinationDataExtensionId": item.get("destinationObjectId"),
+                "destinationDataExtensionName": item.get("resultDEName"),
+                "destinationDataExtensionKey": item.get("resultDEKey"),
                 # Filter definition
                 "filterDefinitionId": item.get("filterDefinitionId"),
                 # Status and dates
-                "status": item.get("status"),
+                "status": item.get("status") or item.get("statusId"),
                 "createdDate": item.get("createdDate"),
                 "modifiedDate": item.get("modifiedDate"),
+                "createdBy": item.get("createdBy"),
+                "modifiedBy": item.get("modifiedBy"),
             }
             transformed.append(output)
 
@@ -122,35 +122,27 @@ class FilterExtractor(BaseExtractor):
                 continue
 
             # Source DE relationship (reads from)
-            source_de = item.get("sourceDataExtension", {})
-            if source_de:
-                de_id = source_de.get("id")
-                de_name = source_de.get("name")
-                if de_id:
-                    result.add_relationship(
-                        source_id=str(filter_id),
-                        source_type="filter",
-                        source_name=filter_name,
-                        target_id=str(de_id),
-                        target_type="data_extension",
-                        target_name=de_name,
-                        relationship_type=RelationshipType.DEPENDS_ON,
-                        metadata={"usage": "source"},
-                    )
+            source_de_id = item.get("sourceObjectId")
+            if source_de_id:
+                result.add_relationship(
+                    source_id=str(filter_id),
+                    source_type="filter",
+                    source_name=filter_name,
+                    target_id=str(source_de_id),
+                    target_type="data_extension",
+                    target_name=item.get("sourceDEName"),
+                    relationship_type=RelationshipType.FILTER_READS_DE,
+                )
 
             # Destination DE relationship (writes to)
-            dest_de = item.get("destinationDataExtension", {})
-            if dest_de:
-                de_id = dest_de.get("id")
-                de_name = dest_de.get("name")
-                if de_id:
-                    result.add_relationship(
-                        source_id=str(filter_id),
-                        source_type="filter",
-                        source_name=filter_name,
-                        target_id=str(de_id),
-                        target_type="data_extension",
-                        target_name=de_name,
-                        relationship_type=RelationshipType.DEPENDS_ON,
-                        metadata={"usage": "destination"},
-                    )
+            dest_de_id = item.get("destinationObjectId")
+            if dest_de_id:
+                result.add_relationship(
+                    source_id=str(filter_id),
+                    source_type="filter",
+                    source_name=filter_name,
+                    target_id=str(dest_de_id),
+                    target_type="data_extension",
+                    target_name=item.get("resultDEName"),
+                    relationship_type=RelationshipType.FILTER_WRITES_DE,
+                )

@@ -98,6 +98,8 @@ class DataExtractExtractor(BaseExtractor):
                 "status": item.get("status"),
                 "createdDate": item.get("createdDate"),
                 "modifiedDate": item.get("modifiedDate"),
+                "createdBy": item.get("createdBy"),
+                "modifiedBy": item.get("modifiedBy"),
             }
             transformed.append(output)
 

@@ -294,3 +294,269 @@ class RelationshipBuilder:
     def to_dict(self) -> dict[str, Any]:
         """Export the graph as a dictionary."""
         return self._graph.model_dump()
+
+    def get_objects_used_by(self, source_type: str) -> set[str]:
+        """Get all object IDs that are targets of a given source type.
+
+        Args:
+            source_type: Type of source objects (e.g., "automation").
+
+        Returns:
+            Set of target object IDs used by the source type.
+        """
+        used_ids = set()
+        for edge in self._graph.edges:
+            if edge.source_type == source_type:
+                used_ids.add(edge.target_id)
+        return used_ids
+
+    def get_objects_not_used_by(
+        self,
+        object_type: str,
+        source_types: list[str],
+    ) -> list[dict[str, Any]]:
+        """Find objects not referenced by any of the specified source types.
+
+        Args:
+            object_type: Type of objects to check.
+            source_types: List of source types that should reference the objects.
+
+        Returns:
+            List of objects not used by any of the source types.
+        """
+        # Get all target IDs from the specified source types
+        used_ids: set[str] = set()
+        for edge in self._graph.edges:
+            if edge.source_type in source_types and edge.target_type == object_type:
+                used_ids.add(edge.target_id)
+
+        # Find objects not in the used set
+        objects = self._object_index.get(object_type, {})
+        not_used = []
+        for obj_id, obj in objects.items():
+            if obj_id not in used_ids:
+                not_used.append(obj)
+        return not_used
+
+    def get_usage_count(self, object_id: str, object_type: str) -> int:
+        """Count how many times an object is referenced as a target.
+
+        Args:
+            object_id: ID of the object.
+            object_type: Type of the object.
+
+        Returns:
+            Number of times the object is referenced.
+        """
+        return self._reference_counts[object_type].get(object_id, 0)
+
+    def get_sources_for_target(
+        self,
+        target_id: str,
+        target_type: str,
+        source_type: Optional[str] = None,
+    ) -> list[dict[str, Any]]:
+        """Get all source objects that reference a target object.
+
+        Args:
+            target_id: ID of the target object.
+            target_type: Type of the target object.
+            source_type: Optional filter for source type.
+
+        Returns:
+            List of dicts with source info (id, type, name).
+        """
+        sources = []
+        for edge in self._graph.edges:
+            if edge.target_id == target_id and edge.target_type == target_type:
+                if source_type is None or edge.source_type == source_type:
+                    sources.append({
+                        "id": edge.source_id,
+                        "type": edge.source_type,
+                        "name": edge.source_name,
+                        "relationship": edge.relationship_type.value,
+                    })
+        return sources
+
+    def get_object_by_id(
+        self,
+        object_id: str,
+        object_type: str,
+    ) -> Optional[dict[str, Any]]:
+        """Get an indexed object by ID and type.
+
+        Args:
+            object_id: ID of the object.
+            object_type: Type of the object.
+
+        Returns:
+            Object dict or None if not found.
+        """
+        return self._object_index.get(object_type, {}).get(object_id)
+
+    def get_all_objects(self, object_type: str) -> list[dict[str, Any]]:
+        """Get all indexed objects of a given type.
+
+        Args:
+            object_type: Type of objects to retrieve.
+
+        Returns:
+            List of all objects of that type.
+        """
+        return list(self._object_index.get(object_type, {}).values())
+
+    def generate_deletion_impact_report(
+        self,
+        object_id: str,
+        object_type: str,
+        max_depth: int = 3,
+    ) -> dict[str, Any]:
+        """Generate a report showing what would be affected if an object were deleted.
+
+        Performs a recursive traversal to find all objects that depend on the
+        target object, directly or transitively.
+
+        Args:
+            object_id: ID of the object to analyze.
+            object_type: Type of the object.
+            max_depth: Maximum depth to traverse (default 3).
+
+        Returns:
+            Report dict with:
+            - object: The target object info
+            - direct_dependents: Objects directly depending on this object
+            - transitive_dependents: Objects indirectly affected (by depth level)
+            - summary: Counts by object type
+        """
+        # Get the target object
+        target_obj = self.get_object_by_id(object_id, object_type)
+
+        report = {
+            "object": {
+                "id": object_id,
+                "type": object_type,
+                "name": target_obj.get("name") if target_obj else None,
+            },
+            "direct_dependents": [],
+            "transitive_dependents": {},
+            "summary": {
+                "total_affected": 0,
+                "by_type": {},
+                "by_depth": {},
+            },
+        }
+
+        # Track visited to avoid cycles
+        visited: set[tuple[str, str]] = set()
+        visited.add((object_id, object_type))
+
+        # Find direct dependents
+        direct_edges = self.get_dependents_for(object_id, object_type)
+        for edge in direct_edges:
+            dependent_info = {
+                "id": edge.source_id,
+                "type": edge.source_type,
+                "name": edge.source_name,
+                "relationship": edge.relationship_type.value,
+            }
+            report["direct_dependents"].append(dependent_info)
+            visited.add((edge.source_id, edge.source_type))
+
+        # Track counts
+        report["summary"]["by_depth"]["1"] = len(direct_edges)
+
+        # Find transitive dependents (up to max_depth)
+        current_level = [(e.source_id, e.source_type, e.source_name) for e in direct_edges]
+
+        for depth in range(2, max_depth + 1):
+            next_level = []
+            depth_key = str(depth)
+            report["transitive_dependents"][depth_key] = []
+
+            for src_id, src_type, src_name in current_level:
+                edges = self.get_dependents_for(src_id, src_type)
+                for edge in edges:
+                    key = (edge.source_id, edge.source_type)
+                    if key not in visited:
+                        visited.add(key)
+                        dependent_info = {
+                            "id": edge.source_id,
+                            "type": edge.source_type,
+                            "name": edge.source_name,
+                            "relationship": edge.relationship_type.value,
+                            "via": {
+                                "id": src_id,
+                                "type": src_type,
+                                "name": src_name,
+                            },
+                        }
+                        report["transitive_dependents"][depth_key].append(dependent_info)
+                        next_level.append((edge.source_id, edge.source_type, edge.source_name))
+
+            report["summary"]["by_depth"][depth_key] = len(report["transitive_dependents"][depth_key])
+            current_level = next_level
+
+            if not current_level:
+                break
+
+        # Calculate summary
+        all_affected: list[dict[str, Any]] = list(report["direct_dependents"])
+        for depth_items in report["transitive_dependents"].values():
+            all_affected.extend(depth_items)
+
+        report["summary"]["total_affected"] = len(all_affected)
+
+        # Count by type
+        type_counts: dict[str, int] = {}
+        for item in all_affected:
+            obj_type = item["type"]
+            type_counts[obj_type] = type_counts.get(obj_type, 0) + 1
+        report["summary"]["by_type"] = type_counts
+
+        return report
+
+    def get_deletion_impact_summary(
+        self,
+        object_id: str,
+        object_type: str,
+    ) -> str:
+        """Get a human-readable summary of deletion impact.
+
+        Args:
+            object_id: ID of the object to analyze.
+            object_type: Type of the object.
+
+        Returns:
+            Formatted string summarizing the impact.
+        """
+        report = self.generate_deletion_impact_report(object_id, object_type)
+
+        lines = []
+        obj_name = report["object"]["name"] or object_id
+        lines.append(f"Deletion Impact: {object_type} '{obj_name}'")
+        lines.append("=" * 50)
+
+        total = report["summary"]["total_affected"]
+        if total == 0:
+            lines.append("No other objects depend on this object.")
+            lines.append("This object can be safely deleted.")
+        else:
+            lines.append(f"Total affected objects: {total}")
+            lines.append("")
+            lines.append("By type:")
+            for obj_type, count in sorted(report["summary"]["by_type"].items()):
+                lines.append(f"  - {obj_type}: {count}")
+            lines.append("")
+            lines.append("By dependency depth:")
+            for depth, count in sorted(report["summary"]["by_depth"].items()):
+                if count > 0:
+                    depth_label = "direct" if depth == "1" else f"depth {depth}"
+                    lines.append(f"  - {depth_label}: {count}")
+            lines.append("")
+            lines.append("Direct dependents:")
+            for dep in report["direct_dependents"][:10]:  # Limit to first 10
+                lines.append(f"  - [{dep['type']}] {dep['name'] or dep['id']}")
+            if len(report["direct_dependents"]) > 10:
+                lines.append(f"  ... and {len(report['direct_dependents']) - 10} more")
+
+        return "\n".join(lines)

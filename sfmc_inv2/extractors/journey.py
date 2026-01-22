@@ -141,6 +141,8 @@ class JourneyExtractor(BaseExtractor):
                 "channel": item.get("channel"),
                 "createdDate": item.get("createdDate"),
                 "modifiedDate": item.get("modifiedDate"),
+                "createdBy": item.get("createdBy"),
+                "modifiedBy": item.get("modifiedBy"),
                 "lastPublishedDate": item.get("lastPublishedDate"),
                 "triggers": self._transform_triggers(triggers),
                 "triggerCount": len(triggers),
@@ -255,9 +257,12 @@ class JourneyExtractor(BaseExtractor):
                 activity_type = activity.get("type", "")
                 config_args = activity.get("configurationArguments", {})
 
-                # Email activities
+                # Email activities (EMAILV2)
                 if "email" in activity_type.lower() or activity_type == "EMAILV2":
-                    email_id = config_args.get("triggeredSend", {}).get("emailId")
+                    triggered_send = config_args.get("triggeredSend", {})
+
+                    # Email reference
+                    email_id = triggered_send.get("emailId")
                     if email_id:
                         result.add_relationship(
                             source_id=str(journey_id),
@@ -268,7 +273,58 @@ class JourneyExtractor(BaseExtractor):
                             relationship_type=RelationshipType.JOURNEY_USES_EMAIL,
                         )
 
-                # Filter activities
+                    # Sender profile reference
+                    sender_profile_id = triggered_send.get("senderProfileId")
+                    if sender_profile_id:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(sender_profile_id),
+                            target_type="sender_profile",
+                            relationship_type=RelationshipType.JOURNEY_USES_SENDER_PROFILE,
+                        )
+
+                    # Delivery profile reference
+                    delivery_profile_id = triggered_send.get("deliveryProfileId")
+                    if delivery_profile_id:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(delivery_profile_id),
+                            target_type="delivery_profile",
+                            relationship_type=RelationshipType.JOURNEY_USES_DELIVERY_PROFILE,
+                        )
+
+                    # Send classification reference
+                    send_classification_id = triggered_send.get("sendClassificationId")
+                    if send_classification_id:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(send_classification_id),
+                            target_type="send_classification",
+                            relationship_type=RelationshipType.JOURNEY_USES_SEND_CLASSIFICATION,
+                        )
+
+                # SMS activities (SMSSYNC)
+                if activity_type == "SMSSYNC" or activity_type == "SMS":
+                    # Application extension key for SMS
+                    app_ext_key = config_args.get("applicationExtensionKey")
+                    if app_ext_key:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=app_ext_key,
+                            target_type="sms_definition",
+                            relationship_type=RelationshipType.JOURNEY_USES_SMS,
+                            metadata={"applicationExtensionKey": app_ext_key},
+                        )
+
+                # Filter/Decision activities
                 if activity_type == "ENGAGMENTSPLIT" or "filter" in activity_type.lower():
                     filter_id = config_args.get("filterId")
                     if filter_id:
@@ -295,15 +351,47 @@ class JourneyExtractor(BaseExtractor):
                             metadata={"usage": "update_contact"},
                         )
 
-                # Fire Automation activities
-                if activity_type == "FIREAUTOMATION":
-                    automation_id = config_args.get("automationId")
-                    if automation_id:
+                # DataExtensionUpdate activities (per-field DE references)
+                if activity_type == "DATAEXTENSIONUPDATE":
+                    # May have dataExtensionId at activity level
+                    de_id = config_args.get("dataExtensionId")
+                    if de_id:
                         result.add_relationship(
                             source_id=str(journey_id),
                             source_type="journey",
                             source_name=journey_name,
-                            target_id=str(automation_id),
+                            target_id=str(de_id),
+                            target_type="data_extension",
+                            relationship_type=RelationshipType.JOURNEY_USES_DE,
+                            metadata={"usage": "data_extension_update"},
+                        )
+
+                # Fire Automation activities
+                if activity_type == "FIREAUTOMATION":
+                    automation_id_ref = config_args.get("automationId")
+                    if automation_id_ref:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(automation_id_ref),
                             target_type="automation",
                             relationship_type=RelationshipType.JOURNEY_USES_AUTOMATION,
+                        )
+
+                # Rest/API activities
+                if activity_type == "REST" or activity_type == "RESTACTIVITY":
+                    app_ext_key = config_args.get("applicationExtensionKey")
+                    if app_ext_key:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=app_ext_key,
+                            target_type="api_event",
+                            relationship_type=RelationshipType.REFERENCES,
+                            metadata={
+                                "usage": "rest_activity",
+                                "applicationExtensionKey": app_ext_key,
+                            },
                         )

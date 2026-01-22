@@ -7,6 +7,7 @@ import logging
 from typing import Any
 
 from ..clients.soap_client import build_simple_filter
+from ..types.relationships import RelationshipType
 from .base_extractor import BaseExtractor, ExtractorOptions, ExtractorResult
 
 logger = logging.getLogger(__name__)
@@ -118,3 +119,38 @@ class FolderExtractor(BaseExtractor):
             transformed.append(output)
 
         return transformed
+
+    async def extract_relationships(
+        self,
+        items: list[dict[str, Any]],
+        result: ExtractorResult,
+    ) -> None:
+        """Extract parent→child folder relationships.
+
+        Tracks FOLDER_CONTAINS_FOLDER relationships for folder hierarchy.
+        """
+        for item in items:
+            folder_id = item.get("ID")
+            folder_name = item.get("Name")
+            content_type = item.get("ContentType") or item.get("_contentType")
+
+            if not folder_id:
+                continue
+
+            # Get parent folder info
+            parent_folder = item.get("ParentFolder", {})
+            if isinstance(parent_folder, dict):
+                parent_id = parent_folder.get("ID")
+                parent_name = parent_folder.get("Name")
+
+                if parent_id:
+                    result.add_relationship(
+                        source_id=str(parent_id),
+                        source_type="folder",
+                        source_name=parent_name,
+                        target_id=str(folder_id),
+                        target_type="folder",
+                        target_name=folder_name,
+                        relationship_type=RelationshipType.FOLDER_CONTAINS_FOLDER,
+                        metadata={"contentType": content_type},
+                    )

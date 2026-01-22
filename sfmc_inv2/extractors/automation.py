@@ -15,27 +15,32 @@ from .base_extractor import BaseExtractor, ExtractorOptions, ExtractorResult
 logger = logging.getLogger(__name__)
 
 # Activity type ID to name mapping
+# Based on mcdev (sfmc-devtools) authoritative activityTypeMapping
+# Reference: https://github.com/Accenture/sfmc-devtools
 ACTIVITY_TYPE_MAP = {
-    42: "Refresh Group",
-    43: "Import File",
+    42: "Email Send",  # emailSend in mcdev
+    43: "Import File",  # importFile in mcdev
     45: "Transfer File (Legacy)",
-    53: "File Transfer",
-    73: "Data Extract",
+    53: "File Transfer",  # fileTransfer in mcdev
+    73: "Data Extract",  # dataExtract in mcdev
     84: "Report Definition",
-    300: "Query Activity",
-    303: "Filter Activity",
-    423: "Script Activity",
-    425: "Verification Activity",
-    427: "Wait Activity",
+    300: "Query Activity",  # query in mcdev
+    303: "Filter Activity",  # filter in mcdev
+    423: "Script Activity",  # script in mcdev
+    425: "Data Factory Utility",  # dataFactoryUtility in mcdev (UI-only ELT)
+    427: "Build Audience",  # UI-only
+    467: "Wait Activity",  # wait in mcdev
     667: "Journey Entry Injection",
-    724: "Fire Event",
-    725: "Exclusion Script",
+    724: "Refresh Group",  # refreshGroup in mcdev
+    725: "SMS",  # sms in mcdev
     726: "Predictive Intelligence Recommendations",
-    733: "Send Email",
-    736: "Triggered Send Refresh",
-    749: "Fire Entry Event",
+    733: "Journey Entry (Legacy)",  # journeyEntryOld in mcdev
+    736: "Push Notification",  # push in mcdev
+    749: "Fire Event",  # fireEvent in mcdev
     771: "Salesforce Send",
-    783: "Send SMS",
+    783: "Send SMS (v2)",  # Alternative SMS activity type
+    952: "Journey Entry",  # journeyEntry in mcdev
+    1000: "Verification Activity",  # verification in mcdev
     1101: "Audience Studio Segment Refresh",
 }
 
@@ -195,6 +200,8 @@ class AutomationExtractor(BaseExtractor):
                 "typeId": item.get("typeId"),
                 "createdDate": item.get("createdDate"),
                 "modifiedDate": item.get("modifiedDate"),
+                "createdBy": item.get("createdBy"),
+                "modifiedBy": item.get("modifiedBy"),
                 "lastRunTime": item.get("lastRunTime"),
                 "lastRunStatus": item.get("lastRunStatus"),
                 "schedule": item.get("schedule"),
@@ -234,14 +241,32 @@ class AutomationExtractor(BaseExtractor):
                         continue
 
                     # Map activity types to relationship types
+                    # Based on mcdev authoritative activityTypeMapping
                     rel_type_map = {
+                        # Core activities with external references
                         300: (RelationshipType.AUTOMATION_CONTAINS_QUERY, "query"),
                         423: (RelationshipType.AUTOMATION_CONTAINS_SCRIPT, "script"),
                         43: (RelationshipType.AUTOMATION_CONTAINS_IMPORT, "import"),
                         73: (RelationshipType.AUTOMATION_CONTAINS_EXTRACT, "data_extract"),
                         53: (RelationshipType.AUTOMATION_CONTAINS_TRANSFER, "file_transfer"),
-                        733: (RelationshipType.AUTOMATION_CONTAINS_EMAIL, "email"),
                         303: (RelationshipType.AUTOMATION_CONTAINS_FILTER, "filter"),
+                        # Email activities
+                        42: (RelationshipType.AUTOMATION_CONTAINS_EMAIL, "email"),  # emailSend
+                        # Event and entry activities
+                        749: (RelationshipType.AUTOMATION_CONTAINS_FIRE_EVENT, "event_definition"),  # fireEvent
+                        667: (RelationshipType.AUTOMATION_CONTAINS_JOURNEY_ENTRY, "event_definition"),
+                        733: (RelationshipType.AUTOMATION_CONTAINS_JOURNEY_ENTRY, "event_definition"),  # journeyEntryOld
+                        952: (RelationshipType.AUTOMATION_CONTAINS_JOURNEY_ENTRY, "event_definition"),  # journeyEntry
+                        # Send activities
+                        725: (RelationshipType.AUTOMATION_CONTAINS_SMS, "sms_definition"),  # sms
+                        783: (RelationshipType.AUTOMATION_CONTAINS_SMS, "sms_definition"),  # sms v2
+                        771: (RelationshipType.AUTOMATION_CONTAINS_SALESFORCE_SEND, "salesforce_campaign"),
+                        736: (RelationshipType.AUTOMATION_CONTAINS_PUSH, "push_definition"),  # push
+                        # Refresh activities
+                        724: (RelationshipType.AUTOMATION_CONTAINS_REFRESH_GROUP, "group"),  # refreshGroup
+                        # Activities with inline config (no external references)
+                        467: (RelationshipType.AUTOMATION_CONTAINS_WAIT, "wait"),
+                        1000: (RelationshipType.AUTOMATION_CONTAINS_VERIFICATION, "verification"),
                     }
 
                     if activity_type_id in rel_type_map:

@@ -17,6 +17,14 @@ class RelationshipType(str, Enum):
     AUTOMATION_CONTAINS_TRANSFER = "automation_contains_transfer"
     AUTOMATION_CONTAINS_EMAIL = "automation_contains_email"
     AUTOMATION_CONTAINS_FILTER = "automation_contains_filter"
+    AUTOMATION_CONTAINS_FIRE_EVENT = "automation_contains_fire_event"
+    AUTOMATION_CONTAINS_SMS = "automation_contains_sms"
+    AUTOMATION_CONTAINS_VERIFICATION = "automation_contains_verification"
+    AUTOMATION_CONTAINS_WAIT = "automation_contains_wait"
+    AUTOMATION_CONTAINS_REFRESH_GROUP = "automation_contains_refresh_group"
+    AUTOMATION_CONTAINS_JOURNEY_ENTRY = "automation_contains_journey_entry"
+    AUTOMATION_CONTAINS_SALESFORCE_SEND = "automation_contains_salesforce_send"
+    AUTOMATION_CONTAINS_PUSH = "automation_contains_push"
 
     # Query relationships
     QUERY_READS_DE = "query_reads_de"
@@ -28,6 +36,10 @@ class RelationshipType(str, Enum):
     JOURNEY_USES_FILTER = "journey_uses_filter"
     JOURNEY_USES_AUTOMATION = "journey_uses_automation"
     JOURNEY_USES_EVENT = "journey_uses_event"
+    JOURNEY_USES_SENDER_PROFILE = "journey_uses_sender_profile"
+    JOURNEY_USES_DELIVERY_PROFILE = "journey_uses_delivery_profile"
+    JOURNEY_USES_SEND_CLASSIFICATION = "journey_uses_send_classification"
+    JOURNEY_USES_SMS = "journey_uses_sms"
 
     # Import relationships
     IMPORT_WRITES_DE = "import_writes_de"
@@ -60,6 +72,9 @@ class RelationshipType(str, Enum):
 
     # Event Definition relationships
     EVENT_DEFINITION_USES_DE = "event_definition_uses_de"
+
+    # Folder relationships
+    FOLDER_CONTAINS_FOLDER = "folder_contains_folder"
 
     # Script relationships
     SCRIPT_USES_DE = "script_uses_de"
