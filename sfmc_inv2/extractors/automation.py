@@ -150,14 +150,15 @@ class AutomationExtractor(BaseExtractor):
 
     def _enrich_activity(self, activity: dict[str, Any]) -> None:
         """Enrich activity with resolved type name and object info."""
-        activity_type_id = activity.get("activityTypeId")
+        # API returns objectTypeId (not activityTypeId)
+        activity_type_id = activity.get("objectTypeId")
         if activity_type_id is not None:
             activity["activityTypeName"] = ACTIVITY_TYPE_MAP.get(
                 activity_type_id, f"Unknown ({activity_type_id})"
             )
 
-        # Resolve object references based on activity type
-        object_id = activity.get("objectId")
+        # API returns activityObjectId (not objectId)
+        object_id = activity.get("activityObjectId")
         if object_id:
             if activity_type_id == 300:  # Query
                 queries = self._cache.get_queries()
@@ -224,8 +225,10 @@ class AutomationExtractor(BaseExtractor):
 
             for step in item.get("steps", []):
                 for activity in step.get("activities", []):
-                    activity_type_id = activity.get("activityTypeId")
-                    object_id = activity.get("objectId")
+                    # API returns objectTypeId (not activityTypeId) and
+                    # activityObjectId (not objectId)
+                    activity_type_id = activity.get("objectTypeId")
+                    object_id = activity.get("activityObjectId")
 
                     if not object_id:
                         continue

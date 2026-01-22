@@ -184,6 +184,9 @@ class ExtractorRunner:
             for edge in extractor_result.relationships:
                 result.relationship_graph.edges.append(edge)
 
+        # Detect orphaned objects using RelationshipBuilder
+        self._detect_orphans(result)
+
         # Calculate relationship stats
         result.relationship_graph.calculate_stats()
         result.completed_at = datetime.now()
@@ -252,6 +255,9 @@ class ExtractorRunner:
                 result.results[name] = error_result
                 self._report_progress(name, 0, 0, "Error")
 
+        # Detect orphaned objects
+        self._detect_orphans(result)
+
         result.relationship_graph.calculate_stats()
         result.completed_at = datetime.now()
 
@@ -281,6 +287,64 @@ class ExtractorRunner:
         """Report progress via callback."""
         if self._config.progress_callback:
             self._config.progress_callback(extractor, current, total, stage)
+
+    def _detect_orphans(self, result: RunnerResult) -> None:
+        """Detect orphaned objects across all extraction results.
+
+        Uses RelationshipBuilder to index objects and identify orphans
+        based on relationship rules.
+        """
+        # Import here to avoid circular import
+        from ..output.relationship_builder import RelationshipBuilder
+
+        builder = RelationshipBuilder()
+
+        # Map extractor names to object types used in relationships
+        # The relationship edges use singular, lowercase type names
+        type_mapping = {
+            "automations": "automation",
+            "data_extensions": "data_extension",
+            "queries": "query",
+            "journeys": "journey",
+            "scripts": "script",
+            "imports": "import",
+            "data_extracts": "data_extract",
+            "filters": "filter",
+            "file_transfers": "file_transfer",
+            "assets": "asset",
+            "folders": "folder",
+            "event_definitions": "event_definition",
+            "classic_emails": "classic_email",
+            "triggered_sends": "triggered_send",
+            "lists": "list",
+            "sender_profiles": "sender_profile",
+            "delivery_profiles": "delivery_profile",
+            "send_classifications": "send_classification",
+            "templates": "template",
+            "account": "account",
+        }
+
+        # Index all extracted objects
+        for extractor_name, extractor_result in result.results.items():
+            if not extractor_result.success:
+                continue
+
+            object_type = type_mapping.get(extractor_name, extractor_name)
+            builder.index_objects(
+                extractor_result.items,
+                object_type,
+                id_field="id",
+            )
+
+        # Merge relationship edges
+        builder.merge_edges(result.relationship_graph.edges)
+
+        # Detect orphans
+        builder.detect_all_orphans()
+
+        # Copy orphans to result graph
+        for orphan in builder.graph.orphans:
+            result.relationship_graph.orphans.append(orphan)
 
 
 # Preset configurations

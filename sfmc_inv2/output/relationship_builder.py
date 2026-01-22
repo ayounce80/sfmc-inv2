@@ -150,13 +150,43 @@ class RelationshipBuilder:
 
         Updates the graph's orphans list.
         """
-        # Define which object types should be referenced
+        # Define which object types should be referenced and by what
+        # Key = object type, Value = list of source types that should reference it
         orphan_rules = {
-            "query": ["automation"],  # Queries should be used in automations
-            "data_extension": ["automation", "query", "journey", "import"],
+            # Automation activities - should be used in automations
+            "query": ["automation"],
+            "script": ["automation"],
+            "import": ["automation"],
+            "data_extract": ["automation"],
+            "file_transfer": ["automation"],
+            "filter": ["automation", "journey"],
+
+            # Data extensions - widely used across the platform
+            "data_extension": [
+                "automation", "query", "journey", "import", "filter",
+                "data_extract", "event_definition", "triggered_send",
+            ],
+
+            # Messaging infrastructure
+            "email": ["automation", "journey", "triggered_send"],
+            "classic_email": ["automation", "journey", "triggered_send"],
+            "asset": ["email", "asset", "journey"],  # Content blocks used in emails/other assets
+            "content_block": ["email", "asset"],
+
+            # Triggered send dependencies
+            "list": ["triggered_send", "journey"],
+            "sender_profile": ["send_classification", "triggered_send"],
+            "delivery_profile": ["send_classification", "triggered_send"],
+            "send_classification": ["triggered_send"],
+
+            # Journey entry events
+            "event_definition": ["journey"],
         }
 
         for object_type, required_refs in orphan_rules.items():
+            if object_type not in self._object_index:
+                continue  # Skip if no objects of this type were indexed
+
             orphans = self.find_orphans(object_type, required_refs)
             for orphan in orphans:
                 self._graph.add_orphan(
