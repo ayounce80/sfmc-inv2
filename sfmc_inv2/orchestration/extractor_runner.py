@@ -448,11 +448,19 @@ PRESETS = {
     },
     "full": {
         "extractors": [
-            "automations", "data_extensions", "queries", "journeys",
-            "scripts", "imports", "data_extracts", "filters", "file_transfers",
-            "assets",
+            # REST - Automation Studio
+            "automations", "queries", "scripts", "imports",
+            "data_extracts", "filters", "file_transfers",
+            # REST - Data & Content
+            "data_extensions", "assets", "folders", "event_definitions",
+            # REST - Journey Builder
+            "journeys",
+            # SOAP - Messaging
+            "classic_emails", "triggered_sends", "lists",
+            "sender_profiles", "delivery_profiles", "send_classifications",
+            "templates", "account",
         ],
-        "description": "Full REST inventory - all REST-based object types",
+        "description": "Full inventory - all 20 extractors (REST and SOAP)",
     },
     "automation": {
         "extractors": [
@@ -475,21 +483,6 @@ PRESETS = {
     "journey": {
         "extractors": ["journeys", "data_extensions", "event_definitions"],
         "description": "Journey focus - journeys, entry events, and related data extensions",
-    },
-    "core": {
-        "extractors": [
-            # Existing
-            "automations", "data_extensions", "queries", "journeys",
-            # Phase 1 - Automation Activities
-            "scripts", "imports", "data_extracts", "filters", "file_transfers",
-            # Phase 2 - Content
-            "assets", "folders", "event_definitions",
-            # Phase 3 - Messaging (SOAP)
-            "classic_emails", "triggered_sends", "lists",
-            "sender_profiles", "delivery_profiles", "send_classifications",
-            "templates", "account",
-        ],
-        "description": "Core inventory - all 20 extractors covering operational SFMC objects",
     },
 }
 
