@@ -123,8 +123,7 @@ class SendClassificationExtractor(BaseExtractor):
                         target_id=sp_key,
                         target_type="sender_profile",
                         target_name=sp_name,
-                        relationship_type=RelationshipType.DEPENDS_ON,
-                        metadata={"usage": "sender_profile"},
+                        relationship_type=RelationshipType.SEND_CLASSIFICATION_USES_SENDER_PROFILE,
                     )
 
             # Delivery profile relationship
@@ -140,6 +139,5 @@ class SendClassificationExtractor(BaseExtractor):
                         target_id=dp_key,
                         target_type="delivery_profile",
                         target_name=dp_name,
-                        relationship_type=RelationshipType.DEPENDS_ON,
-                        metadata={"usage": "delivery_profile"},
+                        relationship_type=RelationshipType.SEND_CLASSIFICATION_USES_DELIVERY_PROFILE,
                     )

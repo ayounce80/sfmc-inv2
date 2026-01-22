@@ -172,8 +172,7 @@ class TriggeredSendExtractor(BaseExtractor):
                     target_id=str(email.get("ID")),
                     target_type="email",
                     target_name=email.get("Name"),
-                    relationship_type=RelationshipType.DEPENDS_ON,
-                    metadata={"usage": "email_template"},
+                    relationship_type=RelationshipType.TRIGGERED_SEND_USES_EMAIL,
                 )
 
             # List relationship
@@ -186,8 +185,7 @@ class TriggeredSendExtractor(BaseExtractor):
                     target_id=str(list_obj.get("ID")),
                     target_type="list",
                     target_name=list_obj.get("ListName"),
-                    relationship_type=RelationshipType.DEPENDS_ON,
-                    metadata={"usage": "subscriber_list"},
+                    relationship_type=RelationshipType.TRIGGERED_SEND_USES_LIST,
                 )
 
             # Sender profile relationship
@@ -200,8 +198,7 @@ class TriggeredSendExtractor(BaseExtractor):
                     target_id=sender_profile.get("CustomerKey"),
                     target_type="sender_profile",
                     target_name=sender_profile.get("Name"),
-                    relationship_type=RelationshipType.DEPENDS_ON,
-                    metadata={"usage": "sender_profile"},
+                    relationship_type=RelationshipType.TRIGGERED_SEND_USES_SENDER_PROFILE,
                 )
 
             # Delivery profile relationship
@@ -214,8 +211,7 @@ class TriggeredSendExtractor(BaseExtractor):
                     target_id=delivery_profile.get("CustomerKey"),
                     target_type="delivery_profile",
                     target_name=delivery_profile.get("Name"),
-                    relationship_type=RelationshipType.DEPENDS_ON,
-                    metadata={"usage": "delivery_profile"},
+                    relationship_type=RelationshipType.TRIGGERED_SEND_USES_DELIVERY_PROFILE,
                 )
 
             # Send classification relationship
@@ -228,6 +224,5 @@ class TriggeredSendExtractor(BaseExtractor):
                     target_id=send_class.get("CustomerKey"),
                     target_type="send_classification",
                     target_name=send_class.get("Name"),
-                    relationship_type=RelationshipType.DEPENDS_ON,
-                    metadata={"usage": "send_classification"},
+                    relationship_type=RelationshipType.TRIGGERED_SEND_USES_SEND_CLASSIFICATION,
                 )

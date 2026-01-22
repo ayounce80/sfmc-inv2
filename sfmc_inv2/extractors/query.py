@@ -7,7 +7,7 @@ Analyzes SQL to identify Data Extension dependencies.
 import asyncio
 import logging
 import re
-from typing import Any, Optional, Set
+from typing import Any, Optional
 
 from ..cache.cache_manager import CacheType
 from ..types.relationships import RelationshipType
@@ -16,16 +16,12 @@ from .base_extractor import BaseExtractor, ExtractorOptions, ExtractorResult
 logger = logging.getLogger(__name__)
 
 # Regex patterns for SQL parsing
-DE_FROM_PATTERN = re.compile(
-    r'\bFROM\s+\[?([^\s\[\],]+)\]?',
-    re.IGNORECASE
-)
-DE_JOIN_PATTERN = re.compile(
-    r'\bJOIN\s+\[?([^\s\[\],]+)\]?',
-    re.IGNORECASE
-)
-DE_ENT_PATTERN = re.compile(
-    r'\b(?:_?ent\.)?([a-zA-Z_][a-zA-Z0-9_]*)',
+# Comprehensive pattern matching FROM and all JOIN types with optional schema prefix
+# Captures: group 1 = schema prefix (e.g., 'ENT'), group 2 = table name
+# Handles: FROM, LEFT JOIN, RIGHT JOIN, INNER JOIN, OUTER JOIN, CROSS JOIN, FULL OUTER JOIN
+DE_TABLE_PATTERN = re.compile(
+    r'\b(?:FROM|(?:LEFT|RIGHT|INNER|OUTER|CROSS|FULL\s+OUTER)?\s*JOIN)\s+'
+    r'\[?(?:(\w+)\.)?\[?([A-Za-z_][A-Za-z0-9_]*)\]?',
     re.IGNORECASE
 )
 
@@ -91,32 +87,50 @@ class QueryExtractor(BaseExtractor):
 
         return item
 
-    def _extract_de_references(self, sql: str) -> list[str]:
+    def _extract_de_references(self, sql: str) -> list[dict[str, Any]]:
         """Extract Data Extension names from SQL query.
 
-        Parses FROM and JOIN clauses to find referenced DEs.
+        Parses FROM and JOIN clauses to find referenced DEs, including
+        cross-BU references with ENT. or _ENT. schema prefixes.
 
         Args:
             sql: SQL query text.
 
         Returns:
-            List of unique DE names referenced.
+            List of DE reference dicts with name and isShared flag.
         """
-        references: Set[str] = set()
+        # Track references by name to avoid duplicates while preserving metadata
+        references: dict[str, dict[str, Any]] = {}
 
-        # Find FROM clause references
-        for match in DE_FROM_PATTERN.finditer(sql):
-            de_name = match.group(1).strip()
-            if de_name and not self._is_system_table(de_name):
-                references.add(de_name)
+        # Find all FROM and JOIN clause references with optional schema prefix
+        for match in DE_TABLE_PATTERN.finditer(sql):
+            schema_prefix = match.group(1)  # e.g., 'ENT', '_ENT', or None
+            de_name = match.group(2)
 
-        # Find JOIN clause references
-        for match in DE_JOIN_PATTERN.finditer(sql):
-            de_name = match.group(1).strip()
-            if de_name and not self._is_system_table(de_name):
-                references.add(de_name)
+            if not de_name or self._is_system_table(de_name):
+                continue
 
-        return sorted(references)
+            de_name = de_name.strip()
+
+            # Determine if this is a shared/enterprise DE (cross-BU reference)
+            is_shared = False
+            if schema_prefix:
+                schema_upper = schema_prefix.upper()
+                if schema_upper in ("ENT", "_ENT"):
+                    is_shared = True
+
+            # Store or update reference (prefer isShared=True if seen both ways)
+            if de_name in references:
+                if is_shared:
+                    references[de_name]["isShared"] = True
+            else:
+                references[de_name] = {
+                    "name": de_name,
+                    "isShared": is_shared,
+                }
+
+        # Return sorted by name
+        return sorted(references.values(), key=lambda x: x["name"])
 
     def _is_system_table(self, name: str) -> bool:
         """Check if a table name is a system table."""
@@ -165,6 +179,10 @@ class QueryExtractor(BaseExtractor):
                 "createdBy": item.get("createdBy"),
                 "modifiedBy": item.get("modifiedBy"),
                 "referencedDataExtensions": item.get("referencedDataExtensions", []),
+                # Convenience field: list of DE names for simpler queries
+                "referencedDataExtensionNames": [
+                    ref["name"] for ref in item.get("referencedDataExtensions", [])
+                ],
             }
             transformed.append(output)
 
@@ -199,7 +217,10 @@ class QueryExtractor(BaseExtractor):
                 )
 
             # Source DE relationships (reads)
-            for de_name in item.get("referencedDataExtensions", []):
+            for de_ref in item.get("referencedDataExtensions", []):
+                de_name = de_ref.get("name") if isinstance(de_ref, dict) else de_ref
+                is_shared = de_ref.get("isShared", False) if isinstance(de_ref, dict) else False
+
                 result.add_relationship(
                     source_id=str(query_id),
                     source_type="query",
@@ -208,5 +229,8 @@ class QueryExtractor(BaseExtractor):
                     target_type="data_extension",
                     target_name=de_name,
                     relationship_type=RelationshipType.QUERY_READS_DE,
-                    metadata={"resolved_by_name": True},
+                    metadata={
+                        "resolved_by_name": True,
+                        "isShared": is_shared,
+                    },
                 )
