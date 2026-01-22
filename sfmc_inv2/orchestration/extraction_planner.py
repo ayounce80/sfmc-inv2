@@ -170,6 +170,70 @@ class ExtractionPlanner:
 
         return plan
 
+    def get_dependency_layers(self, types: set[str]) -> list[list[str]]:
+        """Group types into dependency layers for phased execution.
+
+        Types in each layer have all their dependencies satisfied by
+        previous layers. Types within a layer can execute in parallel.
+
+        Uses Kahn's algorithm to produce layers rather than a flat list.
+
+        Args:
+            types: Set of type names to organize into layers.
+
+        Returns:
+            List of layers, where each layer is a list of type names.
+            Layer 0 contains types with no dependencies.
+            Layer N contains types whose dependencies are all in layers 0..N-1.
+
+        Example:
+            Input: {"automation", "query", "folder", "data_extension"}
+            Output: [
+                ["folder"],                    # Layer 0: no deps
+                ["data_extension"],            # Layer 1: depends on folder
+                ["query"],                     # Layer 2: depends on DE, folder
+                ["automation"]                 # Layer 3: depends on query, etc.
+            ]
+        """
+        # Build adjacency list and in-degree count
+        in_degree: dict[str, int] = {t: 0 for t in types}
+        graph: dict[str, list[str]] = {t: [] for t in types}
+
+        for type_name in types:
+            type_def = get_type_definition(type_name)
+            if type_def:
+                for dep in type_def.dependencies:
+                    if dep in types:
+                        graph[dep].append(type_name)
+                        in_degree[type_name] += 1
+
+        layers: list[list[str]] = []
+
+        # Start with types that have no dependencies (in-degree 0)
+        current_layer = sorted([t for t in types if in_degree[t] == 0])
+
+        while current_layer:
+            layers.append(current_layer)
+
+            # Find next layer: types whose deps are now all processed
+            next_layer = []
+            for type_name in current_layer:
+                for dependent in graph[type_name]:
+                    in_degree[dependent] -= 1
+                    if in_degree[dependent] == 0:
+                        next_layer.append(dependent)
+
+            # Sort for determinism
+            current_layer = sorted(next_layer)
+
+        # Handle any remaining types (cycles - shouldn't happen)
+        processed = {t for layer in layers for t in layer}
+        remaining = sorted([t for t in types if t not in processed])
+        if remaining:
+            layers.append(remaining)
+
+        return layers
+
     def _topological_sort(self, types: set[str]) -> list[str]:
         """Perform topological sort on types based on dependencies.
 

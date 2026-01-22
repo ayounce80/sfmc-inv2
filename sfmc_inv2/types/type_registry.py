@@ -179,6 +179,7 @@ TYPE_REGISTRY: dict[str, TypeDefinition] = {
             "data_extract",
             "filter",
             "file_transfer",
+            "event_definition",
             "folder",
         ],
         dependency_graph={

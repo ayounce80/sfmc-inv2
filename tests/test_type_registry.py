@@ -85,6 +85,15 @@ class TestTypeRegistry:
         assert "script" in deps
         assert "folder" in deps
 
+    def test_automation_depends_on_event_definition(self):
+        """Automation should depend on event_definition for Fire Event activities."""
+        deps = get_dependencies("automation")
+        assert "event_definition" in deps
+
+        # Also verify it's in the dependency_graph
+        type_def = get_type_definition("automation")
+        assert "event_definition" in type_def.dependency_graph
+
     def test_get_dependencies_empty(self):
         """Types with no dependencies should return empty list."""
         deps = get_dependencies("sender_profile")

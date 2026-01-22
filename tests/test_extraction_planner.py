@@ -104,6 +104,75 @@ class TestConvenienceFunctions:
         assert "queries" in order
 
 
+class TestDependencyLayers:
+    """Test dependency layer functionality for phased execution."""
+
+    def test_get_dependency_layers_basic(self):
+        """Should group types into correct dependency layers."""
+        planner = ExtractionPlanner(include_dependencies=True)
+
+        # Types with known dependency chain
+        types = {"folder", "data_extension", "query", "automation"}
+        layers = planner.get_dependency_layers(types)
+
+        # Should have multiple layers
+        assert len(layers) >= 3
+
+        # Flatten to check ordering
+        flat = [t for layer in layers for t in layer]
+
+        # folder has no deps, should be in first layer
+        assert "folder" in layers[0]
+
+        # data_extension depends on folder
+        folder_layer = next(i for i, l in enumerate(layers) if "folder" in l)
+        de_layer = next(i for i, l in enumerate(layers) if "data_extension" in l)
+        assert de_layer > folder_layer
+
+        # query depends on data_extension and folder
+        query_layer = next(i for i, l in enumerate(layers) if "query" in l)
+        assert query_layer > de_layer
+
+        # automation depends on query
+        auto_layer = next(i for i, l in enumerate(layers) if "automation" in l)
+        assert auto_layer > query_layer
+
+    def test_get_dependency_layers_parallel_deps(self):
+        """Types with same deps should be in same layer."""
+        planner = ExtractionPlanner(include_dependencies=True)
+
+        # query and script both depend on data_extension and folder
+        types = {"folder", "data_extension", "query", "script"}
+        layers = planner.get_dependency_layers(types)
+
+        # Find which layers contain query and script
+        query_layer = next(i for i, l in enumerate(layers) if "query" in l)
+        script_layer = next(i for i, l in enumerate(layers) if "script" in l)
+
+        # They should be in the same layer since they have same deps
+        assert query_layer == script_layer
+
+    def test_get_dependency_layers_no_deps(self):
+        """Types with no dependencies should be in layer 0."""
+        planner = ExtractionPlanner(include_dependencies=True)
+
+        types = {"folder", "sender_profile", "delivery_profile"}
+        layers = planner.get_dependency_layers(types)
+
+        # All have no dependencies, should be in layer 0
+        assert len(layers) == 1
+        assert set(layers[0]) == types
+
+    def test_get_dependency_layers_single_type(self):
+        """Single type should return single layer."""
+        planner = ExtractionPlanner(include_dependencies=True)
+
+        types = {"folder"}
+        layers = planner.get_dependency_layers(types)
+
+        assert layers == [["folder"]]
+
+
 class TestExtractionPlan:
     """Test ExtractionPlan dataclass."""
 

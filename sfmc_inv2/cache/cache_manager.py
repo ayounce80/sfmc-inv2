@@ -332,6 +332,13 @@ class CacheManager:
         When an item is not found in the current BU cache, it will
         optionally search the parent BU cache.
 
+        Note: Parent BU fallback requires `load_shared_resources()` to be
+        called first to populate the parent BU cache. Currently,
+        `load_shared_resources()` is a placeholder that requires API
+        context switching to the parent BU, which is not yet implemented.
+        The parent BU fallback will only work if the parent cache has been
+        manually populated via `store_in_bu_cache()`.
+
         Args:
             cache_type: Type of cache to search.
             key: Item key/ID to lookup.
@@ -408,8 +415,17 @@ class CacheManager:
     ) -> int:
         """Load shared resources from parent BU into separate cache.
 
-        This method loads resources from the parent BU that may be
-        shared with child BUs. Useful for Enterprise 2.0 accounts.
+        PLACEHOLDER: This method is scaffolding for future implementation.
+        Currently returns 0 without loading any data because it requires
+        API context switching to the parent BU, which is not yet implemented.
+
+        To implement this properly, the method would need to:
+        1. Switch API context to parent BU (requires separate auth or BU switching)
+        2. Fetch resources from parent BU using the appropriate loader
+        3. Store results in `_bu_caches[parent_account_id]`
+
+        For now, parent BU caches can be manually populated using
+        `store_in_bu_cache()` if the data is obtained through other means.
 
         Args:
             cache_type: Type of resources to load.
@@ -417,7 +433,7 @@ class CacheManager:
                 If None, loads all resources from parent BU.
 
         Returns:
-            Number of resources loaded.
+            Number of resources loaded (currently always 0).
         """
         if not self.has_parent_bu:
             logger.debug("No parent BU configured, skipping shared resource load")

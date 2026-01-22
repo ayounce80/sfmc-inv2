@@ -217,9 +217,44 @@ class ExtractorRunner:
                     self._report_progress(name, 0, 0, "Error")
                     return name, error_result
 
-        # Run all extractors (using ordered names from planner if enabled)
-        tasks = [run_single(name) for name in ordered_names]
-        completed = await asyncio.gather(*tasks, return_exceptions=True)
+        # Run extractors - use dependency layers if planner enabled
+        if self._config.use_extraction_planner and self._current_plan:
+            # Get types from plan steps
+            plan_types = {step.type_name for step in self._current_plan.steps}
+            layers = self._planner.get_dependency_layers(plan_types)
+
+            # Build type-to-extractor mapping for this plan
+            type_to_extractor = {
+                step.type_name: step.extractor_name
+                for step in self._current_plan.steps
+            }
+
+            logger.info(f"Executing {len(layers)} dependency layers")
+
+            completed = []
+            for layer_idx, layer_types in enumerate(layers):
+                # Convert types to extractor names
+                layer_extractors = [
+                    type_to_extractor[t]
+                    for t in layer_types
+                    if t in type_to_extractor
+                ]
+
+                if not layer_extractors:
+                    continue
+
+                logger.debug(
+                    f"Layer {layer_idx}: {layer_extractors}"
+                )
+
+                # Run this layer in parallel
+                layer_tasks = [run_single(name) for name in layer_extractors]
+                layer_results = await asyncio.gather(*layer_tasks, return_exceptions=True)
+                completed.extend(layer_results)
+        else:
+            # Non-planner mode: run all concurrently (original behavior)
+            tasks = [run_single(name) for name in ordered_names]
+            completed = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Collect results
         for item in completed:

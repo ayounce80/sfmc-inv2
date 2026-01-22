@@ -79,8 +79,8 @@ class PathEvaluator:
 
         for path in paths:
             for value in self.evaluate(obj, path):
-                # Dedup by string representation for hashable comparison
-                value_key = str(value) if isinstance(value, dict) else value
+                # Dedup by string representation for unhashable types
+                value_key = str(value) if isinstance(value, (dict, list)) else value
                 if value_key not in seen:
                     seen.add(value_key)
                     results.append(value)

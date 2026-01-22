@@ -104,6 +104,37 @@ class TestPathEvaluator:
         result = evaluator.evaluate_all(automation_obj, paths)
         assert len(result) == 3  # 2 queries + 1 script
 
+    def test_evaluate_all_handles_list_values(self, evaluator):
+        """Should handle list values without TypeError during dedup."""
+        obj = {
+            "items": [
+                {"tags": ["a", "b"]},
+                {"tags": ["c", "d"]},
+                {"tags": ["a", "b"]},  # duplicate
+            ]
+        }
+        # This should not raise TypeError when deduping lists
+        result = evaluator.evaluate_all(obj, ["items[].tags"])
+        # Should have 2 unique lists (dedup by string representation)
+        assert len(result) == 2
+        assert ["a", "b"] in result
+        assert ["c", "d"] in result
+
+    def test_evaluate_all_handles_mixed_types(self, evaluator):
+        """Should handle mixed value types (dict, list, primitives)."""
+        obj = {
+            "config": {"key": "value"},
+            "tags": ["tag1", "tag2"],
+            "name": "test",
+            "count": 42,
+        }
+        result = evaluator.evaluate_all(obj, ["config", "tags", "name", "count"])
+        assert len(result) == 4
+        assert {"key": "value"} in result
+        assert ["tag1", "tag2"] in result
+        assert "test" in result
+        assert 42 in result
+
     def test_evaluate_with_context(self, evaluator, automation_obj):
         """Should return values with parent context."""
         results = evaluator.evaluate_with_context(
