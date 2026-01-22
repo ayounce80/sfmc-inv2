@@ -2,6 +2,9 @@
 
 Provides async parallel execution with configurable concurrency,
 progress reporting, and error collection.
+
+Supports dependency-aware extraction ordering via the ExtractionPlanner
+to ensure dependencies are extracted before dependents.
 """
 
 import asyncio
@@ -14,6 +17,7 @@ from ..extractors import EXTRACTORS, ExtractorOptions, ExtractorResult, get_extr
 from ..extractors.base_extractor import BaseExtractor
 from ..types.inventory import InventoryStatistics, ExtractorStats as StatsModel
 from ..types.relationships import RelationshipGraph
+from .extraction_planner import ExtractionPlan, ExtractionPlanner, plan_extraction
 from .rate_limiter import AdaptiveRateLimiter
 
 logger = logging.getLogger(__name__)
@@ -39,6 +43,11 @@ class RunnerConfig:
 
     # Progress
     progress_callback: Optional[Callable[[str, int, int, str], None]] = None
+
+    # Dependency-aware extraction (Phase 6)
+    use_extraction_planner: bool = False  # Enable topological ordering
+    include_dependencies: bool = True  # Include dependency types as cache-only
+    cache_only_types: list[str] = field(default_factory=list)  # Types to cache but not output
 
 
 @dataclass
@@ -106,6 +115,7 @@ class ExtractorRunner:
     - Progress reporting
     - Error collection without abort
     - Relationship graph merging
+    - Dependency-aware extraction ordering (via ExtractionPlanner)
     """
 
     def __init__(self, config: Optional[RunnerConfig] = None):
@@ -120,6 +130,26 @@ class ExtractorRunner:
             base_delay=self._config.base_delay,
             max_delay=self._config.max_delay,
         )
+        self._planner = ExtractionPlanner(
+            include_dependencies=self._config.include_dependencies
+        )
+        self._current_plan: Optional[ExtractionPlan] = None
+
+    def get_extraction_plan(
+        self,
+        extractor_names: list[str],
+    ) -> ExtractionPlan:
+        """Get the extraction plan for the given extractors.
+
+        Uses the ExtractionPlanner to determine dependency order.
+
+        Args:
+            extractor_names: List of extractor names to plan.
+
+        Returns:
+            ExtractionPlan with ordered steps.
+        """
+        return self._planner.plan(extractor_names)
 
     async def run(
         self,
@@ -128,6 +158,9 @@ class ExtractorRunner:
     ) -> RunnerResult:
         """Run specified extractors in parallel.
 
+        When use_extraction_planner is enabled, extractors run in
+        topological order based on dependencies.
+
         Args:
             extractor_names: List of extractor names to run.
             custom_options: Additional options per extractor.
@@ -135,6 +168,23 @@ class ExtractorRunner:
         Returns:
             RunnerResult with all extraction results.
         """
+        # Apply extraction planner if enabled
+        if self._config.use_extraction_planner:
+            plan = self.get_extraction_plan(extractor_names)
+            self._current_plan = plan
+            # Use all extractors from plan (includes dependencies)
+            ordered_names = plan.all_extractor_names
+            # Track which are cache-only
+            cache_only_set = set(plan.cache_only_extractor_names)
+            logger.info(
+                f"Using extraction plan: {len(plan.steps)} steps "
+                f"({len(plan.output_extractor_names)} output, "
+                f"{len(plan.cache_only_extractor_names)} cache-only)"
+            )
+        else:
+            ordered_names = extractor_names
+            cache_only_set = set(self._config.cache_only_types)
+
         result = RunnerResult(extractors_run=extractor_names)
         custom_options = custom_options or {}
 
@@ -167,8 +217,8 @@ class ExtractorRunner:
                     self._report_progress(name, 0, 0, "Error")
                     return name, error_result
 
-        # Run all extractors
-        tasks = [run_single(name) for name in extractor_names]
+        # Run all extractors (using ordered names from planner if enabled)
+        tasks = [run_single(name) for name in ordered_names]
         completed = await asyncio.gather(*tasks, return_exceptions=True)
 
         # Collect results
@@ -178,9 +228,17 @@ class ExtractorRunner:
                 continue
 
             name, extractor_result = item
-            result.results[name] = extractor_result
 
-            # Merge relationships into graph
+            # Skip adding to results if cache-only (but still merge relationships)
+            is_cache_only = name in cache_only_set
+            if not is_cache_only:
+                result.results[name] = extractor_result
+            else:
+                # Mark as cache-only in extractor result metadata
+                extractor_result.metadata["cache_only"] = True
+                logger.debug(f"Extractor {name} completed (cache-only)")
+
+            # Merge relationships into graph (from all extractors)
             for edge in extractor_result.relationships:
                 result.relationship_graph.edges.append(edge)
 
@@ -411,3 +469,45 @@ def get_preset(name: str) -> dict[str, Any]:
 def list_presets() -> dict[str, str]:
     """List available presets with descriptions."""
     return {name: preset["description"] for name, preset in PRESETS.items()}
+
+
+def run_with_planner(
+    extractor_names: list[str],
+    config: Optional[RunnerConfig] = None,
+    include_dependencies: bool = True,
+) -> RunnerResult:
+    """Run extractors with dependency-aware ordering.
+
+    Convenience function that enables the extraction planner
+    for topological ordering based on type dependencies.
+
+    Args:
+        extractor_names: List of extractor names to run.
+        config: Optional runner configuration.
+        include_dependencies: Include dependency types as cache-only.
+
+    Returns:
+        RunnerResult with all extraction results.
+    """
+    run_config = config or RunnerConfig()
+    run_config.use_extraction_planner = True
+    run_config.include_dependencies = include_dependencies
+
+    runner = ExtractorRunner(run_config)
+    return runner.run_sync(extractor_names)
+
+
+def get_extraction_order(extractor_names: list[str]) -> list[str]:
+    """Get the extraction order for given extractors.
+
+    Uses the ExtractionPlanner to determine dependency order.
+
+    Args:
+        extractor_names: List of extractor names.
+
+    Returns:
+        Ordered list of extractor names (dependencies first).
+    """
+    planner = ExtractionPlanner(include_dependencies=True)
+    plan = planner.plan(extractor_names)
+    return plan.all_extractor_names

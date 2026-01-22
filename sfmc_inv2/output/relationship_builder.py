@@ -2,6 +2,10 @@
 
 Builds a relationship graph from extraction results and identifies
 orphaned objects that appear unused.
+
+Multi-BU Support:
+- Tracks shared resources via `fromParentBU` metadata on edges
+- Detects shared DEs by ENT. prefix and folder path conventions
 """
 
 import logging
@@ -17,6 +21,11 @@ from ..types.relationships import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+# Patterns indicating shared/enterprise resources
+SHARED_PREFIXES = ("ENT.", "_ENT.", "Shared_", "Enterprise_")
+SHARED_FOLDER_KEYWORDS = ("shared", "enterprise", "parent", "global")
 
 
 class RelationshipBuilder:
@@ -203,13 +212,18 @@ class RelationshipBuilder:
         sql: str,
         source_id: str,
         source_name: str,
+        source_account_id: Optional[str] = None,
     ) -> list[str]:
         """Analyze SQL query to find Data Extension dependencies.
+
+        Detects shared/enterprise DEs by naming conventions and adds
+        appropriate metadata to relationship edges.
 
         Args:
             sql: SQL query text.
             source_id: ID of the query.
             source_name: Name of the query.
+            source_account_id: Account ID of the source object (for BU tracking).
 
         Returns:
             List of referenced DE names.
@@ -228,6 +242,18 @@ class RelationshipBuilder:
                 if name and not self._is_system_table(name):
                     de_names.add(name)
 
+                    # Detect if this is a shared/enterprise DE
+                    is_shared = self._is_shared_resource_name(name)
+
+                    # Build metadata
+                    metadata: dict[str, Any] = {"resolved_by_name": True}
+                    if is_shared:
+                        metadata["isShared"] = True
+                        metadata["fromParentBU"] = True
+
+                    if source_account_id:
+                        metadata["sourceAccountId"] = source_account_id
+
                     # Add edge (by name since we may not have ID)
                     self.add_edge(
                         source_id=source_id,
@@ -237,7 +263,7 @@ class RelationshipBuilder:
                         target_type="data_extension",
                         target_name=name,
                         relationship_type=RelationshipType.QUERY_READS_DE,
-                        metadata={"resolved_by_name": True},
+                        metadata=metadata,
                     )
 
         return list(de_names)
@@ -249,6 +275,125 @@ class RelationshipBuilder:
             name_lower.startswith("_")
             or name_lower.startswith("sys")
             or name_lower in {"dual", "subscribers", "subscriberattributes"}
+        )
+
+    def _is_shared_resource_name(self, name: str) -> bool:
+        """Check if a resource name indicates a shared/enterprise resource.
+
+        Detects shared resources by common SFMC naming conventions:
+        - ENT. prefix (standard SFMC convention for enterprise DEs)
+        - _ENT. prefix (alternative convention)
+        - Shared_ or Enterprise_ prefixes (custom conventions)
+
+        Args:
+            name: Resource name to check.
+
+        Returns:
+            True if the name indicates a shared resource.
+        """
+        if not name:
+            return False
+
+        # Check for known shared prefixes
+        for prefix in SHARED_PREFIXES:
+            if name.startswith(prefix):
+                return True
+
+        return False
+
+    def _is_shared_resource(self, item: dict[str, Any]) -> bool:
+        """Check if an item is a shared resource from parent BU.
+
+        Detects shared resources by:
+        1. `_fromParentBU` flag (set by cache manager)
+        2. ENT. prefix in name (SFMC convention)
+        3. Shared folder keywords in path
+
+        Args:
+            item: Item dictionary to check.
+
+        Returns:
+            True if the item appears to be a shared resource.
+        """
+        # Check explicit flag
+        if item.get("_fromParentBU"):
+            return True
+
+        # Check name for shared prefixes
+        name = item.get("name", "")
+        if self._is_shared_resource_name(name):
+            return True
+
+        # Check folder path for shared indicators
+        folder_path = item.get("folderPath", "")
+        if folder_path:
+            path_lower = folder_path.lower()
+            for keyword in SHARED_FOLDER_KEYWORDS:
+                if keyword in path_lower:
+                    return True
+
+        return False
+
+    def add_edge_with_bu_tracking(
+        self,
+        source_id: str,
+        source_type: str,
+        target_id: str,
+        target_type: str,
+        relationship_type: RelationshipType,
+        source_name: Optional[str] = None,
+        target_name: Optional[str] = None,
+        target_item: Optional[dict[str, Any]] = None,
+        source_account_id: Optional[str] = None,
+        additional_metadata: Optional[dict[str, Any]] = None,
+    ) -> None:
+        """Add a relationship edge with automatic BU tracking.
+
+        This method automatically detects shared resources and adds
+        appropriate metadata to the edge.
+
+        Args:
+            source_id: Source object ID.
+            source_type: Source object type.
+            target_id: Target object ID.
+            target_type: Target object type.
+            relationship_type: Type of relationship.
+            source_name: Optional source object name.
+            target_name: Optional target object name.
+            target_item: Optional full target item dict for shared detection.
+            source_account_id: Account ID of source object.
+            additional_metadata: Additional metadata to include.
+        """
+        metadata: dict[str, Any] = additional_metadata.copy() if additional_metadata else {}
+
+        # Detect shared resource
+        is_shared = False
+        from_parent_bu = False
+
+        if target_item:
+            if self._is_shared_resource(target_item):
+                is_shared = True
+                from_parent_bu = target_item.get("_fromParentBU", False)
+        elif target_name:
+            is_shared = self._is_shared_resource_name(target_name)
+            from_parent_bu = is_shared  # Assume from parent if shared by name
+
+        if is_shared:
+            metadata["isShared"] = True
+        if from_parent_bu:
+            metadata["fromParentBU"] = True
+        if source_account_id:
+            metadata["sourceAccountId"] = source_account_id
+
+        self.add_edge(
+            source_id=source_id,
+            source_type=source_type,
+            source_name=source_name,
+            target_id=target_id,
+            target_type=target_type,
+            target_name=target_name,
+            relationship_type=relationship_type,
+            metadata=metadata if metadata else None,
         )
 
     def get_dependencies_for(

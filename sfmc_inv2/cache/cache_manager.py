@@ -5,6 +5,11 @@ Provides lazy-loaded caching for:
 - Object definitions (queries, scripts, emails)
 
 All caches load on first access and support pre-warming.
+
+Multi-BU Support:
+- MID-keyed caching for current and parent BU
+- Cross-BU lookup with parent BU fallback
+- Shared resource tracking via `_fromParentBU` flag
 """
 
 import logging
@@ -75,26 +80,52 @@ class CacheManager:
 
     Caches folder hierarchies and object definitions on first access.
     Provides breadcrumb path building with memoization.
+
+    Multi-BU Features:
+    - MID-keyed caching for current and parent business units
+    - Cross-BU lookup with automatic parent BU fallback
+    - Shared resource tracking via `_fromParentBU` metadata
     """
 
     def __init__(
         self,
         rest_client: Optional[RESTClient] = None,
         soap_client: Optional[SOAPClient] = None,
+        account_id: Optional[str] = None,
+        parent_account_id: Optional[str] = None,
     ):
         """Initialize the cache manager.
 
         Args:
             rest_client: REST client instance.
             soap_client: SOAP client instance.
+            account_id: Current business unit MID (Member ID).
+            parent_account_id: Parent business unit MID for Enterprise 2.0 accounts.
         """
         self._rest = rest_client or get_rest_client()
         self._soap = soap_client or get_soap_client()
 
-        # Cache storage
+        # Business Unit IDs
+        self._account_id = account_id
+        self._parent_account_id = parent_account_id
+
+        # Cache storage - single BU mode (backward compatible)
         self._caches: dict[CacheType, dict[str, Any]] = {}
         self._loaded: set[CacheType] = set()
         self._lock = threading.RLock()
+
+        # MID-keyed cache storage for multi-BU mode
+        # Structure: {MID: {CacheType: {id: object}}}
+        self._bu_caches: dict[str, dict[CacheType, dict[str, Any]]] = {}
+        self._bu_loaded: dict[str, set[CacheType]] = {}
+
+        # Initialize BU cache storage
+        if account_id:
+            self._bu_caches[account_id] = {}
+            self._bu_loaded[account_id] = set()
+        if parent_account_id and parent_account_id != account_id:
+            self._bu_caches[parent_account_id] = {}
+            self._bu_loaded[parent_account_id] = set()
 
         # Breadcrumb builders (created on demand)
         self._breadcrumb_builders: dict[CacheType, BreadcrumbBuilder] = {}
@@ -234,8 +265,249 @@ class CacheManager:
                     for ct, folders in self._missing_folders.items()
                     if folders
                 },
+                "account_id": self._account_id,
+                "parent_account_id": self._parent_account_id,
+                "bu_cache_sizes": {
+                    mid: {ct.value: len(caches.get(ct, {})) for ct in self._bu_loaded.get(mid, set())}
+                    for mid, caches in self._bu_caches.items()
+                },
             }
         return stats
+
+    # -------------------------------------------------------------------------
+    # Multi-BU Support Methods
+    # -------------------------------------------------------------------------
+
+    @property
+    def account_id(self) -> Optional[str]:
+        """Get the current business unit MID."""
+        return self._account_id
+
+    @property
+    def parent_account_id(self) -> Optional[str]:
+        """Get the parent business unit MID."""
+        return self._parent_account_id
+
+    @property
+    def has_parent_bu(self) -> bool:
+        """Check if a parent BU is configured."""
+        return (
+            self._parent_account_id is not None
+            and self._parent_account_id != self._account_id
+        )
+
+    def set_account_ids(
+        self,
+        account_id: str,
+        parent_account_id: Optional[str] = None,
+    ) -> None:
+        """Set or update the business unit IDs.
+
+        Args:
+            account_id: Current business unit MID.
+            parent_account_id: Parent business unit MID (optional).
+        """
+        with self._lock:
+            self._account_id = account_id
+            self._parent_account_id = parent_account_id
+
+            # Initialize BU cache storage
+            if account_id and account_id not in self._bu_caches:
+                self._bu_caches[account_id] = {}
+                self._bu_loaded[account_id] = set()
+
+            if parent_account_id and parent_account_id not in self._bu_caches:
+                self._bu_caches[parent_account_id] = {}
+                self._bu_loaded[parent_account_id] = set()
+
+    def lookup(
+        self,
+        cache_type: CacheType,
+        key: str,
+        allow_parent: bool = True,
+    ) -> Optional[dict[str, Any]]:
+        """Lookup an item with optional parent BU fallback.
+
+        This method supports cross-BU lookup for shared resources.
+        When an item is not found in the current BU cache, it will
+        optionally search the parent BU cache.
+
+        Args:
+            cache_type: Type of cache to search.
+            key: Item key/ID to lookup.
+            allow_parent: If True, fall back to parent BU cache.
+
+        Returns:
+            Item dict with `_fromParentBU` flag if found in parent,
+            or None if not found.
+        """
+        self._ensure_loaded(cache_type)
+
+        # Try current BU first
+        result = self._caches.get(cache_type, {}).get(key)
+        if result is not None:
+            return result
+
+        # Try parent BU if allowed and configured
+        if allow_parent and self.has_parent_bu:
+            parent_cache = self._bu_caches.get(self._parent_account_id, {})
+            parent_items = parent_cache.get(cache_type, {})
+            result = parent_items.get(key)
+
+            if result is not None:
+                # Return a copy with parent BU flag
+                result_copy = dict(result)
+                result_copy["_fromParentBU"] = True
+                result_copy["_parentAccountId"] = self._parent_account_id
+                return result_copy
+
+        return None
+
+    def lookup_by_name(
+        self,
+        cache_type: CacheType,
+        name: str,
+        name_field: str = "name",
+        allow_parent: bool = True,
+    ) -> Optional[dict[str, Any]]:
+        """Lookup an item by name with optional parent BU fallback.
+
+        Args:
+            cache_type: Type of cache to search.
+            name: Item name to lookup.
+            name_field: Field name containing the name (default "name").
+            allow_parent: If True, fall back to parent BU cache.
+
+        Returns:
+            Item dict with `_fromParentBU` flag if found in parent,
+            or None if not found.
+        """
+        self._ensure_loaded(cache_type)
+
+        # Search current BU
+        for item in self._caches.get(cache_type, {}).values():
+            if item.get(name_field) == name:
+                return item
+
+        # Search parent BU if allowed
+        if allow_parent and self.has_parent_bu:
+            parent_cache = self._bu_caches.get(self._parent_account_id, {})
+            for item in parent_cache.get(cache_type, {}).values():
+                if item.get(name_field) == name:
+                    result_copy = dict(item)
+                    result_copy["_fromParentBU"] = True
+                    result_copy["_parentAccountId"] = self._parent_account_id
+                    return result_copy
+
+        return None
+
+    def load_shared_resources(
+        self,
+        cache_type: CacheType,
+        shared_folder_names: Optional[list[str]] = None,
+    ) -> int:
+        """Load shared resources from parent BU into separate cache.
+
+        This method loads resources from the parent BU that may be
+        shared with child BUs. Useful for Enterprise 2.0 accounts.
+
+        Args:
+            cache_type: Type of resources to load.
+            shared_folder_names: Optional list of folder names to filter by.
+                If None, loads all resources from parent BU.
+
+        Returns:
+            Number of resources loaded.
+        """
+        if not self.has_parent_bu:
+            logger.debug("No parent BU configured, skipping shared resource load")
+            return 0
+
+        parent_mid = self._parent_account_id
+
+        with self._lock:
+            if cache_type in self._bu_loaded.get(parent_mid, set()):
+                # Already loaded
+                return len(self._bu_caches.get(parent_mid, {}).get(cache_type, {}))
+
+        # TODO: This would require switching the API context to the parent BU
+        # For now, we rely on the current BU's cache and mark shared resources
+        # when they are identified by naming convention (e.g., ENT. prefix)
+        logger.debug(
+            f"Shared resource loading for {cache_type.value} from parent BU "
+            f"{parent_mid} is not yet implemented"
+        )
+        return 0
+
+    def get_bu_cache(
+        self,
+        account_id: str,
+        cache_type: CacheType,
+    ) -> dict[str, Any]:
+        """Get cache for a specific business unit.
+
+        Args:
+            account_id: Business unit MID.
+            cache_type: Type of cache to retrieve.
+
+        Returns:
+            Dictionary of cached items for that BU and type.
+        """
+        with self._lock:
+            return self._bu_caches.get(account_id, {}).get(cache_type, {})
+
+    def store_in_bu_cache(
+        self,
+        account_id: str,
+        cache_type: CacheType,
+        items: dict[str, Any],
+    ) -> None:
+        """Store items in a specific BU's cache.
+
+        Args:
+            account_id: Business unit MID.
+            cache_type: Type of cache.
+            items: Dictionary of items to store (id -> item).
+        """
+        with self._lock:
+            if account_id not in self._bu_caches:
+                self._bu_caches[account_id] = {}
+                self._bu_loaded[account_id] = set()
+
+            self._bu_caches[account_id][cache_type] = items
+            self._bu_loaded[account_id].add(cache_type)
+
+    def is_shared_resource(self, item: dict[str, Any]) -> bool:
+        """Check if an item is a shared resource from parent BU.
+
+        Detects shared resources by:
+        1. `_fromParentBU` flag (set by lookup methods)
+        2. ENT. prefix in name (SFMC convention for shared DEs)
+        3. Enterprise-level folder path
+
+        Args:
+            item: Item dictionary to check.
+
+        Returns:
+            True if the item appears to be a shared resource.
+        """
+        # Check explicit flag
+        if item.get("_fromParentBU"):
+            return True
+
+        # Check for ENT. prefix (common SFMC convention)
+        name = item.get("name", "")
+        if name.startswith("ENT.") or name.startswith("_ENT."):
+            return True
+
+        # Check folder path for shared/enterprise indicators
+        folder_path = item.get("folderPath", "")
+        if folder_path:
+            path_lower = folder_path.lower()
+            if "shared" in path_lower or "enterprise" in path_lower:
+                return True
+
+        return False
 
     def _ensure_loaded(self, cache_type: CacheType) -> None:
         """Ensure a cache is loaded, loading if needed."""
@@ -574,13 +846,30 @@ _manager_lock = threading.Lock()
 def get_cache_manager(
     rest_client: Optional[RESTClient] = None,
     soap_client: Optional[SOAPClient] = None,
+    account_id: Optional[str] = None,
+    parent_account_id: Optional[str] = None,
 ) -> CacheManager:
-    """Get or create the default cache manager."""
+    """Get or create the default cache manager.
+
+    Args:
+        rest_client: REST client instance.
+        soap_client: SOAP client instance.
+        account_id: Current business unit MID.
+        parent_account_id: Parent business unit MID (for Enterprise 2.0).
+
+    Returns:
+        CacheManager singleton instance.
+    """
     global _default_manager
     if _default_manager is None:
         with _manager_lock:
             if _default_manager is None:
-                _default_manager = CacheManager(rest_client, soap_client)
+                _default_manager = CacheManager(
+                    rest_client, soap_client, account_id, parent_account_id
+                )
+    elif account_id:
+        # Update account IDs if provided
+        _default_manager.set_account_ids(account_id, parent_account_id)
     return _default_manager
 
 

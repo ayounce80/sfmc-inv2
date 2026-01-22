@@ -24,6 +24,18 @@ from .relationships import (
     RelationshipEdge,
     RelationshipType,
 )
+from .type_registry import (
+    TypeDefinition,
+    TYPE_REGISTRY,
+    get_type_definition,
+    get_type_by_extractor,
+    get_all_types,
+    get_shared_types,
+    get_dependencies,
+    get_dependency_paths,
+    get_extractor_to_type_map,
+    get_type_to_extractor_map,
+)
 
 __all__ = [
     # Inventory
@@ -47,4 +59,15 @@ __all__ = [
     "RelationshipGraph",
     "RelationshipEdge",
     "RelationshipType",
+    # Type Registry
+    "TypeDefinition",
+    "TYPE_REGISTRY",
+    "get_type_definition",
+    "get_type_by_extractor",
+    "get_all_types",
+    "get_shared_types",
+    "get_dependencies",
+    "get_dependency_paths",
+    "get_extractor_to_type_map",
+    "get_type_to_extractor_map",
 ]
