@@ -160,12 +160,15 @@ class JourneyExtractor(BaseExtractor):
         """Transform trigger data."""
         transformed = []
         for trigger in triggers:
+            # eventDefinitionKey/Id are nested in metaData
+            meta = trigger.get("metaData", {})
             transformed.append({
                 "id": trigger.get("id"),
                 "key": trigger.get("key"),
                 "name": trigger.get("name"),
                 "type": trigger.get("type"),
-                "eventDefinitionKey": trigger.get("eventDefinitionKey"),
+                "eventDefinitionId": meta.get("eventDefinitionId"),
+                "eventDefinitionKey": meta.get("eventDefinitionKey"),
             })
         return transformed
 
@@ -212,9 +215,26 @@ class JourneyExtractor(BaseExtractor):
             if not journey_id:
                 continue
 
-            # Process triggers for DE relationships
+            # Process triggers for event definition and DE relationships
             for trigger in item.get("triggers", []):
-                # Event-triggered journeys reference a DE
+                # Event definition relationship (from metaData)
+                meta = trigger.get("metaData", {})
+                event_def_id = meta.get("eventDefinitionId")
+                event_def_key = meta.get("eventDefinitionKey")
+
+                if event_def_id:
+                    result.add_relationship(
+                        source_id=str(journey_id),
+                        source_type="journey",
+                        source_name=journey_name,
+                        target_id=str(event_def_id),
+                        target_type="event_definition",
+                        target_name=trigger.get("name"),
+                        relationship_type=RelationshipType.JOURNEY_USES_EVENT,
+                        metadata={"eventDefinitionKey": event_def_key},
+                    )
+
+                # Event-triggered journeys may also reference a DE directly
                 config_args = trigger.get("configurationArguments", {})
                 de_key = config_args.get("eventDataConfig", {}).get("deKey")
 
