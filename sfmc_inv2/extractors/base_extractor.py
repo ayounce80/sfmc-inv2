@@ -134,6 +134,10 @@ class BaseExtractor(ABC, Generic[T]):
     # Cache types needed by this extractor
     required_caches: list[CacheType] = []
 
+    # Multi-BU support: True if this extractor should aggregate across child BUs
+    # Objects like journeys live on child BUs, while shared resources are on parent
+    supports_multi_bu: bool = False
+
     def __init__(
         self,
         rest_client: Optional[RESTClient] = None,

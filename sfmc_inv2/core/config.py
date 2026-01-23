@@ -26,6 +26,21 @@ class SFMCConfig:
     soap_debug: bool = False
     rest_debug: bool = False
     soap_max_pages: int = 100  # Maximum pages for SOAP pagination
+    child_account_ids: list[str] = None  # Child BU MIDs for multi-BU extraction
+
+    def __post_init__(self):
+        """Initialize mutable defaults."""
+        if self.child_account_ids is None:
+            self.child_account_ids = []
+
+    @property
+    def all_account_ids(self) -> list[str]:
+        """Get all configured account IDs (parent + children)."""
+        accounts = []
+        if self.account_id:
+            accounts.append(self.account_id)
+        accounts.extend(self.child_account_ids)
+        return accounts
 
     @property
     def auth_url(self) -> str:
@@ -64,6 +79,22 @@ def get_config() -> SFMCConfig:
     Returns:
         SFMCConfig instance populated from environment.
     """
+    # Collect child BU MIDs from SFMC_CHILD_BU_* or legacy SFMC_*_ID vars
+    child_ids = []
+
+    # Check for comma-separated list in SFMC_CHILD_BUS
+    child_bus_env = os.environ.get("SFMC_CHILD_BUS", "")
+    if child_bus_env:
+        child_ids.extend([mid.strip() for mid in child_bus_env.split(",") if mid.strip()])
+
+    # Also check legacy individual vars (SFMC_DT_ID, SFMC_AT_ID, etc.)
+    for key, value in os.environ.items():
+        if key.startswith("SFMC_") and key.endswith("_ID") and key not in (
+            "SFMC_ACCOUNT_ID", "SFMC_CLIENT_ID"
+        ):
+            if value and value not in child_ids:
+                child_ids.append(value)
+
     return SFMCConfig(
         subdomain=os.environ.get("SFMC_SUBDOMAIN", ""),
         client_id=os.environ.get("SFMC_CLIENT_ID", ""),
@@ -72,6 +103,7 @@ def get_config() -> SFMCConfig:
         soap_debug=os.environ.get("SFMC_SOAP_DEBUG", "").lower() == "true",
         rest_debug=os.environ.get("SFMC_REST_DEBUG", "").lower() == "true",
         soap_max_pages=int(os.environ.get("SFMC_SOAP_MAX_PAGES", "100")),
+        child_account_ids=child_ids,
     )
 
 

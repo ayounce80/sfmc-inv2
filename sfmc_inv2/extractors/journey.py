@@ -33,6 +33,9 @@ class JourneyExtractor(BaseExtractor):
     description = "SFMC Journey Builder Journeys"
     object_type = "Journey"
 
+    # Journeys live on child BUs, so aggregate across all configured BUs
+    supports_multi_bu = True
+
     required_caches = [CacheType.DE_FOLDERS]
 
     async def fetch_data(self, options: ExtractorOptions) -> list[dict[str, Any]]:

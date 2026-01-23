@@ -13,6 +13,10 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Callable, Optional
 
+from ..core.config import SFMCConfig, get_config, get_config_with_account
+from ..clients.rest_client import RESTClient
+from ..clients.soap_client import SOAPClient
+from ..clients.auth import TokenManager
 from ..extractors import EXTRACTORS, ExtractorOptions, ExtractorResult, get_extractor
 from ..extractors.base_extractor import BaseExtractor
 from ..types.inventory import InventoryStatistics, ExtractorStats as StatsModel
@@ -48,6 +52,10 @@ class RunnerConfig:
     use_extraction_planner: bool = False  # Enable topological ordering
     include_dependencies: bool = True  # Include dependency types as cache-only
     cache_only_types: list[str] = field(default_factory=list)  # Types to cache but not output
+
+    # Multi-BU support: run extractors with supports_multi_bu=True across all child BUs
+    enable_multi_bu: bool = True  # Enable multi-BU aggregation
+    child_bu_ids: list[str] = field(default_factory=list)  # Override child BUs (or use config)
 
 
 @dataclass
@@ -134,6 +142,112 @@ class ExtractorRunner:
             include_dependencies=self._config.include_dependencies
         )
         self._current_plan: Optional[ExtractionPlan] = None
+        self._base_config = get_config()
+
+    def _get_child_bu_ids(self) -> list[str]:
+        """Get child BU IDs to use for multi-BU extraction."""
+        # Use explicit config first, then fall back to SFMCConfig
+        if self._config.child_bu_ids:
+            return self._config.child_bu_ids
+        return self._base_config.child_account_ids
+
+    async def _run_extractor_for_bu(
+        self,
+        name: str,
+        account_id: str,
+        options: ExtractorOptions,
+    ) -> ExtractorResult:
+        """Run an extractor targeting a specific Business Unit.
+
+        Creates BU-specific clients and tags results with source BU.
+
+        Args:
+            name: Extractor name.
+            account_id: Target BU MID.
+            options: Extraction options.
+
+        Returns:
+            ExtractorResult with items tagged with source BU.
+        """
+        # Create BU-specific configuration
+        bu_config = get_config_with_account(account_id)
+
+        # Create BU-specific clients
+        token_manager = TokenManager(bu_config)
+        rest_client = RESTClient(bu_config, token_manager)
+        soap_client = SOAPClient(bu_config, token_manager)
+
+        # Create extractor with BU-specific clients
+        extractor_class = get_extractor(name)
+        extractor = extractor_class(
+            rest_client=rest_client,
+            soap_client=soap_client,
+        )
+
+        # Run extraction
+        extractor_result = await extractor.extract(options)
+
+        # Tag all items with source BU
+        for item in extractor_result.items:
+            item["_sourceBuMid"] = account_id
+
+        # Also tag relationships
+        for edge in extractor_result.relationships:
+            if edge.metadata is None:
+                edge.metadata = {}
+            edge.metadata["_sourceBuMid"] = account_id
+
+        return extractor_result
+
+    async def _run_multi_bu_extractor(
+        self,
+        name: str,
+        options: ExtractorOptions,
+    ) -> ExtractorResult:
+        """Run an extractor across all configured BUs and merge results.
+
+        Args:
+            name: Extractor name.
+            options: Extraction options.
+
+        Returns:
+            Merged ExtractorResult from all BUs.
+        """
+        child_bu_ids = self._get_child_bu_ids()
+        if not child_bu_ids:
+            # No child BUs, run on parent only
+            extractor_class = get_extractor(name)
+            extractor = extractor_class()
+            return await extractor.extract(options)
+
+        # Run on all child BUs (skip parent for child-BU-specific objects like journeys)
+        all_results = []
+        for bu_id in child_bu_ids:
+            try:
+                logger.info(f"Running {name} on BU {bu_id}")
+                bu_result = await self._run_extractor_for_bu(name, bu_id, options)
+                all_results.append(bu_result)
+            except Exception as e:
+                logger.error(f"Failed to run {name} on BU {bu_id}: {e}")
+
+        # Merge all results
+        merged = ExtractorResult(extractor_name=name, success=True)
+
+        for bu_result in all_results:
+            merged.items.extend(bu_result.items)
+            merged.relationships.extend(bu_result.relationships)
+            merged.errors.extend(bu_result.errors)
+            merged.pages_fetched += bu_result.pages_fetched
+
+            if not bu_result.success:
+                merged.success = False  # Mark as partial failure
+
+        merged.item_count = len(merged.items)
+        merged.completed_at = datetime.now()
+        merged.metadata["multi_bu"] = True
+        merged.metadata["bu_count"] = len(all_results)
+
+        return merged
 
     def get_extraction_plan(
         self,
@@ -197,10 +311,24 @@ class ExtractorRunner:
 
                 try:
                     extractor_class = get_extractor(name)
-                    extractor = extractor_class()
-
                     options = self._build_options(name, custom_options.get(name, {}))
-                    extractor_result = await extractor.extract(options)
+
+                    # Check if extractor supports multi-BU and multi-BU is enabled
+                    supports_multi_bu = getattr(extractor_class, "supports_multi_bu", False)
+                    child_bu_ids = self._get_child_bu_ids()
+
+                    if (
+                        self._config.enable_multi_bu
+                        and supports_multi_bu
+                        and child_bu_ids
+                    ):
+                        # Run across all child BUs
+                        logger.info(f"Running {name} across {len(child_bu_ids)} child BUs")
+                        extractor_result = await self._run_multi_bu_extractor(name, options)
+                    else:
+                        # Run on default BU only
+                        extractor = extractor_class()
+                        extractor_result = await extractor.extract(options)
 
                     status = "Completed" if extractor_result.success else "Failed"
                     self._report_progress(
