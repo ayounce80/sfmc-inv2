@@ -1,6 +1,8 @@
 """Delivery Profile extractor for SFMC.
 
-Extracts Delivery Profile definitions via SOAP API.
+Extracts Delivery Profile definitions via REST API.
+Note: The API only exposes basic metadata (id, key, name, description, dates).
+Detailed configuration (IP, domain, headers/footers) is not available via API.
 """
 
 import logging
@@ -12,90 +14,63 @@ logger = logging.getLogger(__name__)
 
 
 class DeliveryProfileExtractor(BaseExtractor):
-    """Extractor for SFMC Delivery Profiles."""
+    """Extractor for SFMC Delivery Profiles.
+
+    Uses the legacy REST endpoint as the SOAP DeliveryProfile object type
+    is not directly retrievable in most SFMC instances.
+    """
 
     name = "delivery_profiles"
-    description = "SFMC Delivery Profiles (SOAP)"
+    description = "SFMC Delivery Profiles (REST)"
     object_type = "DeliveryProfile"
-
-    SOAP_OBJECT_TYPE = "DeliveryProfile"
-
-    SOAP_PROPERTIES = [
-        "ObjectID",
-        "CustomerKey",
-        "Name",
-        "Description",
-        "SourceAddressType",
-        "PrivateIP",
-        "DomainType",
-        "PrivateDomain",
-        "HeaderSalutationSource",
-        "HeaderContentArea.ID",
-        "FooterSalutationSource",
-        "FooterContentArea.ID",
-        "SubscriberLevelPrivateDomain",
-        "SMIMESignatureCertificateCustomerKey",
-        "SMIMEEncryptionCertificateCustomerKey",
-        "CreatedDate",
-        "ModifiedDate",
-    ]
 
     required_caches = []
 
     async def fetch_data(self, options: ExtractorOptions) -> list[dict[str, Any]]:
-        """Fetch delivery profiles via SOAP API."""
+        """Fetch delivery profiles via REST API.
+
+        Note: This endpoint only returns basic metadata. Detailed delivery
+        profile configuration is not exposed via API.
+        """
         self._pages_fetched = 0
 
-        result = self._soap.retrieve_all_pages(
-            object_type=self.SOAP_OBJECT_TYPE,
-            properties=self.SOAP_PROPERTIES,
-            max_pages=options.max_pages,
-        )
+        result = self._rest.get("/legacy/v1/beta/messaging/deliverypolicy/")
 
         if not result.get("ok"):
             logger.error(f"Failed to fetch delivery profiles: {result.get('error')}")
             return []
 
-        self._pages_fetched = result.get("pages_retrieved", 1)
-        objects = result.get("objects", [])
-        logger.info(f"Retrieved {len(objects)} delivery profiles")
+        data = result.get("data", {})
 
-        return objects
+        # Response uses 'entry' as the items field
+        items = data.get("entry", [])
+        self._pages_fetched = 1
+
+        logger.info(f"Retrieved {len(items)} delivery profiles")
+        return items
 
     def transform_data(
         self,
         items: list[dict[str, Any]],
         options: ExtractorOptions,
     ) -> list[dict[str, Any]]:
-        """Transform delivery profile data for output."""
+        """Transform delivery profile data for output.
+
+        Note: The API only provides limited metadata. Detailed configuration
+        (IP address, domain, headers, footers) is not available.
+        """
         transformed = []
 
         for item in items:
-            header_content = item.get("HeaderContentArea", {})
-            footer_content = item.get("FooterContentArea", {})
-
             output = {
-                "objectId": item.get("ObjectID"),
-                "name": item.get("Name"),
-                "customerKey": item.get("CustomerKey"),
-                "description": item.get("Description"),
-                # IP/Domain settings
-                "sourceAddressType": item.get("SourceAddressType"),
-                "privateIP": item.get("PrivateIP"),
-                "domainType": item.get("DomainType"),
-                "privateDomain": item.get("PrivateDomain"),
-                "subscriberLevelPrivateDomain": item.get("SubscriberLevelPrivateDomain") == "true" if isinstance(item.get("SubscriberLevelPrivateDomain"), str) else item.get("SubscriberLevelPrivateDomain"),
-                # Header/Footer
-                "headerSalutationSource": item.get("HeaderSalutationSource"),
-                "headerContentAreaId": header_content.get("ID") if isinstance(header_content, dict) else None,
-                "footerSalutationSource": item.get("FooterSalutationSource"),
-                "footerContentAreaId": footer_content.get("ID") if isinstance(footer_content, dict) else None,
-                # S/MIME
-                "smimeSignatureCertificateKey": item.get("SMIMESignatureCertificateCustomerKey"),
-                "smimeEncryptionCertificateKey": item.get("SMIMEEncryptionCertificateCustomerKey"),
-                # Audit
-                "createdDate": item.get("CreatedDate"),
-                "modifiedDate": item.get("ModifiedDate"),
+                "id": item.get("id"),
+                "customerKey": item.get("key"),
+                "name": item.get("name"),
+                "description": item.get("description"),
+                "createdDate": item.get("createdDate"),
+                "lastUpdated": item.get("lastUpdated"),
+                # Note: Detailed settings not available via API
+                "_apiLimitation": "Detailed configuration (IP, domain, headers/footers) not exposed via API",
             }
             transformed.append(output)
 

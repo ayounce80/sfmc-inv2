@@ -65,6 +65,7 @@ def build_retrieve_request(
     object_type: str,
     properties: list[str],
     filter_xml: Optional[Element] = None,
+    query_all_accounts: bool = False,
 ) -> Element:
     """Build a SOAP RetrieveRequest element.
 
@@ -72,6 +73,8 @@ def build_retrieve_request(
         object_type: SFMC object type (e.g., "Automation", "DataExtension")
         properties: List of property names to retrieve
         filter_xml: Optional Filter element for the request
+        query_all_accounts: If True, adds QueryAllAccounts option to retrieve
+            objects from all Business Units (requires parent BU credentials)
 
     Returns:
         RetrieveRequestMsg element ready to be added to envelope Body.
@@ -88,6 +91,11 @@ def build_retrieve_request(
 
     if filter_xml is not None:
         req.append(filter_xml)
+
+    # Add QueryAllAccounts option for cross-BU retrieval
+    if query_all_accounts:
+        options = ET.SubElement(req, f"{{{ET_NS}}}Options")
+        ET.SubElement(options, f"{{{ET_NS}}}QueryAllAccounts").text = "true"
 
     return msg
 
@@ -463,6 +471,7 @@ class SOAPClient:
         object_type: str,
         properties: list[str],
         filter_xml: Optional[Element] = None,
+        query_all_accounts: bool = False,
     ) -> dict[str, Any]:
         """Make a SOAP Retrieve request.
 
@@ -470,6 +479,7 @@ class SOAPClient:
             object_type: SFMC object type to retrieve.
             properties: List of properties to retrieve.
             filter_xml: Optional filter element.
+            query_all_accounts: If True, retrieve from all Business Units.
 
         Returns:
             Parsed response with objects list.
@@ -478,7 +488,9 @@ class SOAPClient:
         envelope = env_with_oauth(token)
         body = envelope.find(f".//{{{SOAP_ENV}}}Body")
 
-        retrieve_msg = build_retrieve_request(object_type, properties, filter_xml)
+        retrieve_msg = build_retrieve_request(
+            object_type, properties, filter_xml, query_all_accounts
+        )
         body.append(retrieve_msg)  # type: ignore
 
         xml_bytes = ET.tostring(envelope, encoding="utf-8", xml_declaration=True)
@@ -506,7 +518,9 @@ class SOAPClient:
                         token = self._token_manager.get_token()
                         envelope = env_with_oauth(token)
                         body = envelope.find(f".//{{{SOAP_ENV}}}Body")
-                        body.append(build_retrieve_request(object_type, properties, filter_xml))  # type: ignore
+                        body.append(build_retrieve_request(
+                            object_type, properties, filter_xml, query_all_accounts
+                        ))  # type: ignore
                         xml_bytes = ET.tostring(envelope, encoding="utf-8", xml_declaration=True)
                         continue
 
@@ -533,6 +547,7 @@ class SOAPClient:
         properties: list[str],
         filter_xml: Optional[Element] = None,
         max_pages: Optional[int] = None,
+        query_all_accounts: bool = False,
     ) -> dict[str, Any]:
         """Retrieve all pages of objects using pagination.
 
@@ -541,6 +556,7 @@ class SOAPClient:
             properties: List of properties to retrieve.
             filter_xml: Optional filter element.
             max_pages: Maximum number of pages to retrieve. Defaults to config value.
+            query_all_accounts: If True, retrieve from all Business Units.
 
         Returns:
             Combined response with all objects.
@@ -551,7 +567,9 @@ class SOAPClient:
         page = 1
 
         # First request
-        result = self.retrieve(object_type, properties, filter_xml)
+        result = self.retrieve(
+            object_type, properties, filter_xml, query_all_accounts
+        )
         if not result.get("ok"):
             return result
 
