@@ -79,6 +79,10 @@ class RelationshipType(str, Enum):
     # Script relationships
     SCRIPT_USES_DE = "script_uses_de"
 
+    # CloudPage relationships (AMPscript DE references)
+    CLOUDPAGE_WRITES_DE = "cloudpage_writes_de"
+    CLOUDPAGE_READS_DE = "cloudpage_reads_de"
+
     # Generic
     REFERENCES = "references"
     CONTAINS = "contains"
