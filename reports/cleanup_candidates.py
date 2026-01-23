@@ -3,7 +3,7 @@
 
 import csv
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 
@@ -31,8 +31,11 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
     imports = {i["id"]: i for i in load_ndjson(inventory_path / "objects/imports.ndjson")}
     triggered_sends = load_ndjson(inventory_path / "objects/triggered_sends.ndjson")
 
-    cutoff_2024 = datetime(2024, 1, 1)
-    cutoff_2022 = datetime(2022, 1, 1)
+    # Dynamic cutoffs based on current date
+    today = datetime.now()
+    cutoff_90_days = today - timedelta(days=90)   # Stale automation threshold
+    cutoff_1_year = today - timedelta(days=365)   # Old objects threshold
+    cutoff_3_years = today - timedelta(days=1095)  # Very old objects threshold
 
     # === REPORT 1: Orphaned Data Extensions ===
     de_report = []
@@ -58,10 +61,10 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
         elif "backup" in name_lower or "_bak" in name_lower or "copy of" in name_lower or "archive" in name_lower or "_old" in name_lower:
             category = "BACKUP"
             confidence = "HIGH"
-        elif mod_date and mod_date < cutoff_2022:
+        elif mod_date and mod_date < cutoff_3_years:
             category = "VERY_OLD"
             confidence = "MEDIUM"
-        elif mod_date and mod_date < cutoff_2024:
+        elif mod_date and mod_date < cutoff_1_year:
             category = "OLD"
             confidence = "LOW"
         else:
@@ -107,18 +110,18 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
         except:
             last_run = None
 
-        # Categorize
-        if status == "PausedSchedule" and (not last_run or last_run < cutoff_2024):
+        # Categorize using 90-day staleness threshold per user request
+        if status == "PausedSchedule" and (not last_run or last_run < cutoff_90_days):
             category = "PAUSED_STALE"
             confidence = "HIGH"
         elif status == "PausedSchedule":
             category = "PAUSED_RECENT"
             confidence = "MEDIUM"
-        elif status == "Ready" and last_run and last_run < cutoff_2022:
+        elif status == "Ready" and last_run and last_run < cutoff_1_year:
             category = "READY_VERY_OLD"
             confidence = "HIGH"
-        elif status == "Ready" and last_run and last_run < cutoff_2024:
-            category = "READY_OLD"
+        elif status == "Ready" and last_run and last_run < cutoff_90_days:
+            category = "READY_STALE"
             confidence = "MEDIUM"
         elif status in ("Building", "Inactive"):
             category = "INCOMPLETE"
@@ -168,9 +171,9 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
 
         if "test" in name_lower:
             confidence = "HIGH"
-        elif mod_date and mod_date < cutoff_2022:
+        elif mod_date and mod_date < cutoff_3_years:
             confidence = "HIGH"
-        elif mod_date and mod_date < cutoff_2024:
+        elif mod_date and mod_date < cutoff_1_year:
             confidence = "MEDIUM"
         else:
             confidence = "REVIEW"

@@ -19,6 +19,9 @@ class EventDefinitionExtractor(BaseExtractor):
     description = "SFMC Journey Entry Event Definitions"
     object_type = "EventDefinition"
 
+    # Event definitions are used by journeys and can exist on child BUs
+    supports_multi_bu = True
+
     required_caches = []
 
     async def fetch_data(self, options: ExtractorOptions) -> list[dict[str, Any]]:

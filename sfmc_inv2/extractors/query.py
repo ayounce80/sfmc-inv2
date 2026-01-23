@@ -167,7 +167,8 @@ class QueryExtractor(BaseExtractor):
                 "description": item.get("description"),
                 "categoryId": item.get("categoryId"),
                 "folderPath": item.get("folderPath"),
-                "queryText": item.get("queryText") if options.include_content else None,
+                # Always include queryText for relationship analysis (SQL parsing)
+                "queryText": item.get("queryText"),
                 "targetName": item.get("targetName"),
                 "targetKey": item.get("targetKey"),
                 "targetId": item.get("targetId"),

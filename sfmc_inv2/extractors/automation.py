@@ -66,6 +66,9 @@ class AutomationExtractor(BaseExtractor):
     description = "SFMC Automations with steps and activities"
     object_type = "Automation"
 
+    # Automations can exist on child BUs, so aggregate across all configured BUs
+    supports_multi_bu = True
+
     required_caches = [
         CacheType.AUTOMATION_FOLDERS,
         CacheType.QUERIES,
@@ -281,16 +284,43 @@ class AutomationExtractor(BaseExtractor):
                             relationship_type=rel_type,
                         )
 
-                        # For queries, also track the target DE relationship
-                        if activity_type_id == 300:
-                            target_de_id = activity.get("targetDataExtensionId")
-                            if target_de_id:
-                                result.add_relationship(
-                                    source_id=str(object_id),
-                                    source_type="query",
-                                    source_name=activity.get("queryName"),
-                                    target_id=str(target_de_id),
-                                    target_type="data_extension",
-                                    target_name=activity.get("targetDataExtensionName"),
-                                    relationship_type=RelationshipType.QUERY_WRITES_DE,
-                                )
+                    # Extract relationships from targetDataExtensions array
+                    # This array is present for imports, queries, and filters
+                    target_des = activity.get("targetDataExtensions", [])
+                    for target_de in target_des:
+                        de_id = target_de.get("id")
+                        de_name = target_de.get("name")
+                        if not de_id:
+                            continue
+
+                        # Map activity type to appropriate writes relationship
+                        if activity_type_id == 43:  # Import
+                            result.add_relationship(
+                                source_id=str(object_id),
+                                source_type="import",
+                                source_name=activity.get("name"),
+                                target_id=str(de_id),
+                                target_type="data_extension",
+                                target_name=de_name,
+                                relationship_type=RelationshipType.IMPORT_WRITES_DE,
+                            )
+                        elif activity_type_id == 300:  # Query
+                            result.add_relationship(
+                                source_id=str(object_id),
+                                source_type="query",
+                                source_name=activity.get("name"),
+                                target_id=str(de_id),
+                                target_type="data_extension",
+                                target_name=de_name,
+                                relationship_type=RelationshipType.QUERY_WRITES_DE,
+                            )
+                        elif activity_type_id == 303:  # Filter
+                            result.add_relationship(
+                                source_id=str(object_id),
+                                source_type="filter",
+                                source_name=activity.get("name"),
+                                target_id=str(de_id),
+                                target_type="data_extension",
+                                target_name=de_name,
+                                relationship_type=RelationshipType.FILTER_WRITES_DE,
+                            )

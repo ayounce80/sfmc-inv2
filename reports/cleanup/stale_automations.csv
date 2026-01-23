@@ -1,52 +1,279 @@
 id,name,status,category,confidence,last_run,schedule_type,activity_count
-591e7698-f7aa-4ccf-bf13-02db7f4f8706,ATC Thank_You_v3_SurveyURL_Import_dev,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
-15a8a5ab-0e80-4713-b7ce-834262759205,DTC Thank_You_v3_SurveyURL_Import_dev,PausedSchedule,PAUSED_STALE,HIGH,2022-10-08,,2
-44635b51-9157-4390-af7b-529a38d9e4b1,Omniture Export Metrics and Campaigns 1045947,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
-ccb86cca-ae31-47d2-a988-69c809515bc0,Omniture Import Segments 1045947,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
-07442671-c14c-42c4-8965-d3d8e4c9c785,Tread Wear Journey,PausedSchedule,PAUSED_STALE,HIGH,Never,,1
-b9e1af46-1f1b-4af8-9a12-a1e9c1b0991f,daily_tracking_process - 2,PausedSchedule,PAUSED_STALE,HIGH,Never,,3
-ce4b1c73-bd1a-4b55-903c-ec191b8c5965,daily_tracking_process_makeup,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
-36250f59-cb6c-4812-898c-ab021c8a2c51,daily_tracking_process_migrated_from_folder_myprograms,PausedSchedule,PAUSED_STALE,HIGH,Never,,7
-a2a88db6-5f41-43ac-aa4b-72b7a131afea,memorial_STO_reporting,PausedSchedule,PAUSED_STALE,HIGH,2023-06-21,,2
-24aa3055-80e5-458e-93b8-3e8709392a6c,1045947-PSHist#01,Ready,READY_VERY_OLD,HIGH,2018-07-12,,7
-8686651d-d385-43d3-a729-72e295ea0fda,1045947-PSHist#02,Ready,READY_VERY_OLD,HIGH,2019-06-18,,7
-a4222400-7917-4dab-97db-001ff83c07b4,18 Month Engaged Subscribers,Ready,READY_VERY_OLD,HIGH,2017-01-10,,1
-84d7b3e8-e912-48d7-abf2-3b6a2d6a8166,4th 2016 Clicks tmp,Ready,READY_VERY_OLD,HIGH,2016-09-20,,2
-4d2c47c2-48f7-4a3d-808d-402e573428c1,Add seed to last send send_log,Ready,READY_VERY_OLD,HIGH,2017-08-22,,1
-20a90b80-673d-4abb-9e3d-1b9e345a9d93,Bad Email Addresses,Ready,READY_VERY_OLD,HIGH,2018-03-13,,1
-b3be009f-b32b-4317-a068-cfb8d4224397,Bad Emails Query,Ready,READY_VERY_OLD,HIGH,2018-03-28,,1
-154c5af7-962c-4fba-94e4-9d2443cc37d4,Co Subscribers,Ready,READY_VERY_OLD,HIGH,2014-12-22,,2
-4180086b-d68c-4699-8b84-b8e091b261a0,DTC ATC Activity Log 6-1-2017 to Today,Ready,READY_VERY_OLD,HIGH,2017-07-12,,1
-094c5b12-ac90-4364-a928-5af911cc7faa,DTC Customer Vehicles Rebuild Import,Ready,READY_VERY_OLD,HIGH,2017-09-22,,1
-03b8bc6b-44ca-46e3-8fb6-b3b384705fa1,Dynamic Branding Demo,Ready,READY_VERY_OLD,HIGH,2015-01-16,,1
-4ff03e49-682c-4ac7-865c-ea2ca191ab0a,Import Seed DAta,Ready,READY_VERY_OLD,HIGH,2017-08-22,,3
-73ee379d-d5f1-4875-b31f-624d4118e81d,Import_6-28-2018-Data,Ready,READY_VERY_OLD,HIGH,2018-07-02,,1
-845c4e3a-d371-4e0c-85ff-e1ff359d4d5b,Last AR Sendlog test,Ready,READY_VERY_OLD,HIGH,2017-04-06,,1
-7703d9dc-0f62-43dd-95bc-fd9bd7e06cd0,Populate TY catchup,Ready,READY_VERY_OLD,HIGH,2018-09-07,,1
-86d3acd0-2180-43ab-a7e4-51565cb0f369,Re-engagement Centralized Data,Ready,READY_VERY_OLD,HIGH,2017-05-10,,2
-bdcc8612-4c1f-41f1-94ca-0ad42c434aaf,Run Tracking Update Queries,Ready,READY_VERY_OLD,HIGH,2015-08-26,,4
-5a2a3e09-296f-4a1c-9736-c9cc56a0cdbe,RunQry,Ready,READY_VERY_OLD,HIGH,2015-08-28,,2
-5b401337-6972-4152-8a3b-66ee748bff81,Segment Contacts to Delete,Ready,READY_VERY_OLD,HIGH,2018-12-13,,4
-7ae6d0a8-27a9-421b-bf97-5ca5c30e172d,Segment Non Numeric and Non DTC records,Ready,READY_VERY_OLD,HIGH,2021-04-15,,5
-ccdd2f7e-431f-49a1-8faa-53a2518536c7,Subscriber not engaged in 18 months one time send,Ready,READY_VERY_OLD,HIGH,2018-03-26,,2
-eec201c6-d949-40ed-903e-3ce20f02b0b0,SubscriberStatusExtract,Ready,READY_VERY_OLD,HIGH,2015-04-29,,3
-0a5c9f10-3722-48c5-a94c-a593daef9ff7,Tracking History Data,Ready,READY_VERY_OLD,HIGH,2015-08-21,,12
-aec8e1b1-f572-46de-86bb-e5bfeda8097c,Unique Subscribes and Unsubscribes Ad Hoc,Ready,READY_VERY_OLD,HIGH,2017-01-17,,2
-b56471f9-1497-4072-be39-d3cb468b7cef,DTD Invoice makeup send 01092024,Building,INCOMPLETE,MEDIUM,Never,,0
-80c57dc4-168f-45a2-9b56-0bf78a6c7c2e,SMS_Account_Summary,Building,INCOMPLETE,MEDIUM,Never,,1
-13804d82-4e06-4256-9e1b-ee8f954e0243,Daily_Tracking_Process,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-04-22,,8
-5206b2c1-3da6-4b9e-a73f-37d629c35edc,Daily_Tracking_Process_CWA,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-06-05,,9
-02cd5ed8-1428-4f8b-ba79-784c051a1b11,ENT_SendLog Air and Rotation Filters,PausedSchedule,PAUSED_RECENT,MEDIUM,2024-05-24,,5
-ac8a37d5-9cb4-4515-b231-8145dbb58e11,"Last purchase greater and less than 2 years
-",PausedSchedule,PAUSED_RECENT,MEDIUM,2025-08-28,,7
-9d22d23e-07a2-4fa3-9cdb-1c91c1d463f1,Subscriber Vehicles Cleaning,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-05-10,,3
-e444d5a5-0523-4345-8777-45fc647afb99,Wheel Purchased Within One Year,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-01-16,,1
-617bcd93-3025-4db2-acc1-4c542965974b,DTC BI Tracking Extract Catchup 12-27-2022,Ready,READY_OLD,MEDIUM,2022-12-27,,10
-281d2ec6-2ef0-4c50-9e71-8df01b845702,DTC BI Tracking Extract Daily Catch up,Ready,READY_OLD,MEDIUM,2023-01-20,,2
-b2600d95-3b39-45a2-a1f8-3409e0346c99,DTC BI Tracking Extract Historical 2021,Ready,READY_OLD,MEDIUM,2023-01-20,,24
-de80d747-c105-4359-92ec-447874d1a3e2,DTC BI Tracking Extract Historical 2022,Ready,READY_OLD,MEDIUM,2023-01-23,,26
-d1428c87-2d6f-4f3c-bfb5-6129f764054d,Emails Collected by Employee 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
-e2d111a0-1c1f-43f5-86fd-45ff61847a95,Emails Collected by Region 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
-65d6722b-7ba4-4fb7-84d7-82689d61d3f9,Emails Collected by Store 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
-b641e6cf-6437-41a2-8248-d05456b3d954,VTV Reporting,Ready,READY_OLD,MEDIUM,2023-08-24,,1
-0143e9b2-5d5f-4f36-a659-9c7bff0d95a7,nextactiv - reporting,Ready,READY_OLD,MEDIUM,2023-06-12,,1
+a5a679a3-7c27-4c6b-9527-d1ce81cc04be,0821 Promo STO - Build and Deploy,PausedSchedule,PAUSED_STALE,HIGH,2023-08-21,,4
+56cea220-99cd-4403-95a4-5bcdcde1f506,0908 Promo Test - Build And Deploy,PausedSchedule,PAUSED_STALE,HIGH,2023-09-15,,4
+ee8c47d1-f981-4bc8-8363-b9b08b2c2791,AT BlackFriday320 20161123,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+f3d2e394-4798-40a9-83d1-cf1e1d571a7a,AT CyberMonday320 20161127,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+8eb46402-b4e8-49a9-9871-f6b004cdf9a9,AT General Thank you Data Output TESTING,PausedSchedule,PAUSED_STALE,HIGH,2017-10-02,,3
+032bf347-66c7-47a2-9310-162aadfa1031,AT PresidentsDay320 20170215,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+8e675344-0c58-4694-a728-9268b085fd1e,ATC Appointment Reminders,PausedSchedule,PAUSED_STALE,HIGH,2023-05-02,,6
+4833a4fb-0bd5-4ff9-adec-7b99b7277186,ATC Re-engagement Send,PausedSchedule,PAUSED_STALE,HIGH,2018-04-03,,1
+48da9435-d6c4-4280-92a3-7d74447f09c2,ATC Store Review Response Sends,PausedSchedule,PAUSED_STALE,HIGH,2024-03-14,,3
+911d3f31-001c-4c21-aa72-a668d83585a2,ATC_Air_Pressure_Reminder_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+6533cd0a-5dd9-4c6a-b8ce-69163a01a275,ATC_General_Thank_You_Send,PausedSchedule,PAUSED_STALE,HIGH,2018-01-03,,2
+519ffc18-95c3-4a98-bbda-df8abc0307c5,ATC_General_Thank_You_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+7ee55846-8763-4176-a77a-c6efc0013985,ATC_Product_Review_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+c7111b59-9294-4942-a216-3fbdaface361,ATC_Tire_Rotation_Reminder_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+9f98dc47-58a1-4e05-814f-cb9985491aaf,AT_CERT_Transactions,PausedSchedule,PAUSED_STALE,HIGH,2018-06-14,,1
+4dc127fd-3086-4aca-8aa3-b25b0642f031,BOPIS Order Cancelation Notifications,PausedSchedule,PAUSED_STALE,HIGH,2023-08-21,,5
+81e6d284-bba2-4423-8044-755e17b91d18,Black Friday 2019 Journey,PausedSchedule,PAUSED_STALE,HIGH,2019-11-26,,1
+0823f542-262e-4ba1-8c7d-51a79370a2a2,Copy Activity Log to Shared Reference DE,PausedSchedule,PAUSED_STALE,HIGH,2017-06-02,,1
+d0acae0d-6116-4dd5-808e-bb4b2ee96329,DEPRECATED_Master_Subscriber_Automation,PausedSchedule,PAUSED_STALE,HIGH,2024-04-08,,4
+772125ef-94f0-4ebc-a604-2f9ab49268c6,DISABLED_Promo_AbandonCart_Staging_Automation,PausedSchedule,PAUSED_STALE,HIGH,2025-09-02,,2
+b80841f8-c478-4dcb-9bdb-b6ae3e59df86,DT BlackFriday320 20161123,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+4c6dd73d-952a-44f7-84d5-b6c5a718b783,DT CyberMonday320 20161127,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+14667b4a-ff8a-4407-a9f0-620ad9b919e2,DT General Thank You Send - JOURNEY TESTING,PausedSchedule,PAUSED_STALE,HIGH,2025-07-29,,5
+66fdee52-7667-46da-b9be-0aa9cbab9147,DT PresidentsDay320 20170215,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+d486a30c-9398-46fd-bc6f-2312781a4596,DTC Appointment Reminders,PausedSchedule,PAUSED_STALE,HIGH,2023-05-02,,6
+da3678cf-468e-4e02-91ca-9837307dce3a,DTC Re-engagement Send,PausedSchedule,PAUSED_STALE,HIGH,2018-04-10,,1
+4bbb0800-85e3-4da3-bac0-4efe60304ea9,DTC Store Review Response Sends,PausedSchedule,PAUSED_STALE,HIGH,2024-03-14,,3
+a05fad0f-6c27-4902-bc20-bc01a5845a49,DTC_Air_Pressure_Reminder_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,3
+572855f2-709d-4b0b-9921-2718bdc52c41,DTC_Data_Management - V2,PausedSchedule,PAUSED_STALE,HIGH,Never,,7
+5109483f-64d4-4569-ba45-8e3492ebd873,DTC_Data_Management_Manual,PausedSchedule,PAUSED_STALE,HIGH,2017-08-02,,7
+63ce0889-dc2c-4af7-8276-4fc882ad246f,DTC_Data_Management_Manual - 1_migrated_from_folder_activity_data,PausedSchedule,PAUSED_STALE,HIGH,Never,,6
+e73d055a-3881-4094-8985-b55caa8af5d2,DTC_General_Thank_You_Send,PausedSchedule,PAUSED_STALE,HIGH,2018-01-03,,3
+6489aae5-7642-4d2f-a340-535ba09675d8,DTC_General_Thank_You_Send_migrated_from_folder_automated_campaigns,PausedSchedule,PAUSED_STALE,HIGH,Never,,3
+5efeaaca-0997-4101-a07f-f34bf7a0483a,DTC_Sponsor_Automation,PausedSchedule,PAUSED_STALE,HIGH,2025-10-15,,3
+bc01545b-047a-42c5-bbb4-342107aa7ed1,DTC_Vehicle_ID_New,PausedSchedule,PAUSED_STALE,HIGH,2020-03-10,,2
+9901f76e-b15c-42f5-acdc-4bfd3fa8cc91,DT_CERT_Transactions,PausedSchedule,PAUSED_STALE,HIGH,2018-05-30,,1
+371f847d-b6fe-47a7-8bb1-96f01dbe4b8e,General Thank You Send v3_dev,PausedSchedule,PAUSED_STALE,HIGH,2018-11-02,,2
+505627d4-ba79-4651-8601-c5437ca29e3e,General Thank You Send v3_dev,PausedSchedule,PAUSED_STALE,HIGH,2022-05-25,,2
+43920922-336f-453c-b045-bdf454a80b8b,OneReach_Test_Audience,PausedSchedule,PAUSED_STALE,HIGH,2022-11-03,,1
+4c8c0a3d-23d1-4c70-b57c-0646a1a59082,Re-Engagement Qualification Queries,PausedSchedule,PAUSED_STALE,HIGH,2024-02-29,,4
+80367ace-0356-4317-a873-6fbb45cf7bbc,SMSSendTrackingLog,PausedSchedule,PAUSED_STALE,HIGH,Never,,1
+80edaf1b-7a53-4c8a-8a1a-3ad9d95db762,TEMP - DTC Data Load_migrated_from_folder_ET,PausedSchedule,PAUSED_STALE,HIGH,Never,,1
+5acae7a6-4fb8-4f93-9c15-ad9d016837cc,Tire Tread Depth Reminder Injection,PausedSchedule,PAUSED_STALE,HIGH,2022-11-08,,6
+f9a725df-40e2-4e7b-9f80-88533e58befe,archive-SenderRating,PausedSchedule,PAUSED_STALE,HIGH,2025-10-23,,16
+46d51f11-3321-4fca-8cae-7d4b9a0df31a,test,PausedSchedule,PAUSED_STALE,HIGH,Never,,0
+af229ff0-1fc7-49ad-9dd8-94adbf5b8a1d,tmp_trim,PausedSchedule,PAUSED_STALE,HIGH,2017-04-12,,1
+dfbff099-33cd-450f-a7da-5f472ac1ff16,xARCHIVE -- ATC_Product_Review_Send,PausedSchedule,PAUSED_STALE,HIGH,2025-02-07,,2
+a934ac40-d86b-4873-aac1-ec5c1d94a09b,xARCHIVE -- DTC_Product_Review_Send,PausedSchedule,PAUSED_STALE,HIGH,2025-02-07,,3
+ccdb2a83-9701-49a4-be66-ce8534acd44c,0915 Promo Test - Redeploy,Ready,READY_VERY_OLD,HIGH,2023-09-15,,2
+39e797b9-7a1c-48d5-898f-bad4c0d32667,1-6-2018 Send catchup,Ready,READY_VERY_OLD,HIGH,2018-01-09,,3
+952da86d-f0fc-48e1-be46-a1321973266e,1211 DT Promo Test - Send Remainder,Ready,READY_VERY_OLD,HIGH,2023-12-11,,3
+c1048b0d-ccaa-4165-a02b-36e1b4aeaa2f,1211 Promo Test - Build and Deploy,Ready,READY_VERY_OLD,HIGH,2023-12-11,,4
+9e3254cf-330e-4a71-834c-c4f3886ed648,1976001457 One Time Air and Tire queries,Ready,READY_VERY_OLD,HIGH,2018-06-27,,1
+5db9f631-cbd9-4ad1-a8fa-77d71fc9e29a,20240219_Presidents_Day_Dynamic_SL_Automation,Ready,READY_VERY_OLD,HIGH,2024-02-19,,7
+1991eb1e-b9a1-4e14-ac8c-d90299e2b340,20240318 DT Promo Test - Build and Deploy,Ready,READY_VERY_OLD,HIGH,2024-03-18,,4
+d158705f-4d28-4d2c-9a13-f67ae8edbd81,20240618_Sub_Unsub_L3Y_Stats_Automation,Ready,READY_VERY_OLD,HIGH,2024-06-18,,2
+dd4474c0-1be7-4057-ad97-52e58da4d991,241122_Bot_Clicks,Ready,READY_VERY_OLD,HIGH,2024-11-25,,2
+2d250693-48d3-427b-8b82-0b85dd160132,3-2-2022 Catch Up,Ready,READY_VERY_OLD,HIGH,2022-03-03,,1
+234952e1-9110-48d7-b1cb-036badb1f802,6-28-7-2 Catch ups requiring URLs,Ready,READY_VERY_OLD,HIGH,2018-07-12,,3
+0e6ca6ab-2ae9-4f5c-a254-0adce560bb22,6-28-7-2 Catch ups requiring URLs - v2,Ready,READY_VERY_OLD,HIGH,2018-07-12,,3
+8e7cdd16-c604-461e-98f0-676a5cace194,APRS,Ready,READY_VERY_OLD,HIGH,2017-04-06,,1
+37e5b53e-31ab-4ec9-a568-fdc380c5beb2,APRS,Ready,READY_VERY_OLD,HIGH,2017-04-06,,1
+22f33303-12a5-40cf-a1bb-465a496023c2,APTS,Ready,READY_VERY_OLD,HIGH,2017-02-06,,1
+412c1852-968e-4cc1-9117-ac13ed4643f2,AT - Einstein STO Test - Memorial Day,Ready,READY_VERY_OLD,HIGH,2023-05-26,,3
+2050c6c9-3477-412d-b546-30777b893801,AT General Thank You Data Output - catchup send 4-24,Ready,READY_VERY_OLD,HIGH,2018-04-24,,3
+0509c450-656d-4f06-9687-70f585c5794c,AT General Thank You Data Output - copy,Ready,READY_VERY_OLD,HIGH,2017-11-08,,3
+a4f469ae-ea40-45f2-9022-b4795fc1be00,AT General Thank you Data Output TESTING v2,Ready,READY_VERY_OLD,HIGH,2017-12-12,,3
+b140d823-17cc-480a-9c4f-a11990c07876,AT Historical Tire Wear Launch,Ready,READY_VERY_OLD,HIGH,2017-06-22,,2
+a988427f-b015-49eb-a6e6-5daa13b62da7,AT Journey Test Records - 2017-06-05T110640.463,Ready,READY_VERY_OLD,HIGH,2017-06-07,,1
+424d0392-2ee0-45da-8636-85fcd924f0b1,AT Root Extract BU,Ready,READY_VERY_OLD,HIGH,2022-11-07,,1
+71f0d303-d7d8-42c4-bbff-cc5664073aa4,AT TY Catchup Import,Ready,READY_VERY_OLD,HIGH,2018-07-12,,2
+3981b4db-5ab8-4dbc-9c04-8eaa0483d28f,AT ThankYou Catchup Send for 7-13-18,Ready,READY_VERY_OLD,HIGH,2018-07-16,,1
+672d8ea3-e060-49e5-8f5e-4780415511c1,AT Thanksgiving320 20171122,Ready,READY_VERY_OLD,HIGH,2017-11-22,,2
+8a27ee94-782d-4d9a-bce5-6e511e3f1bc2,AT-Tire Wear Historical Conversions,Ready,READY_VERY_OLD,HIGH,2017-09-29,,1
+0630d716-57f0-4710-bb77-b8efa5818b68,ATC Appointment Reminders Test,Ready,READY_VERY_OLD,HIGH,2020-02-25,,5
+76fab6c2-2d4c-40a0-9cae-fa5343084c73,ATC Apt Reminders Testing 8-14-2020,Ready,READY_VERY_OLD,HIGH,2020-10-09,,6
+6a8d7968-f534-4523-833b-9784e6841ff8,ATC Not Opens Sendable Query,Ready,READY_VERY_OLD,HIGH,2018-03-28,,1
+4c3f5f77-a450-46a3-b24b-b8691eb21c17,AT_Cert_Journey_Audience_Inject Copy for Run Once,Ready,READY_VERY_OLD,HIGH,2019-01-18,,4
+a154ca0f-5c9c-443b-aab7-dd3e6db6d8e2,AW -- BOPIS Order Cancelation Notifications,Ready,READY_VERY_OLD,HIGH,2023-08-10,,4
+47a38023-bd43-4569-826d-5144a0dfcb10,AW QA -- Tire_Review_Journey_Audience,Ready,READY_VERY_OLD,HIGH,2024-05-09,,4
+4461dbc8-ad92-48c8-ab0c-f362765344ca,Adhoc DTC_Customer_Transaction_Log_Import_VISION,Ready,READY_VERY_OLD,HIGH,2024-11-12,,4
+6d76a5e2-8a17-46d4-8102-758df5536680,America_Tire_CERT_Journey (copy) - 2018-05-07T141757.935,Ready,READY_VERY_OLD,HIGH,2018-05-07,,1
+4434da77-87f8-4099-ade5-7b535dac982b,Appointment Reminders Query Only,Ready,READY_VERY_OLD,HIGH,2017-04-18,,1
+045c2201-56dd-4d49-8411-ec7ae0859e9d,Appointment Reminders Query Only,Ready,READY_VERY_OLD,HIGH,2018-08-23,,1
+09f56ec1-c925-4751-8aa5-e948fba9edae,Apt Reminder MyAccount Validation Test,Ready,READY_VERY_OLD,HIGH,2020-02-25,,5
+18cad729-e39b-4de8-a623-2735a9c68127,BF Qualifying Purchases,Ready,READY_VERY_OLD,HIGH,2019-03-11,,1
+ef607d06-117c-4276-8c9e-7e4d8c48d6ef,BOPIS Order Cancelation Notifications TESTING,Ready,READY_VERY_OLD,HIGH,2023-08-30,,5
+606026d0-2298-4764-b22a-d4769d87e186,BU DTC_ATC_Transaction_log,Ready,READY_VERY_OLD,HIGH,2024-12-13,,2
+d2d3e3e7-7efb-4422-a0af-16c0f1701c03,Black Friday 2019 Journey,Ready,READY_VERY_OLD,HIGH,2019-11-26,,1
+3ae14199-ec1a-4172-9a51-30511e050c74,BlackFriday AT 20141125,Ready,READY_VERY_OLD,HIGH,2014-11-25,,2
+b1228e8e-d6c9-477a-a01b-4f69f79d6ee9,BlackFriday DT 20141125,Ready,READY_VERY_OLD,HIGH,2014-11-25,,2
+692bce54-be30-4bbc-a5e0-a6b490a3da30,BlackFriday IN 20141125,Ready,READY_VERY_OLD,HIGH,2014-11-25,,2
+56ef68a1-5297-422f-84d7-b34aed592b2b,Bridgestone Driveguard Plus One Time Send,Ready,READY_VERY_OLD,HIGH,2023-07-07,,2
+0101aef2-a35f-4a48-8a3d-36a88965f80f,Clean Apt Conf v2,Ready,READY_VERY_OLD,HIGH,2018-08-23,,2
+443a37fc-b075-4603-867a-b0b4a9327ab1,Clean Store Responses,Ready,READY_VERY_OLD,HIGH,2017-04-07,,1
+301359d7-c805-4ff1-8c2b-8728120d1d6b,Copy DTC Tire List Data to BU,Ready,READY_VERY_OLD,HIGH,2024-03-14,,1
+e6690a40-8580-435e-96b0-70af9f80d51e,CyberMonday AT 20141201,Ready,READY_VERY_OLD,HIGH,2014-12-01,,2
+d0d358d1-ed81-4875-92a2-f1d06c7668f6,CyberMonday DT 20141201,Ready,READY_VERY_OLD,HIGH,2014-12-01,,2
+89fdc662-da1b-48f2-a616-8e4f21d7969a,DEV_DTC_Activity_Log,Ready,READY_VERY_OLD,HIGH,2024-02-08,,1
+5a3a3a62-6bac-4e95-946a-105a410b1d4b,DT Catch up 3-2-2022,Ready,READY_VERY_OLD,HIGH,2022-03-02,,1
+f6659180-f853-41a3-9810-e7ab9e977867,DT General TY Output - testing,Ready,READY_VERY_OLD,HIGH,2019-09-25,,3
+e8b83731-9824-4ac9-b3ba-68e66e093d58,DT General Thank You Send End to End Test 11-9-17,Ready,READY_VERY_OLD,HIGH,2017-11-09,,2
+fdab034d-8b73-4a7c-b96e-12ab9442cb9e,DT Root BU,Ready,READY_VERY_OLD,HIGH,2022-11-07,,1
+2175c68c-85f8-42c5-8b57-36f6179bbe82,DT TY Catchup for 07162018,Ready,READY_VERY_OLD,HIGH,2018-07-17,,1
+ed79bf71-ee8a-471f-969b-aa871ef8e8b3,DT Thanksgiving320 20171122,Ready,READY_VERY_OLD,HIGH,2017-11-22,,2
+f14a8970-dd84-45b4-af7f-92c9cc6725aa,DT Transaction Import Automation Copy for Run Once Operations,Ready,READY_VERY_OLD,HIGH,2019-01-18,,2
+1ce351f5-05fe-478b-8510-a970b2e5eee2,DT Transaction Import Testing,Ready,READY_VERY_OLD,HIGH,2021-04-29,,2
+b4f6cbd0-a794-4085-8663-2940e545138c,DTC ATC Feb 2021 Without Subsequent Transactions,Ready,READY_VERY_OLD,HIGH,2024-04-15,,1
+80129118-70d2-48b1-a0de-dfeeee58598e,DTC Apt Reminders Testing 8-14-2020,Ready,READY_VERY_OLD,HIGH,2020-10-09,,6
+504ce542-d842-43c1-875a-71973531fdc9,DTC Data Load - 4-24-2023,Ready,READY_VERY_OLD,HIGH,2023-04-24,,17
+6dfbc933-ac82-4e40-93a6-fdc3488e73d7,DTC Data Load Testing Copy,Ready,READY_VERY_OLD,HIGH,2023-04-12,,1
+198c3723-74e7-429d-a759-b20a669424a3,DTC Data Load Testing Copy2,Ready,READY_VERY_OLD,HIGH,2023-05-10,,1
+59803542-e8cf-48c7-9928-6885c63d2b83,DTC Data Management Troubleshooting 1-21-2021,Ready,READY_VERY_OLD,HIGH,2021-02-03,,8
+e805c5d0-33b4-467b-8c08-d41a3389afab,DTC Data Management Troubleshooting 6-14-2021,Ready,READY_VERY_OLD,HIGH,2021-06-14,,8
+e12472b2-238e-4b02-bcaa-2a2e1a55aa9a,DTC Data Management Troubleshooting 7-19-2021,Ready,READY_VERY_OLD,HIGH,2021-07-19,,8
+c51ef021-5a8a-40ef-a3e4-13cca106c4b6,DTC Data Management Troubleshooting 7-21-2021,Ready,READY_VERY_OLD,HIGH,2021-07-12,,8
+83f48f7a-9531-4865-aa61-52b6d5fcd31a,DTC Data Management Troubleshooting 7-23-2021,Ready,READY_VERY_OLD,HIGH,2022-08-02,,9
+f1481741-cad9-4d0e-b3c9-7fcfa6737ed6,DTC Import Activity Data Testing V2,Ready,READY_VERY_OLD,HIGH,2020-03-13,,1
+4b2a1e3a-3c39-4699-b325-2d759e04995f,DTC Promo Send IP Warming Split 4-10-2024,Ready,READY_VERY_OLD,HIGH,2024-04-10,,7
+20cbd49e-cba0-443e-8a77-69985d385ab4,DTC Promo Send IP Warming Split 4-12-2024,Ready,READY_VERY_OLD,HIGH,2024-04-12,,7
+a0911199-e0ca-4abe-98a7-fe69b279dd03,DTC Promo Send IP Warming Split 4-14-2024,Ready,READY_VERY_OLD,HIGH,2024-04-14,,7
+c937fe41-c74c-447e-9ba3-bbae51a87302,DTC Promo Send IP Warming Split 4-21-2024,Ready,READY_VERY_OLD,HIGH,2024-04-21,,7
+200b4fc5-524b-4c97-8538-651c1a3e6e2a,DTC Promo Send IP Warming Split 4-22-2024,Ready,READY_VERY_OLD,HIGH,2024-04-22,,7
+ebd93927-9cfb-4d74-86da-9d4076cf0c57,DTC Promo Send IP Warming Split 4-24-2024,Ready,READY_VERY_OLD,HIGH,2024-04-24,,7
+57e9aaf6-2fb0-466b-8854-83dab55e20b3,DTC Promo Send IP Warming Split 4-26-2024,Ready,READY_VERY_OLD,HIGH,2024-04-26,,7
+f9a974fb-ffc3-4866-9498-51ed2c69a99b,DTC Promo Send IP Warming Split 4-27-2024,Ready,READY_VERY_OLD,HIGH,2024-04-27,,7
+e8f8fd8d-216e-4d6b-ad07-32ceab89f87e,DTC Promo Send IP Warming Split 5-10-2024,Ready,READY_VERY_OLD,HIGH,2024-05-10,,7
+aa0d83a1-b875-409d-8d7d-b252579526ec,DTC Promo Send IP Warming Split 5-12-2024,Ready,READY_VERY_OLD,HIGH,2024-05-12,,7
+c4041d21-ccd9-4c35-9584-d126be2a233d,DTC Promo Send IP Warming Split 5-3-2024,Ready,READY_VERY_OLD,HIGH,2024-05-03,,7
+1b0e69ac-0a47-489c-b494-a21c0a88c2d7,DTC Promo Send IP Warming Split 5-6-2024,Ready,READY_VERY_OLD,HIGH,2024-05-06,,7
+1c29c39a-a498-4ee0-be14-8a8d81f2b1ee,DTC Reengage populate sendable DEs,Ready,READY_VERY_OLD,HIGH,2018-03-28,,3
+0d3d7e29-46f4-47af-88e0-eb88fca03f4a,DTC-SubsToDeleteDOTcsv,Ready,READY_VERY_OLD,HIGH,2020-12-23,,1
+802879c7-35f0-422b-8f1d-9b1b1130b168,DTC_Analytics_Automation,Ready,READY_VERY_OLD,HIGH,2024-11-11,,2
+37326182-5a6b-4b88-b2c7-f5f9bf6c4ddd,"DTC_Customer_Activity_Log_BU
+",Ready,READY_VERY_OLD,HIGH,2023-04-18,,2
+b8f10758-2eb3-4e42-8ae8-f0a97de6b4a8,DTC_Customer_Activity_Log_Import - Prod Copy for Run Once Operations,Ready,READY_VERY_OLD,HIGH,2019-01-18,,8
+4990c398-ccd1-4283-a664-5b54ea64e330,DTC_Customer_Activity_Log_Import ONLY,Ready,READY_VERY_OLD,HIGH,2017-04-13,,1
+51c64926-721d-45a5-b9c4-b710319703c1,DTC_DATA_Management for Troubleshooting 2-20-2018,Ready,READY_VERY_OLD,HIGH,2018-02-20,,8
+9edb63de-5bd2-4e24-8704-828213504122,DTC_DATA_Management for Troubleshooting 5-22,Ready,READY_VERY_OLD,HIGH,2018-05-22,,8
+452f8aed-51b3-416d-ae1e-dbd66ced2483,DTC_DAta_Management_testing,Ready,READY_VERY_OLD,HIGH,2019-01-18,,8
+36e81c6a-e995-4995-94a4-e8c4e91a8a24,DTC_Data_Management 5-25-2019 Rerun,Ready,READY_VERY_OLD,HIGH,2019-06-07,,8
+a7c21c77-5158-41c2-95d9-68bb4c7dc8fb,DTC_Data_Management MANUAL RUN,Ready,READY_VERY_OLD,HIGH,2023-04-20,,10
+863990c5-4db6-4aa2-a8b3-8b57f8b710ca,DTC_Data_Management_Catchup_11-30,Ready,READY_VERY_OLD,HIGH,2018-12-07,,10
+ea44b8e9-2e24-4a10-a806-e43d1a3ff35d,DTC_Data_Management_Manual - 1,Ready,READY_VERY_OLD,HIGH,2017-04-13,,6
+a338406f-4c76-4237-b096-84ba038238b6,DTC_General_Thank_You_Send-TESTING,Ready,READY_VERY_OLD,HIGH,2017-09-11,,2
+5ecc7e63-abb5-4d07-9a67-9e42ad0d22ca,DTC_Make_Data,Ready,READY_VERY_OLD,HIGH,2016-04-27,,1
+2519196c-1fd5-4dbe-abd3-bbaaa8b1900f,DTC_SUB_ACTIVITY_LOG,Ready,READY_VERY_OLD,HIGH,2016-07-07,,1
+b9b5b2a9-f2a9-4a82-b6b4-4a034509e761,DTC_SUB_ACTIVITY_LOG_March_2016,Ready,READY_VERY_OLD,HIGH,2016-08-17,,1
+a721202d-bd47-4836-96d4-29e27e439573,DTC_Subscriber_Stores_Clean,Ready,READY_VERY_OLD,HIGH,2016-08-12,,1
+193a6cc7-d342-4910-b1df-189fd6253a95,DTC_Transaction Import Automation 7_19_2021 Troubleshooting,Ready,READY_VERY_OLD,HIGH,2021-07-19,,2
+44174639-f93e-4780-b881-457b7679e84f,DTC_Vehicle_ID_New BU,Ready,READY_VERY_OLD,HIGH,2024-12-02,,1
+42cc84a3-da19-4c70-bf89-9d143cb6a817,DT_Inject (QA) - 2017-05-08T085618.084,Ready,READY_VERY_OLD,HIGH,2017-05-08,,1
+4bc3e573-6db2-4c0b-8042-e54b1861883e,DT_Inject Copy,Ready,READY_VERY_OLD,HIGH,2019-01-30,,5
+2eeb2d52-21e8-4663-b76d-ca0349a7bde2,DT_JB_CERT_Audience_Inject TESTING,Ready,READY_VERY_OLD,HIGH,2024-05-17,,4
+61ea0b1d-909b-4e74-84e5-35f7d4506023,DT_JB_CERT_Inject_Catchup 4-23,Ready,READY_VERY_OLD,HIGH,2018-05-01,,5
+cecd0929-dc16-4a45-a938-df7b344686de,DT_JB_Cert_Audience_Inject Copy for Run Once Operations,Ready,READY_VERY_OLD,HIGH,2019-01-18,,4
+d5e28891-9467-4590-8a64-cb7c7a36ebcb,DT_JB_Coversion_reporting_test_bwj,Ready,READY_VERY_OLD,HIGH,2018-03-06,,3
+5c619fd5-13b9-43cb-90b2-227011161828,DT_TY_Catchup_6-28-7-2 Imports,Ready,READY_VERY_OLD,HIGH,2018-07-12,,2
+65eaeac1-0c61-4690-8ab5-c680b7c57b73,DT_Transaction Import 11-30-2018,Ready,READY_VERY_OLD,HIGH,2018-12-07,,2
+b1d49203-5a4b-46e6-adea-c576862600d7,DT_Transaction Import Automation MANUAL RUN,Ready,READY_VERY_OLD,HIGH,2024-06-12,,4
+5c1390ef-386d-4144-9e9e-433a8641b9cc,DT_Transaction Import Automation Testing 8-2-2022,Ready,READY_VERY_OLD,HIGH,2022-08-16,,2
+697892e5-c102-459d-8d24-0e620b56a22d,DT_Transaction Import Catchup 4-23,Ready,READY_VERY_OLD,HIGH,2018-04-23,,2
+608dd5ce-0873-4a2d-a615-cde6dfb16cd3,DT_Transaction Import Catchup 4-23 v2,Ready,READY_VERY_OLD,HIGH,2018-04-23,,2
+6a638176-8e18-49b1-9897-f8669c205511,DT_Transaction Import Testing BWJ,Ready,READY_VERY_OLD,HIGH,2018-03-06,,1
+4fd66a7f-3d5d-449d-8454-f7b3f79f3638,Data Management Step 6 - 8,Ready,READY_VERY_OLD,HIGH,2017-07-14,,3
+ba57aa06-bbbb-4299-b7ae-a66344fcdc7a,Dtc_customer_activity_log_archive,Ready,READY_VERY_OLD,HIGH,2017-04-11,,3
+10956926-0971-467d-b73f-cbe72c16c2a8,Dtc_customer_activity_log_archive_2014-2015,Ready,READY_VERY_OLD,HIGH,2017-04-11,,2
+130774e2-6b0f-4772-a733-1aadd5c05448,Dtc_customer_activity_log_archive_2016-2017 with Overwrite,Ready,READY_VERY_OLD,HIGH,2017-04-11,,3
+2f4f7223-fc32-416f-adae-04077013029a,Dustin Garner Air and Tire reminder Manual Send,Ready,READY_VERY_OLD,HIGH,2021-08-20,,1
+076c0deb-d8c5-44de-a543-ac8e27ce4e7d,Dynamic Branding Demo,Ready,READY_VERY_OLD,HIGH,2015-01-22,,1
+436e8ef6-ecc2-4150-a832-8872a4d94568,E2E Send Monitoring (temporary),Ready,READY_VERY_OLD,HIGH,2024-03-31,,2
+74a4c99d-5564-45a3-88ef-130118c6c75c,Einstein STO Control - Tire Rotation Reminder,Ready,READY_VERY_OLD,HIGH,2023-07-26,,1
+369d9408-2f2b-4e0c-9de4-a2d1f2f66bc6,Einstein STO Test - Memorial Day,Ready,READY_VERY_OLD,HIGH,2023-05-29,,1
+76d423f5-ea69-462e-9902-32c0f9815abd,Einstein STO Test - Tire Rotation Reminder,Ready,READY_VERY_OLD,HIGH,2023-07-26,,5
+d8a6617d-213b-4a5e-b77d-0efbb3b27c64,Email_Send,Ready,READY_VERY_OLD,HIGH,2021-10-21,,1
+1b565cc8-f911-42be-ba29-03c300d990df,FLA Extract,Ready,READY_VERY_OLD,HIGH,2019-02-05,,1
+638db663-e50e-47ff-881f-85db01e28cbd,General TY Send One time catchup 2-9,Ready,READY_VERY_OLD,HIGH,2018-02-13,,2
+af7b2b22-c76b-4aa9-9eea-5039f76634da,General Thank You Send v3_dev One Time Catch up,Ready,READY_VERY_OLD,HIGH,2018-01-31,,2
+8961e497-5c66-42ac-a7be-384ce5f5d16b,Historical One Time,Ready,READY_VERY_OLD,HIGH,2017-05-15,,1
+1bd6ebc7-0f08-4ef7-9a00-acf08449a0ef,Historical Tire Wear Journey Members - 2017-06-22T125710.166,Ready,READY_VERY_OLD,HIGH,2017-06-22,,1
+ecbef3ea-e5dd-4cc5-9600-7ea7e27fe284,Import Only,Ready,READY_VERY_OLD,HIGH,2017-08-02,,1
+06234ed4-1451-43c9-b90f-0855efa4142e,JB_CERT_EntryCriteria,Ready,READY_VERY_OLD,HIGH,2017-11-28,,8
+52b9cd46-605c-4ca8-bc9c-a9450a4e6e53,JB_CERT_EntryCriteria_Test,Ready,READY_VERY_OLD,HIGH,2017-12-06,,8
+c62c91a9-2dd5-4825-9160-db561c74bded,JB_Inject Copy,Ready,READY_VERY_OLD,HIGH,2019-01-30,,5
+3b8fb082-446a-4b6e-826a-df7ffd50b3a6,JB_Inject_Queries Only,Ready,READY_VERY_OLD,HIGH,2017-06-08,,4
+d176bff0-3ab2-49f1-85c0-a785f77842fc,JB_Root Only with export,Ready,READY_VERY_OLD,HIGH,2017-10-12,,2
+1082ecd6-0f43-4a26-ae48-d3c8680baefc,July 2015 Promo Qualifying,Ready,READY_VERY_OLD,HIGH,2016-10-01,,1
+8e3adbf8-a224-4836-a263-81d51aa22f47,July 4th ROI 2017,Ready,READY_VERY_OLD,HIGH,2017-10-31,,1
+3b0cc5d3-2a63-4479-aa90-72c970acce21,July 4th qualifying transaction data,Ready,READY_VERY_OLD,HIGH,2016-09-21,,2
+45390a2c-1f1b-4abc-a7da-39136d8e2e6b,Load LD Data,Ready,READY_VERY_OLD,HIGH,2017-10-31,,1
+4a386940-f897-4b84-8928-2fc7da5d37cf,Makeup 091824 - DTC Thank You,Ready,READY_VERY_OLD,HIGH,2024-09-20,,1
+dd2fe1bd-c504-4d3e-a1fb-d51933e96ab7,Makeup 091924 - DTC Thank You,Ready,READY_VERY_OLD,HIGH,2024-09-26,,2
+8b02f372-4215-403c-915a-038e5febc65c,Non_CH_Mar17_Dec18,Ready,READY_VERY_OLD,HIGH,2020-06-08,,1
+b32f6e83-b809-41d7-a297-abddd1d8e135,Not Engaged Testing,Ready,READY_VERY_OLD,HIGH,2018-03-26,,1
+c708cd76-c099-4181-aac8-0f0e394499f7,Not Sent Extract,Ready,READY_VERY_OLD,HIGH,2023-08-22,,2
+96901caf-1255-4cc0-8849-f5be98b30ee6,Not engaged in 18 Months Query,Ready,READY_VERY_OLD,HIGH,2018-03-26,,1
+01aa425c-25d7-492f-afdf-5b049cf6aade,Not engaged in 18 Months Query,Ready,READY_VERY_OLD,HIGH,2018-03-26,,1
+215026d7-a512-402e-855b-a7e862d07c07,OneReach - Custom Activity Testing,Ready,READY_VERY_OLD,HIGH,2022-10-07,,1
+23a130a6-5a6e-41e0-92b8-7a2ab54247b3,Order Confirmation - Makeup Audience,Ready,READY_VERY_OLD,HIGH,2023-08-16,,7
+05228c3e-2fec-472a-996b-2040d43486de,Overwrite DTC_Vehicle_ID_New with DTC provided data,Ready,READY_VERY_OLD,HIGH,2024-06-03,,1
+36d9b074-2514-42e7-912f-ecf70d97228f,PD 2018 Qualifying Purchases,Ready,READY_VERY_OLD,HIGH,2018-09-20,,1
+c0837e8a-cf63-4ce8-a269-5e66823dd84c,Populate Sent Records to  DE,Ready,READY_VERY_OLD,HIGH,2024-10-25,,1
+a756f9ed-450d-4323-955a-bd5cf6c843dd,Product Review Testing,Ready,READY_VERY_OLD,HIGH,2024-05-20,,3
+5f34e08b-992b-4a7e-a7de-7dad45cf7c67,QA AW - AbandonCart Engagement,Ready,READY_VERY_OLD,HIGH,2024-09-05,,19
+0d2fad4e-2398-4611-8e01-d9d913665718,QA_DTC_Promo_Subscriber,Ready,READY_VERY_OLD,HIGH,2024-08-14,,1
+2b49dcca-7247-44dc-bc0f-87b99fd11cfa,QA_DTC_Re-Eng_Testing_Automation,Ready,READY_VERY_OLD,HIGH,2024-02-12,,1
+4beb8e48-e829-4004-a159-91b05b0a9b49,QA_Re-Engagement_Automation,Ready,READY_VERY_OLD,HIGH,2024-02-14,,1
+28453150-52f1-4301-9544-d02fcc240d0e,ROI Memorial Day Qualifying Purchases,Ready,READY_VERY_OLD,HIGH,2020-01-02,,1
+97474c47-5b42-4e67-acd6-e28495c6b73b,ROI Prez Opens Import,Ready,READY_VERY_OLD,HIGH,2020-01-02,,2
+b8f744f9-e1fa-4f9d-915c-d2bec4dea934,ResetPassword response inquiry,Ready,READY_VERY_OLD,HIGH,2024-03-12,,4
+891d125c-b667-4c31-99b0-4d252c929dd5,Store Review Response Testing 8-10-2021,Ready,READY_VERY_OLD,HIGH,2021-08-10,,2
+6b2061c2-192e-49e4-ad87-f5981d94a16f,Store file load troubleshooting,Ready,READY_VERY_OLD,HIGH,2018-04-24,,1
+126b9e9f-7f7a-4d1f-93f7-0c010285903e,TEMP - DTC Data Load - 7-28-2021,Ready,READY_VERY_OLD,HIGH,2021-07-28,,1
+6be807d0-cefb-4a4d-ba0a-6c2bf91aa5d1,TEMP - DTC Data Load MANUAL RUN,Ready,READY_VERY_OLD,HIGH,2023-04-07,,1
+da7e9db0-37e6-43fb-a606-fac76d9474c5,Test Air Pressure Query,Ready,READY_VERY_OLD,HIGH,2023-07-13,,1
+83a390b6-4cd6-4b3e-a030-1d94d556b6db,Testing,Ready,READY_VERY_OLD,HIGH,2016-12-20,,2
+a77e7c17-7516-43de-9ed2-c43a8cd5917c,Testing,Ready,READY_VERY_OLD,HIGH,2016-12-20,,2
+d8cfafba-8289-47ca-adc7-66c9b6ce4299,Testing Copy Activity Log to Shared Reference De,Ready,READY_VERY_OLD,HIGH,2017-05-22,,1
+497d094e-f724-4e77-95c3-6bb7724915d5,Thank You STO - Import only,Ready,READY_VERY_OLD,HIGH,2023-09-01,,6
+264f1d1f-827e-46d1-a9ca-264202a14d2d,Tire Reminder Activity Data Since 5-1-2017 Journey Launch,Ready,READY_VERY_OLD,HIGH,2018-04-12,,1
+d0144229-bce1-4980-b572-85584f02151a,Tire Rotation Send Testing 10-2024,Ready,READY_VERY_OLD,HIGH,2024-10-18,,7
+078ae94c-7d69-44ac-a053-c2cf06124909,Tire Tread Depth Reminder Injection 7-19-2021 Troubleshooting,Ready,READY_VERY_OLD,HIGH,2021-07-19,,6
+5c7b80ef-fccf-4e34-8c56-181b8247490a,TireReview6 One Time Send,Ready,READY_VERY_OLD,HIGH,2023-06-08,,2
+7fe589f8-d577-4566-9f2f-8bfe98bf7fef,TireReview6 One Time Send - resend,Ready,READY_VERY_OLD,HIGH,2023-06-08,,1
+c8efec50-d344-4690-992d-d022848b3a58,Transaction Log Testing 8-16-2022,Ready,READY_VERY_OLD,HIGH,2022-08-16,,2
+6cdb4af7-58d4-4200-b54d-b999ea0b672b,Unsub Test,Ready,READY_VERY_OLD,HIGH,2016-07-14,,1
+2336b62d-7195-4947-abb1-7bf5f00ad940,Unsub Testing,Ready,READY_VERY_OLD,HIGH,2016-08-01,,1
+f3111248-3f8d-4043-ad42-865d3e99cfb0,Update 7-26 Transactions in dtc_atc_customer_activity_log,Ready,READY_VERY_OLD,HIGH,2017-08-12,,1
+45484cba-04a8-4a66-8bb6-1423aa70d590,Update Activity Log with SiteNum,Ready,READY_VERY_OLD,HIGH,2017-05-18,,1
+8cbe6275-192a-4051-bbdc-44492baa0d0a,Update Root DE mobilephone issue,Ready,READY_VERY_OLD,HIGH,2022-11-10,,2
+6e997723-7276-46fc-bc11-5c4bbb15939a,Update Subscribers Testing,Ready,READY_VERY_OLD,HIGH,2015-08-03,,2
+e4188b8f-3c22-4876-a4c8-71aee22bf823,Vision File Issues Sept 2024 Testing,Ready,READY_VERY_OLD,HIGH,2024-09-19,,2
+f8ae9e14-c68f-4691-930c-433dcc70f019,nextactiv - reporting,Ready,READY_VERY_OLD,HIGH,2023-09-13,,4
+f04230bc-547a-4009-afb2-7b0e9f6fbcf1,sto_test_dt_general_thank_you_send,Ready,READY_VERY_OLD,HIGH,2023-09-01,,5
+5fee7257-cfe6-431b-b747-5ca373c48df4,udpate RootDE,Ready,READY_VERY_OLD,HIGH,2022-11-10,,2
+b55ec2f9-dfcf-42bd-a84e-953fc5edf6e5,zz_StoreReview_Test,Ready,READY_VERY_OLD,HIGH,2016-07-14,,1
+a44b9b5e-8044-418a-94f2-03025404d72f,1-22-2018 AT General Thank You makeup send,Building,INCOMPLETE,MEDIUM,Never,,2
+8490a8da-acd9-475b-a225-b6c5969d65b1,AT GTY Test,Building,INCOMPLETE,MEDIUM,Never,,2
+34c34be7-8bd5-4315-a8da-138f5bd0601c,AW QA - DT General Thank You Send,Building,INCOMPLETE,MEDIUM,Never,,2
+cd23ab4f-c82f-46a1-a5de-2934e8718177,AW QA - Tire Hotel Reminders,Building,INCOMPLETE,MEDIUM,Never,,5
+918c7a7f-aed3-4db1-b74a-c57dc60da098,AW QA -- DT General Thank You Send,Building,INCOMPLETE,MEDIUM,Never,,7
+a8658a56-4e76-4adc-af9b-5b18c84c1d78,AW QA -- DTC_Customer_Transaction_Log_Import_VISION,Building,INCOMPLETE,MEDIUM,Never,,5
+96bed644-9151-439b-a873-9505f10c139f,AW QA --- DT General Thank You Send,Building,INCOMPLETE,MEDIUM,Never,,7
+e93f5935-c9f3-4600-baaa-d18c33324008,DT General Thank You Send - MAKEUP FOR MISSSED FILES,Building,INCOMPLETE,MEDIUM,Never,,2
+33f3db79-816e-49b6-a2d4-f0e411938790,DT General Thank You Send TESTING,Building,INCOMPLETE,MEDIUM,Never,,2
+e679de55-4a03-4eba-940a-a83e6b9324a9,DT General Thank You Send Testing2,Building,INCOMPLETE,MEDIUM,Never,,2
+78828c80-7609-465a-b0c2-ed16ceff95aa,DT General Thank You Send Testing3,Building,INCOMPLETE,MEDIUM,Never,,2
+3d2d9962-77f8-407f-ab33-386edcb54b5d,OneReach - Batch Notification,Building,INCOMPLETE,MEDIUM,2022-08-31,,7
+5d2d6dfb-0821-40b1-91d5-ca41d6f5e5d4,Reengagement Send,Building,INCOMPLETE,MEDIUM,Never,,2
+66314f57-9dc2-431b-ad1d-1388c06ac1e4,STO Test DT General Thank You Send,Building,INCOMPLETE,MEDIUM,Never,,2
+a9a7f864-cede-4b77-8c20-fb14e0c57e21,Thank you IP warming testing,Building,INCOMPLETE,MEDIUM,Never,,17
+654d083e-f7be-4444-ab3a-8284edc35add,Tire Review Journey Reporting,Building,INCOMPLETE,MEDIUM,Never,,0
+7431b965-6cb6-4b86-af75-7fb81292fedd,Trigger Automation test,Building,INCOMPLETE,MEDIUM,Never,,0
+28fc0c54-f7da-42f9-9eea-3d9f33bb4d80,notsent_staging,Building,INCOMPLETE,MEDIUM,Never,,0
+f7e2accb-7b78-4d36-bbbf-447f16123d6d,t file drop,Building,INCOMPLETE,MEDIUM,Never,,2
+31b2bb0e-dbad-47d7-b9f8-a789b28e9218,AdStudio_DT_AT_2Y_Last_Purchase_All_Customers_Automation,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-11-16,,2
+e6d446e9-49d6-4304-a20b-a37f84dc5e0f,a_TEST_TIM_GainLoss_Automation,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-11-04,,12
+5f90f0a3-f27a-4ae3-9150-1ae82387fed3,20250824_ATC_Promo_Non_Opener_Automation,Ready,READY_STALE,MEDIUM,2025-08-24,,2
+d63ae0f0-a999-4175-a204-5ad5280e4895,20250824_DTC_Non_Opener_Send_Automation,Ready,READY_STALE,MEDIUM,2025-08-24,,2
+7458ef5a-ac0c-4c5a-af2e-d90e623ef54d,AB Test April 2025 - AT General Thank You Send,Ready,READY_STALE,MEDIUM,2025-04-30,,4
+f30efb2c-ed8c-48c4-b34c-1e53f5d6985d,AB Test April 2025 -- DT General Thank You Send,Ready,READY_STALE,MEDIUM,2025-04-30,,4
+777386c4-d123-40be-af6a-325d984abe48,ADHOC - AT General Thank You Send,Ready,READY_STALE,MEDIUM,2025-04-17,,2
+08fd2c94-7b7a-4d58-8637-bf88277cb61c,ADHOC -- DT_Transaction Import Automation,Ready,READY_STALE,MEDIUM,2025-05-01,,7
+3d092c1a-10c5-4609-8369-97514d24897e,ADHOC 4-10 makeup -- DTC Custom Reporting Data Load,Ready,READY_STALE,MEDIUM,2025-04-11,,3
+3013a662-08f3-450e-b53f-53855c091db4,AT General Thank You Data Output - ADHOC SOFT LAUNCH,Ready,READY_STALE,MEDIUM,2025-07-29,,6
+412f5de3-06b7-44f8-b6b2-ff537d3db2b6,AT General Thank You Send - JOURNEY TESTING,Ready,READY_STALE,MEDIUM,2025-07-30,,5
+c5a51c6d-e1b5-4dc9-8cdc-bc005eaf6afa,AW Adhoc -- AT General Thank You Data Output,Ready,READY_STALE,MEDIUM,2025-06-24,,2
+1ed33068-0838-44b1-bb94-a19f70be34ec,AW QA -- AT General Thank You Data Output,Ready,READY_STALE,MEDIUM,2025-04-18,,7
+1305a339-a508-420f-9fcf-d1efe7ffcefa,AW QA ---- DT_Transaction Import Automation,Ready,READY_STALE,MEDIUM,2025-09-15,,6
+f8ce54ab-6d93-47e0-a927-97e21406a787,AW testing Tread Depth updates,Ready,READY_STALE,MEDIUM,2025-08-20,,1
+9561a0f8-6abe-41c9-887b-ab136cb6ef68,CWA TEST DT_Transaction Import Automation,Ready,READY_STALE,MEDIUM,2025-09-22,,3
+a35b1bad-1d4d-41f2-8887-9d21d3db5614,CWA Tread Depth Rejected Contacts,Ready,READY_STALE,MEDIUM,2025-09-04,,7
+80c460c5-af73-404b-81e2-e70340b0ea89,DEV_Click_UserAgent_Extract_Automation,Ready,READY_STALE,MEDIUM,2025-10-23,,4
+8fd5f5da-4268-4257-8f68-1ae574f5dbd4,DTC Average Visit Query Process,Ready,READY_STALE,MEDIUM,2025-03-18,,7
+9e8fc62c-5478-4ea6-a115-73c9ec009802,Engagement_by_Service_Date,Ready,READY_STALE,MEDIUM,2025-07-09,,1
+1cf1165e-b6f9-498f-9f07-c7382d0e90a1,GainLoss_Daily_Summary_Category,Ready,READY_STALE,MEDIUM,2025-10-22,,2
+af5eca85-4721-4e13-ab14-833dcb427974,Not Sent,Ready,READY_STALE,MEDIUM,2025-09-23,,4
+eddd1981-3571-4cba-8bd8-b0235c660093,a_Tim_Test,Ready,READY_STALE,MEDIUM,2025-10-24,,2

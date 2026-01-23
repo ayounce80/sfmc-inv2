@@ -6,52 +6,52 @@ id,type,name,confidence,last_modified,reason
 48721,asset,Sharing Test 2,HIGH,2023-08-07,Not referenced by any other object
 43161,asset,Untitled - Notepad.pdf,HIGH,2018-03-02,Not referenced by any other object
 48705,asset,puppy.jpg,HIGH,2018-05-15,Not referenced by any other object
-596321,asset,20240604_ATC_Welcome_Journey,REVIEW,2024-06-04,Not referenced by any other object
-612954,asset,20241008_DTC_,REVIEW,2024-10-08,Not referenced by any other object
-612961,asset,20241008_DTC_ (1),REVIEW,2024-10-08,Not referenced by any other object
-622326,asset,AbandonedCart.png,REVIEW,2025-01-22,Not referenced by any other object
-622332,asset,AirPressure.png,REVIEW,2025-01-22,Not referenced by any other object
+596321,asset,20240604_ATC_Welcome_Journey,MEDIUM,2024-06-04,Not referenced by any other object
+612954,asset,20241008_DTC_,MEDIUM,2024-10-08,Not referenced by any other object
+612961,asset,20241008_DTC_ (1),MEDIUM,2024-10-08,Not referenced by any other object
+622326,asset,AbandonedCart.png,MEDIUM,2025-01-22,Not referenced by any other object
+622332,asset,AirPressure.png,MEDIUM,2025-01-22,Not referenced by any other object
+622346,asset,BOPISOrderAuthFailure.png,MEDIUM,2025-01-22,Not referenced by any other object
+622325,asset,CertificateJourney.png,MEDIUM,2025-01-22,Not referenced by any other object
+622336,asset,DTC_QuoteToBopis.png,MEDIUM,2025-01-22,Not referenced by any other object
+622352,asset,E2EDelayedCustomer.png,MEDIUM,2025-01-22,Not referenced by any other object
+622345,asset,E2EDelayedStore.png,MEDIUM,2025-01-22,Not referenced by any other object
+622349,asset,E2EDeliveredCustomer.png,MEDIUM,2025-01-22,Not referenced by any other object
+622344,asset,E2EDeliveredStore.png,MEDIUM,2025-01-22,Not referenced by any other object
+622350,asset,E2EOutForDeliveryCustomer.png,MEDIUM,2025-01-22,Not referenced by any other object
+622342,asset,E2EOutForDeliveryStore.png,MEDIUM,2025-01-22,Not referenced by any other object
+622347,asset,E2EShippedCustomer.png,MEDIUM,2025-01-22,Not referenced by any other object
+622343,asset,E2EShippedStore.png,MEDIUM,2025-01-22,Not referenced by any other object
+622328,asset,MyAccountPWReset.png,MEDIUM,2025-01-22,Not referenced by any other object
+622341,asset,OMSv2BOPISOrderCancelation.png,MEDIUM,2025-01-22,Not referenced by any other object
+622354,asset,OrderConfirmationV3_AppointmentCancellation.png,MEDIUM,2025-01-22,Not referenced by any other object
+622357,asset,OrderConfirmationV3_AppointmentROPIS.png,MEDIUM,2025-01-22,Not referenced by any other object
+622356,asset,OrderConfirmationV3_OrderBOPIS.png,MEDIUM,2025-01-22,Not referenced by any other object
+622358,asset,OrderConfirmationV3_OrderROPIS.png,MEDIUM,2025-01-22,Not referenced by any other object
+622353,asset,OrderConfirmationV3_ProfileUpdate.png,MEDIUM,2025-01-22,Not referenced by any other object
+622355,asset,OrderConfirmationV3_ServiceAppointment.png,MEDIUM,2025-01-22,Not referenced by any other object
+622359,asset,OrderConfirmation_Creative.pdf,MEDIUM,2025-01-22,Not referenced by any other object
+622351,asset,PasswordReset.png,MEDIUM,2025-01-22,Not referenced by any other object
+622322,asset,ThankYou.png,MEDIUM,2025-01-22,Not referenced by any other object
+622338,asset,TireHotelReminder.png,MEDIUM,2025-01-22,Not referenced by any other object
+622324,asset,TireReview.png,MEDIUM,2025-01-22,Not referenced by any other object
+622323,asset,TireRotation.png,MEDIUM,2025-01-22,Not referenced by any other object
+622333,asset,Tire_Hotel_DeliveredCutsomerDEV.png,MEDIUM,2025-01-22,Not referenced by any other object
+622337,asset,Tire_Hotel_DeliveredStore_DEV.png,MEDIUM,2025-01-22,Not referenced by any other object
+622331,asset,Tire_Hotel_ScheduledCutsomerDEV.png,MEDIUM,2025-01-22,Not referenced by any other object
+622334,asset,Tire_Hotel_ScheduledStore_DEV.png,MEDIUM,2025-01-22,Not referenced by any other object
+622340,asset,TreadDepthMessage1a.png,MEDIUM,2025-01-22,Not referenced by any other object
+622339,asset,TreadDepthMessage2.png,MEDIUM,2025-01-22,Not referenced by any other object
+622335,asset,VTVAirCheck.png,MEDIUM,2025-01-22,Not referenced by any other object
+622330,asset,WelcomeSeries1.png,MEDIUM,2025-01-22,Not referenced by any other object
+622327,asset,WelcomeSeries1b.png,MEDIUM,2025-01-22,Not referenced by any other object
+622329,asset,WelcomeSeries2.png,MEDIUM,2025-01-22,Not referenced by any other object
+622348,asset,digitalReciepts.png,MEDIUM,2025-01-22,Not referenced by any other object
 647922,asset,Automation DE Identifier and Locator,REVIEW,2025-11-26,Not referenced by any other object
 647923,asset,Automation DE Identifier and Locator,REVIEW,2025-11-26,Not referenced by any other object
-622346,asset,BOPISOrderAuthFailure.png,REVIEW,2025-01-22,Not referenced by any other object
-622325,asset,CertificateJourney.png,REVIEW,2025-01-22,Not referenced by any other object
-622336,asset,DTC_QuoteToBopis.png,REVIEW,2025-01-22,Not referenced by any other object
-622352,asset,E2EDelayedCustomer.png,REVIEW,2025-01-22,Not referenced by any other object
-622345,asset,E2EDelayedStore.png,REVIEW,2025-01-22,Not referenced by any other object
-622349,asset,E2EDeliveredCustomer.png,REVIEW,2025-01-22,Not referenced by any other object
-622344,asset,E2EDeliveredStore.png,REVIEW,2025-01-22,Not referenced by any other object
-622350,asset,E2EOutForDeliveryCustomer.png,REVIEW,2025-01-22,Not referenced by any other object
-622342,asset,E2EOutForDeliveryStore.png,REVIEW,2025-01-22,Not referenced by any other object
-622347,asset,E2EShippedCustomer.png,REVIEW,2025-01-22,Not referenced by any other object
-622343,asset,E2EShippedStore.png,REVIEW,2025-01-22,Not referenced by any other object
 631854,asset,"Mobile Message May 8, 2025(2:50:19 PM)",REVIEW,2025-05-08,Not referenced by any other object
 648907,asset,"My Definition - December 10, 2025 at 2:35:41 PM",REVIEW,2025-12-10,Not referenced by any other object
-622328,asset,MyAccountPWReset.png,REVIEW,2025-01-22,Not referenced by any other object
-622341,asset,OMSv2BOPISOrderCancelation.png,REVIEW,2025-01-22,Not referenced by any other object
-622354,asset,OrderConfirmationV3_AppointmentCancellation.png,REVIEW,2025-01-22,Not referenced by any other object
-622357,asset,OrderConfirmationV3_AppointmentROPIS.png,REVIEW,2025-01-22,Not referenced by any other object
-622356,asset,OrderConfirmationV3_OrderBOPIS.png,REVIEW,2025-01-22,Not referenced by any other object
-622358,asset,OrderConfirmationV3_OrderROPIS.png,REVIEW,2025-01-22,Not referenced by any other object
-622353,asset,OrderConfirmationV3_ProfileUpdate.png,REVIEW,2025-01-22,Not referenced by any other object
-622355,asset,OrderConfirmationV3_ServiceAppointment.png,REVIEW,2025-01-22,Not referenced by any other object
-622359,asset,OrderConfirmation_Creative.pdf,REVIEW,2025-01-22,Not referenced by any other object
-622351,asset,PasswordReset.png,REVIEW,2025-01-22,Not referenced by any other object
-622322,asset,ThankYou.png,REVIEW,2025-01-22,Not referenced by any other object
-622338,asset,TireHotelReminder.png,REVIEW,2025-01-22,Not referenced by any other object
-622324,asset,TireReview.png,REVIEW,2025-01-22,Not referenced by any other object
-622323,asset,TireRotation.png,REVIEW,2025-01-22,Not referenced by any other object
-622333,asset,Tire_Hotel_DeliveredCutsomerDEV.png,REVIEW,2025-01-22,Not referenced by any other object
-622337,asset,Tire_Hotel_DeliveredStore_DEV.png,REVIEW,2025-01-22,Not referenced by any other object
-622331,asset,Tire_Hotel_ScheduledCutsomerDEV.png,REVIEW,2025-01-22,Not referenced by any other object
-622334,asset,Tire_Hotel_ScheduledStore_DEV.png,REVIEW,2025-01-22,Not referenced by any other object
-622340,asset,TreadDepthMessage1a.png,REVIEW,2025-01-22,Not referenced by any other object
 622620,asset,TreadDepthMessage1b.png,REVIEW,2025-01-27,Not referenced by any other object
-622339,asset,TreadDepthMessage2.png,REVIEW,2025-01-22,Not referenced by any other object
-622335,asset,VTVAirCheck.png,REVIEW,2025-01-22,Not referenced by any other object
-622330,asset,WelcomeSeries1.png,REVIEW,2025-01-22,Not referenced by any other object
-622327,asset,WelcomeSeries1b.png,REVIEW,2025-01-22,Not referenced by any other object
-622329,asset,WelcomeSeries2.png,REVIEW,2025-01-22,Not referenced by any other object
-622348,asset,digitalReciepts.png,REVIEW,2025-01-22,Not referenced by any other object
 727486,classic_email,00ETTEST,HIGH,2014-08-19,Not referenced by any other object
 2853131,classic_email,ATC_MyAccount_Verification Copy,HIGH,2018-04-06,Not referenced by any other object
 3092456,classic_email,Appointment Reminder Copy,HIGH,2019-09-06,Not referenced by any other object
@@ -67,63 +67,319 @@ id,type,name,confidence,last_modified,reason
 2679953,classic_email,content test,HIGH,2017-04-14,Not referenced by any other object
 664836,classic_email,et_test,HIGH,2014-02-24,Not referenced by any other object
 762771,classic_email,nolan-test-email,HIGH,2015-04-08,Not referenced by any other object
+b6f8d3a8-c819-461d-ab85-396fe5abd71b,data_extract,20110921 extract,HIGH,2011-09-21,Not referenced by any other object
 92904d74-7550-4387-afee-049c3ff3645b,data_extract,DTAT_Thank_You_v3_URL_export,HIGH,2018-01-25,Not referenced by any other object
+845c9414-fa3a-426b-ad47-f0c61ebf155a,data_extract,DTC BI Tracking Extract,HIGH,2023-01-23,Not referenced by any other object
+436c1bf8-58b6-402d-8976-e5a1cdb72a9c,data_extract,DTC_Subscriber_Vehicles_BU,HIGH,2017-09-22,Not referenced by any other object
+966c37fd-9a0e-45ed-ad71-a1c4540f054f,data_extract,DTC_Tracking_Extract_1-1-21---1-31-21.zip,HIGH,2023-01-17,Not referenced by any other object
+2f024968-1c3e-4016-befa-2c2ca8e92fa7,data_extract,DTC_Tracking_Extract_1-26-22---2-25-22.zip,HIGH,2023-01-23,Not referenced by any other object
+6274e098-7e40-48a1-9ebe-6b3e94dcf310,data_extract,DTC_Tracking_Extract_1-31-21---3-2-21.zip,HIGH,2023-01-17,Not referenced by any other object
+c20c159f-21e6-40c7-9189-6b984bdb525e,data_extract,DTC_Tracking_Extract_10-23-22---11-22-22.zip,HIGH,2023-01-23,Not referenced by any other object
+242cfc61-72cc-4475-8217-b4e2d5580b96,data_extract,DTC_Tracking_Extract_10-28-21---11-27-21.zip,HIGH,2023-01-20,Not referenced by any other object
+f90108c3-8050-4f44-b159-fa1874d6136f,data_extract,DTC_Tracking_Extract_11-22-22---12-22-22.zip,HIGH,2023-01-23,Not referenced by any other object
+b760bcda-8b8b-466b-b2ac-63fcc61a16ea,data_extract,DTC_Tracking_Extract_11-27-21---12-27-21.zip,HIGH,2023-01-20,Not referenced by any other object
+6c07f117-2bb8-4a63-a8ed-35db6dbedc95,data_extract,DTC_Tracking_Extract_12-22-22---1-5-23.zip,HIGH,2023-01-23,Not referenced by any other object
+8876347d-7182-4c44-b9e5-696f3fa0a52b,data_extract,DTC_Tracking_Extract_12-27-21---1-26-22.zip,HIGH,2023-01-23,Not referenced by any other object
+dcf866dd-574c-4fde-a5d5-fa0be6136641,data_extract,DTC_Tracking_Extract_2-25-22---3-27-22.zip,HIGH,2023-01-23,Not referenced by any other object
+bb755788-d397-47be-97e1-15eea026495d,data_extract,DTC_Tracking_Extract_20221222000000,HIGH,2022-12-27,Not referenced by any other object
+9c4e39e0-6b03-4cf5-a15f-a0e58e36b799,data_extract,DTC_Tracking_Extract_20221223000000,HIGH,2022-12-27,Not referenced by any other object
+b0a136a5-f5f6-4700-bbd0-c3b352dce4ea,data_extract,DTC_Tracking_Extract_20221224000000,HIGH,2022-12-27,Not referenced by any other object
+9327700b-13bc-4d54-9527-2bfa686ae451,data_extract,DTC_Tracking_Extract_20221225000000,HIGH,2022-12-27,Not referenced by any other object
+ae1ee342-2ebc-4b2c-ae84-55028b9f64bc,data_extract,DTC_Tracking_Extract_20221226000000,HIGH,2022-12-27,Not referenced by any other object
+6a2632f8-0e5b-4e4f-bfeb-e5bc6a77c758,data_extract,DTC_Tracking_Extract_3-2-21---4-1-21.zip,HIGH,2023-01-20,Not referenced by any other object
+5578f489-d44a-44af-aeba-3e4176cb008b,data_extract,DTC_Tracking_Extract_3-27-22---4-26-22.zip,HIGH,2023-01-23,Not referenced by any other object
+e27aa847-7609-480a-b54e-39201b5a8cff,data_extract,DTC_Tracking_Extract_4-1-21---5-1-21.zip,HIGH,2023-01-20,Not referenced by any other object
+a5a42221-055b-4646-b302-7a4649212e72,data_extract,DTC_Tracking_Extract_4-26-22---5-26-22.zip,HIGH,2023-01-23,Not referenced by any other object
+798d6837-d53f-4041-be8a-f18cb8d37f08,data_extract,DTC_Tracking_Extract_5-1-21---5-31-21.zip,HIGH,2023-01-20,Not referenced by any other object
+06d5846d-573c-4987-931c-946e00ed896b,data_extract,DTC_Tracking_Extract_5-26-22---6-25-22.zip,HIGH,2023-01-23,Not referenced by any other object
+afe7e196-b55c-4a24-8b17-36b058dceb92,data_extract,DTC_Tracking_Extract_5-31-21---6-30-21.zip,HIGH,2023-01-20,Not referenced by any other object
+eb4ea7d2-e4c6-4f59-aea3-7f4577e487f6,data_extract,DTC_Tracking_Extract_6-25-22---7-25-22.zip,HIGH,2023-01-23,Not referenced by any other object
+7e0c4936-9385-492e-ba66-75feed5bc9e2,data_extract,DTC_Tracking_Extract_6-30-21---7-30-21.zip,HIGH,2023-01-20,Not referenced by any other object
+fe7dbe70-4465-4719-b230-f799f7980b29,data_extract,DTC_Tracking_Extract_7-25-22---8-24-22.zip,HIGH,2023-01-23,Not referenced by any other object
+bceee3ac-2009-4cfc-931b-a589b8fb88e4,data_extract,DTC_Tracking_Extract_7-30-21---8-29-21.zip,HIGH,2023-01-20,Not referenced by any other object
+b77eff70-f99d-47ff-9c24-b25eafed15fe,data_extract,DTC_Tracking_Extract_8-24-22---9-23-22.zip,HIGH,2023-01-23,Not referenced by any other object
+0f0f15c9-18d1-410e-9ea9-cb6df5ad3e55,data_extract,DTC_Tracking_Extract_8-29-21---9-28-21.zip,HIGH,2023-01-20,Not referenced by any other object
+dced3a40-fe7e-400c-a14a-1d71656466eb,data_extract,DTC_Tracking_Extract_9-23-22---10-23-22.zip,HIGH,2023-01-23,Not referenced by any other object
+acbf591f-0d8d-4107-8c08-06c492936dbd,data_extract,DTC_Tracking_Extract_9-28-21---10-28-21.zip,HIGH,2023-01-20,Not referenced by any other object
+3dc6b0af-24e4-45b2-8b23-6dc4398f4501,data_extract,Discount Tire Data Extract,HIGH,2011-05-26,Not referenced by any other object
 c1c393fd-d72f-4fb8-96d0-57dfb7f835c1,data_extract,ET_Support_Test_LS,HIGH,2012-06-06,Not referenced by any other object
+524b605d-f74f-4a16-9a3a-bf70edc00c00,data_extract,Extract Campaigns,HIGH,2011-12-14,Not referenced by any other object
+155d4588-6a9e-4173-a32f-3b4fd4306fdb,data_extract,Extract Metrics,HIGH,2011-12-14,Not referenced by any other object
+2f6dd855-3c19-4ae4-956b-54c59e64462f,data_extract,SubscriberStatusExtract,HIGH,2015-04-29,Not referenced by any other object
 78cbb8bd-d285-49fc-9096-44822f71df57,data_extract,daily_tracking_extract1,HIGH,2015-08-20,Not referenced by any other object
+efa3dce7-f466-4c9c-b369-ba28feb3382f,data_extract,daily_tracking_extract2,HIGH,2015-08-20,Not referenced by any other object
+31b494ca-9711-4dcd-acf9-78cd44745c09,data_extract,daily_tracking_extract3,HIGH,2015-08-20,Not referenced by any other object
+fb137c12-da87-4fd7-9982-e523bb9fb2fe,data_extract,daily_tracking_extract4,HIGH,2015-08-20,Not referenced by any other object
+e7a23a2c-5fb8-4f80-88a0-5902a80ae3ea,data_extract,daily_tracking_extract5,HIGH,2015-08-20,Not referenced by any other object
+130d1c45-0641-41dc-81f7-eeb79a2ab793,data_extract,daily_tracking_extract6,HIGH,2015-08-20,Not referenced by any other object
 b1c7c973-e60e-4a28-bf20-212c91843a3a,data_extract,profile_attrbutes,HIGH,2013-10-16,Not referenced by any other object
+010d1ead-0cb8-47f1-b0b8-6b621008957d,data_extract,subscriber_bounce,HIGH,2015-02-19,Not referenced by any other object
+bd5c6650-8e7c-425a-ac85-2701cc2769ae,data_extract,vehicle_id_list,HIGH,2012-11-09,Not referenced by any other object
+0905daa4-a5cb-4fa6-b8d4-02459231fa3f,data_extract,Contacts without a Channel Extract AW,REVIEW,2025-06-11,Not referenced by any other object
+e7f718de-ea5e-4e8d-9612-9b7ea194d2cd,data_extract,DTC BI Tracking Extract - ADHOC,REVIEW,2025-03-31,Not referenced by any other object
 800c4ec5-f4c7-49c0-bab6-2829894d221f,data_extract,Legal_Request_DT_AT_Transaction_Log,REVIEW,2026-01-14,Not referenced by any other object
 c0d26027-2a20-4ad0-acf1-b77c2f01ff9a,data_extract,Legal_Request_DT_AT_Transaction_Log_zip,REVIEW,2026-01-14,Not referenced by any other object
+b5eae3bc-7eb0-4404-ad82-d2562251a708,data_extract,Legal_Request_DT_AT_Transaction_Log_zipV2,REVIEW,2026-01-14,Not referenced by any other object
+cf519eb1-2ee3-4e52-91c6-8be7ffdf42f6,data_extract,Not Sent Extract,REVIEW,2025-10-21,Not referenced by any other object
+8ba0c577-7d5a-4d4c-8e21-d90201980907,data_extract,Not Sent Extract - DT and AT,REVIEW,2025-12-16,Not referenced by any other object
+0eefc96d-0d84-431b-a02e-6ab0f6e33635,data_extract,UnsubscribedProfile DE Extract,REVIEW,2025-12-02,Not referenced by any other object
 06ad2c68-5c51-4be7-87c6-f57c249a4541,data_extract,UnsubscribedProfile Zip,REVIEW,2025-11-10,Not referenced by any other object
+6f4974cd-0e79-49c6-88f8-c368c87011b4,data_extract,Zeta Last 7 Days TLog - Extract to CSV,REVIEW,2025-12-02,Not referenced by any other object
 1e17cb29-1e48-43e2-9634-87fecc306bc2,data_extract,Zeta Last 7 Days TLog - Zip File,REVIEW,2025-11-15,Not referenced by any other object
 ee2f089b-db20-4a46-adad-28b3808c12c0,data_extract,Zeta Last 7 Days TLog DE Extract Zip,REVIEW,2025-11-13,Not referenced by any other object
 aa3c37f4-8e83-46ec-a911-e51ae62174e3,data_extract,Zeta Last 7 Days TLog DE Extract gzip,REVIEW,2025-11-14,Not referenced by any other object
+a3aa6352-452d-496b-9528-446bc21d68fc,data_extract,daily_tracking_extract,REVIEW,2025-05-22,Not referenced by any other object
 MkxTUVZCZ2JFZUMtU1FBamZWUnVvZzo0ODow,delivery_profile,Default,REVIEW,,Not referenced by any other object
 UE1LQlViZ2FFZWEyRHpqcXB4V0tEUTo0ODow,delivery_profile,No Header No Footer,REVIEW,,Not referenced by any other object
+209f7774-dcb3-473b-b9eb-0a19a2bf08ee,event_definition,AT BlackFriday 2019 Journey,HIGH,2019-11-25,Not referenced by any other object
+da79945a-b345-4173-9f16-dca6b45958f4,event_definition,AT_Inject (copy),HIGH,2017-06-05,Not referenced by any other object
+a5d428c0-5159-4881-bad3-f220cb1c94fc,event_definition,AT_Inject (copy),HIGH,2017-06-05,Not referenced by any other object
+bb2606e0-6b14-4337-b4b2-37d78cd1529f,event_definition,AT_Inject (copy),HIGH,2017-06-15,Not referenced by any other object
+5053acad-072e-489c-8d2f-ca50a836ba1c,event_definition,AW - Digital Receipt Test - Comm and Transactional,HIGH,2023-09-25,Not referenced by any other object
+a305ce86-ab99-470c-9453-c81354197d20,event_definition,AW Sms testing,HIGH,2025-08-18,Not referenced by any other object
+7dedccb0-e675-4a83-b80f-0e4e2f1424cd,event_definition,AW TESTING Tire Tread Depth Reminder SMS - Email (Copy),HIGH,2023-02-23,Not referenced by any other object
+0fb1f0a1-9d87-4e72-859d-af14e2077df1,event_definition,America_Tere_CERT_Journey,HIGH,2018-01-04,Not referenced by any other object
+19755347-cdee-45e4-871e-b6e806b61806,event_definition,America_Tere_CERT_Journey,HIGH,2018-03-22,Not referenced by any other object
+5bf84282-5e4b-40e1-8e82-3e6d82430257,event_definition,America_Tere_CERT_Journey (copy),HIGH,2018-04-18,Not referenced by any other object
+7f1c6229-b660-497d-86f7-f2ff5cc4e60a,event_definition,America_Tere_CERT_Journey (copy),HIGH,2018-04-18,Not referenced by any other object
+8b57f139-774a-4794-87ac-90481da2d671,event_definition,America_Tire_CERT_Journey (copy),HIGH,2018-05-07,Not referenced by any other object
+b01396ca-4a84-49ac-97a0-60231361f2ea,event_definition,Americas_Tire_CERT_Journey,HIGH,2018-03-22,Not referenced by any other object
+0d7ac748-cac1-426e-a079-0105437678e2,event_definition,DT BlackFriday 2019 Journey,HIGH,2019-11-20,Not referenced by any other object
+d43e86a5-fa42-4ce0-9a1c-3cdb94a903f3,event_definition,DT BlackFriday 2019 Journey,HIGH,2019-11-26,Not referenced by any other object
+0fe0aef9-44ec-4b61-b156-5787c734eb92,event_definition,DT_INJECT,HIGH,2017-05-04,Not referenced by any other object
+80398735-724c-4908-a5cd-eb14981f10d2,event_definition,DT_Inject,HIGH,2017-05-04,Not referenced by any other object
+37e9854d-ec0d-43a2-814c-ba4e1905f5d1,event_definition,DT_Inject,HIGH,2017-05-04,Not referenced by any other object
+ca6eb00c-a84c-4a6a-9fd6-0c9913d148a5,event_definition,DT_Inject,HIGH,2017-05-04,Not referenced by any other object
+555de130-e0a2-4808-8e3b-2cdd1a72b061,event_definition,DT_Inject,HIGH,2017-05-12,Not referenced by any other object
+eb76e887-54e5-4b5a-8735-2cc24fbecdca,event_definition,DT_Journey,HIGH,2017-04-07,Not referenced by any other object
+beebef8a-228e-4cbc-a4ff-915832cedf78,event_definition,Discount_Tire_CERT_Journey,HIGH,2017-11-02,Not referenced by any other object
+c9bff9bc-3791-4f55-99d5-68d5131511fd,event_definition,Onereach_Prod_Test,HIGH,2022-11-03,Not referenced by any other object
+58003d92-ceef-4974-86fc-e2ab516c52d5,event_definition,Onereach_Prod_Test,HIGH,2022-11-03,Not referenced by any other object
+12dc43a3-77db-4d65-8762-94774d9957c2,event_definition,Store Review Response Catchup Aug 2021,HIGH,2021-08-25,Not referenced by any other object
+11b33dff-04d0-445a-8782-5b791a6e2581,event_definition,Tire Tread Depth Reminder SMS - Email,HIGH,2022-11-07,Not referenced by any other object
+faced38e-c6f8-4d8d-937c-fa27c49a6bb9,event_definition,Tire Tread Depth Reminder SMS - Email,HIGH,2022-11-07,Not referenced by any other object
+410e39ed-b867-4a15-9ace-72e3c89ceaa8,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+d3860f53-7bda-485b-a355-755c08354786,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+5c7f4392-d557-42e0-b459-85c32b6bc3a5,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+09459f9f-2ca3-4dee-afc0-121332df1343,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+9d3c1172-9d87-48f1-8a1f-1ae9964640e1,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+73976b76-0d70-4c57-a4e9-c974a0cf94c2,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+eb4894f2-b36f-4b66-97a4-dc47ce0a39f8,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+5a1893bf-1559-4c7c-988a-c62e1b6c9423,event_definition,Tire Tread Depth Reminder SMS - Email (TEST Copy),HIGH,2023-02-27,Not referenced by any other object
+884bbe88-e107-429d-975f-7a95d63acf3c,event_definition,Tire Tread Depth Reminder SMS - Email -- Migration Template,HIGH,2022-11-07,Not referenced by any other object
+c54f90fb-2cb0-4060-adb8-7cd721f7c23f,event_definition,Tire Tread Depth Reminder SMS - Email --- MIGRATION COPY,HIGH,2022-11-07,Not referenced by any other object
+276bb0e4-7a88-47cf-845d-4eddae33dc28,event_definition,Tire Tread Depth Reminder SMS - Email --- MIGRATION COPY,HIGH,2022-11-07,Not referenced by any other object
+fbd5796d-1283-4940-b078-f1d11c50c23e,event_definition,Tire Tread Depth Reminder SMS Only,HIGH,2022-05-23,Not referenced by any other object
+949e4850-f723-438c-98a9-c0029d457404,event_definition,[TESTING] Thank You Survey Email and SMS,HIGH,2025-07-03,Not referenced by any other object
+11bd8d98-75f8-4e42-9178-472ecba147f6,event_definition,20240219_DTC_PD_Dynamic_SL_Journey,MEDIUM,2024-02-07,Not referenced by any other object
+7b7d35d6-1d5e-4c6e-8ba4-4c99eb6ff7ae,event_definition,20240219_DTC_PD_Dynamic_SL_Journey,MEDIUM,2024-02-15,Not referenced by any other object
+6f3c749f-8942-4863-85be-5f39cc881f5a,event_definition,20240219_DTC_PD_Dynamic_SL_Journey,MEDIUM,2024-02-19,Not referenced by any other object
+b41cf6cc-4332-4f58-82bf-70c659e292db,event_definition,20240219_DTC_PD_Dynamic_SL_Journey,MEDIUM,2024-02-19,Not referenced by any other object
+d75e8049-b480-4628-8a4b-dd335cb743e9,event_definition,20240219_DTC_PD_Dynamic_SL_Journey,MEDIUM,2024-02-19,Not referenced by any other object
+3883b187-c6ec-4bb1-85ba-ec08c4024792,event_definition,20240711_DTC_Promo_Message_Frequency_Journey_QA,MEDIUM,2024-07-11,Not referenced by any other object
+af21c980-1b07-49b3-9aa9-1721e42594c1,event_definition,DT Re-Engagement Journey,MEDIUM,2024-02-01,Not referenced by any other object
+d966d61b-4808-4926-a8e8-de74e55cc4c9,event_definition,DT Re-Engagement Journey,MEDIUM,2024-02-08,Not referenced by any other object
+b97796b8-1f13-4bc4-ae13-4b760d9c52bd,event_definition,DT Re-Engagement Journey,MEDIUM,2024-02-08,Not referenced by any other object
+f6a6a01d-4893-4b02-9492-0ed5858f225c,event_definition,DT Re-Engagement Journey,MEDIUM,2024-02-12,Not referenced by any other object
+5dcf3318-57e1-4d0f-8fb9-734f7e2d6920,event_definition,DT Re-Engagement Journey,MEDIUM,2024-02-13,Not referenced by any other object
+e0ed2e7c-891e-4313-90a9-4a7899443c29,event_definition,DTC Welcome,MEDIUM,2024-01-22,Not referenced by any other object
+4c6d3c1b-6ed7-4d30-8152-9d1891468ff6,event_definition,DTC Welcome,MEDIUM,2024-01-22,Not referenced by any other object
+21e4fbdf-c5b9-4177-94ee-5e4e0264997f,event_definition,DTC Welcome,MEDIUM,2024-01-22,Not referenced by any other object
+7af79e23-014e-45d4-a8d6-02ee3db996ec,event_definition,DTC Welcome,MEDIUM,2024-01-22,Not referenced by any other object
+2e5ac955-05c4-4cad-b038-9b60cdeaa7e2,event_definition,Discount Tire - Re-Engagement Journey,MEDIUM,2024-02-14,Not referenced by any other object
+d81070ae-eff2-401f-8b97-0f4783e21839,event_definition,Discount Tire - Re-Engagement Journey,MEDIUM,2024-02-21,Not referenced by any other object
+e95aa6ee-4004-4f51-8d38-c403d4c87ae4,event_definition,Discount Tire - Re-Engagement Journey,MEDIUM,2024-02-21,Not referenced by any other object
+712ebf76-5345-4238-b439-467d19ba7087,event_definition,Discount Tire - Re-Engagement Journey,MEDIUM,2024-02-21,Not referenced by any other object
+691fdc82-0a55-4a67-b4ec-95499f2ee5e4,event_definition,Discount Tire - Re-Engagement Journey,MEDIUM,2024-02-21,Not referenced by any other object
+87e985e2-ee33-4f8d-b50d-1c7348364155,event_definition,New Journey - February 12 2024 at 12.06 PM,MEDIUM,2024-02-12,Not referenced by any other object
+a4ebcc7d-1253-423b-a841-0476866d0504,event_definition,New Journey - February 13 2024 at 3.38 PM,MEDIUM,2024-02-14,Not referenced by any other object
+436fde18-1f9e-41ca-b8c3-39ca5af4c3c5,event_definition,New Journey - February 21 2024 at 1.30 PM,MEDIUM,2024-02-21,Not referenced by any other object
+18cf5621-b3d8-4202-84fb-fa4ae7dd17be,event_definition,New Journey - February 21 2024 at 1.30 PM,MEDIUM,2024-02-21,Not referenced by any other object
+036594bb-c410-42ee-86ce-5c5ec72fb5d2,event_definition,New Journey - February 21 2024 at 1.30 PM,MEDIUM,2024-02-21,Not referenced by any other object
+a27179cd-c5ea-4f48-baee-46352beb06b1,event_definition,New Journey - February 27 2023 at 3.35 PM,MEDIUM,2023-02-27,Not referenced by any other object
+89469369-496a-4854-8d51-c6f3c63c3385,event_definition,New Journey - July 20 2023 at 10.39 PM,MEDIUM,2023-07-20,Not referenced by any other object
+05065a21-e921-481f-8294-2ed896c4273f,event_definition,Tire Tread Depth Reminder SMS - Email,MEDIUM,2023-02-27,Not referenced by any other object
+14289f5e-de02-4317-8c31-451ae21888a1,event_definition,Tire Tread Depth Reminder SMS - Email,MEDIUM,2023-02-27,Not referenced by any other object
+a440fe0f-270e-4db3-95d1-8a9b2c5e2090,event_definition, Thank You Survey Email and SMS,REVIEW,2025-07-30,Not referenced by any other object
+79f44bfe-e460-434d-bb19-a4de3b12e9cd,event_definition,MLS_Journey,REVIEW,2025-05-01,Not referenced by any other object
+9257e3b1-33ca-457f-b954-906f58509c0c,event_definition,MLS_Journey,REVIEW,2025-05-05,Not referenced by any other object
+a8646499-7edc-4839-97d7-d50099592586,event_definition,MLS_Journey,REVIEW,2025-05-05,Not referenced by any other object
+fd14c646-63fc-40d5-b075-a4d8dc921ffa,event_definition,MLS_Journey,REVIEW,2025-05-06,Not referenced by any other object
+67624138-edb0-41d3-b026-119440e98744,event_definition,New Journey - July 28 2025 at 11.04 AM,REVIEW,2025-07-28,Not referenced by any other object
+b68952eb-7adc-4135-a00b-b2f1b86902b4,event_definition,New Journey - July 28 2025 at 11.04 AM,REVIEW,2025-07-28,Not referenced by any other object
+39cafa37-9c23-4a49-acd2-24c71ea101aa,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-22,Not referenced by any other object
+ee2833a8-033c-4186-95b9-5107bed50e92,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-22,Not referenced by any other object
+1d26cb9c-458d-4684-a9eb-4eafb66b66db,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-28,Not referenced by any other object
+221792a8-10f1-4a12-b243-a3578d81999f,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-28,Not referenced by any other object
+667f51ad-cc35-4cbe-b10a-179f15182b0f,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-28,Not referenced by any other object
+90ba800f-d1e8-483c-a8fa-d5a112ff2607,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-29,Not referenced by any other object
+c199abec-bb57-45e9-93d0-f9f4e7072c87,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-29,Not referenced by any other object
+467e8bc0-dcab-49dd-8733-ac5c50319ee6,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-29,Not referenced by any other object
+64bcb302-c532-4462-8fdf-1159c0de3608,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-29,Not referenced by any other object
+94b3c667-6501-4282-989d-a4a745d031f9,event_definition,Thank You Survey Email and SMS,REVIEW,2025-07-30,Not referenced by any other object
 97c734e9-3c72-4063-8107-cc4c63e526d4,filter,dtc_subs_delete,HIGH,2013-05-07,Not referenced by any other object
+fe449cd7-6040-406a-8c99-26d05280f0f9,filter,UnsubscribedProfile,REVIEW,2025-12-02,Not referenced by any other object
+2559bab7-2171-4696-bafc-e1c24d904d9e,filter,Zeta Last 7 Days TLog,REVIEW,2025-12-02,Not referenced by any other object
+223a64ff-95d7-e611-b60f-38eaa7158a0d,import,18 Month Engaged Users,HIGH,2017-01-10,Not referenced by any other object
+34afc364-769a-ec11-ba31-d4f5ef3de4e6,import,2-2022 InMoment Issue DTD TY Send Audience Files Import,HIGH,2022-03-02,Not referenced by any other object
+929ac60d-729a-ec11-ba31-d4f5ef3de4e6,import,2-20222 InMoment Issue AT TY Send Audience Files Import,HIGH,2022-03-02,Not referenced by any other object
+491d370d-709a-ec11-ba31-d4f5ef3de4e6,import,2-20222 InMoment Issue DT TY Send Audience Files Import,HIGH,2022-03-02,Not referenced by any other object
 feb413ab-2c86-e011-ab89-0025b3d7f36a,import,20110524 ET Test Import,HIGH,2011-05-24,Not referenced by any other object
 012c7a22-d1e3-e011-9bf9-3c4a92e57cdc,import,20110920 dtc unsub data import,HIGH,2011-09-21,Not referenced by any other object
+328f8ecd-87e4-e011-9bf9-3c4a92e57cdc,import,20111008 list load,HIGH,2011-10-08,Not referenced by any other object
+17b72f4f-287e-e811-a2c1-1402ec936991,import,AT_Thank_You_6-28-all,HIGH,2018-07-02,Not referenced by any other object
+cd625d04-5601-e811-ba86-38eaa7158951,import,AT_Thank_You_Survey_URLs_v3_Dev,HIGH,2018-01-24,Not referenced by any other object
 6dc5bd69-3a02-e811-ba86-38eaa7158951,import,DTAT_Thank_You_v3_Survey_URLs_consolidated_DEV,HIGH,2018-01-25,Not referenced by any other object
+d41aa892-d29f-e711-8fba-38eaa7158569,import,DTC_Customer_Vehilces_Rebuild,HIGH,2017-09-22,Not referenced by any other object
 6bb2dd45-9bf1-e111-8f65-3c4a92f8dd8c,import,DTC_customer_vehicle_id_backfill,HIGH,2012-08-29,Not referenced by any other object
 116cb9e3-0704-e311-acaf-3c4a92f9105c,import,DTD_Shared_CustomerNo,HIGH,2013-08-13,Not referenced by any other object
 b6b0c09c-cffa-e211-acaf-3c4a92f9105c,import,DTD_Subscriber_List,HIGH,2013-08-01,Not referenced by any other object
+f082abdc-277e-e811-a2c1-1402ec936991,import,DTD_Thank_You_6-28-all,HIGH,2018-07-02,Not referenced by any other object
+639eb52a-287e-e811-a2c1-1402ec936991,import,DT_Thank_You_6-28-all,HIGH,2018-07-02,Not referenced by any other object
+1920b6c7-5501-e811-ba86-38eaa7158951,import,DT_Thank_You_Survey_URLs_v3_Dev,HIGH,2018-01-24,Not referenced by any other object
 75c03307-729d-e211-8b8e-3c4a92e57a48,import,ET_Bounces,HIGH,2013-04-04,Not referenced by any other object
+25836411-cced-e011-9bf9-3c4a92e57cdc,import,Import Cart Abandonment,HIGH,2011-10-04,Not referenced by any other object
+71e7dc2b-a3fd-e811-a2c4-1402ec936991,import,Import Contacts to Delete,HIGH,2018-12-13,Not referenced by any other object
+07c87fef-cbed-e011-9bf9-3c4a92e57cdc,import,Import Product Purchases,HIGH,2011-10-04,Not referenced by any other object
+c23401d0-cbed-e011-9bf9-3c4a92e57cdc,import,Import Product Views,HIGH,2011-10-04,Not referenced by any other object
+a551921f-b386-e711-8fba-38eaa7158569,import,Import_Subscriber_SendLog_Seed_Data,HIGH,2017-08-21,Not referenced by any other object
+9ef9d07c-7b32-e311-abbe-3c4a92e57a48,import,Tracking_Bounces,HIGH,2015-08-11,Not referenced by any other object
+e5ad6d5f-7932-e311-abbe-3c4a92e57a48,import,Tracking_Clicks,HIGH,2015-08-11,Not referenced by any other object
+d8654174-7832-e311-abbe-3c4a92e57a48,import,Tracking_Opens,HIGH,2015-08-11,Not referenced by any other object
+45e9f827-7532-e311-abbe-3c4a92e57a48,import,Tracking_SendJobs,HIGH,2015-08-11,Not referenced by any other object
+f0625ac2-7732-e311-abbe-3c4a92e57a48,import,Tracking_Sent,HIGH,2015-08-11,Not referenced by any other object
+d4947fae-7632-e311-abbe-3c4a92e57a48,import,Tracking_Unsubs,HIGH,2015-08-11,Not referenced by any other object
 8a5acd68-1e15-e111-b6c4-3c4a92f8dd8c,import,Tran Date Fix 11.22.11,HIGH,2011-11-22,Not referenced by any other object
+e61b53ec-a732-e811-9733-38eaa7150229,import,Yahoo Suppression Import,HIGH,2018-03-28,Not referenced by any other object
 25cab16c-9936-e311-abbe-3c4a92e57a48,import,profile_attrbutes,HIGH,2013-10-16,Not referenced by any other object
-929ac60d-729a-ec11-ba31-d4f5ef3de4e6,import,2-20222 InMoment Issue AT TY Send Audience Files Import,MEDIUM,2022-03-02,Not referenced by any other object
-491d370d-709a-ec11-ba31-d4f5ef3de4e6,import,2-20222 InMoment Issue DT TY Send Audience Files Import,MEDIUM,2022-03-02,Not referenced by any other object
+7855bdcd-a6ae-f011-a5ad-5cba2c7c7ee0,import,Not Sent Extract IMPORT,REVIEW,2025-11-11,Not referenced by any other object
+1187c77d-01d6-f011-a5ad-5cba2c7c7ee0,import,Not Sent IMPORT - DT and AT,REVIEW,2025-12-10,Not referenced by any other object
+75764ba3-07d6-f011-a5ad-5cba2c7c7ee0,import,Send Jobs IMPORT - DT and AT,REVIEW,2025-12-10,Not referenced by any other object
 105419,list,Unknown,HIGH,2011-05-24,Not referenced by any other object
 456067,list,Unknown,HIGH,2013-11-15,Not referenced by any other object
 557543,list,Unknown,HIGH,2015-01-20,Not referenced by any other object
 636249,list,Unknown,HIGH,2015-09-14,Not referenced by any other object
 1248364,list,Unknown,HIGH,2017-11-15,Not referenced by any other object
 2749320,list,Unknown,MEDIUM,2023-12-14,Not referenced by any other object
+e05df39e-a39b-439c-8daa-f26dc1bc829c,query,4th of July Offer 2016 Clicks,HIGH,2016-09-20,Not referenced by any other object
+7b1380bb-5ef2-44dd-9d96-15516516b095,query,4th of July Offer 2016 Opens,HIGH,2016-09-20,Not referenced by any other object
+f58c5147-cce3-448e-b988-2e4e192231e4,query,AT Last Purchase Greater Than 2 Years,HIGH,2020-11-05,Not referenced by any other object
+1b4b3727-d532-4627-b9b5-1f2c56b3d739,query,AT Last Purchase Less Than 2 Years,HIGH,2020-11-05,Not referenced by any other object
+ec48f9ec-0090-4e60-90eb-bdb94a423cf3,query,ATC 5_32 Tread Sent Last 3 Days,HIGH,2018-01-17,Not referenced by any other object
+57bdadf2-895b-4ee8-813c-77080bca00a9,query,ATC Subscriber Rotation Sent Last 7 Days,HIGH,2018-01-11,Not referenced by any other object
+dc07a379-037f-4892-803d-b8c527f56b2a,query,Add SendLog Seed Data,HIGH,2017-08-22,Not referenced by any other object
+68a483e3-2226-4d14-8c2d-144e82204b55,query,Add SendLog Seed Data - last send DE,HIGH,2017-08-22,Not referenced by any other object
+042af355-2c21-4e72-bd2b-390a982d6c53,query,Bad Email Addresses Query,HIGH,2018-03-13,Not referenced by any other object
 3abc2ad0-11b0-4a1a-8db8-621aee69714e,query,Bad Email Suppression,HIGH,2018-03-28,Not referenced by any other object
+f84b5397-625c-48dd-8e22-0d2b7f4bc807,query,Clicks_Historical,HIGH,2015-08-28,Not referenced by any other object
+98b6ea18-047d-4e4a-950c-64a337b349e9,query,Combine 5_32 Tread Sent Last 3 Days,HIGH,2018-01-17,Not referenced by any other object
+565e185d-ba2b-4b58-aa05-e0f6946d2a4e,query,ContactDelete-seg01,HIGH,2018-12-11,Not referenced by any other object
+0aff0543-f336-4688-b6ff-d41bde0e73d9,query,ContactDelete-seg02,HIGH,2018-12-11,Not referenced by any other object
+6bbe284f-1851-4318-8e4f-d0990656e3f9,query,ContactDelete-seg03,HIGH,2018-12-11,Not referenced by any other object
+9e6109a6-0c56-419f-804f-9a36f06995b1,query,ContactDelete-seg04,HIGH,2018-12-11,Not referenced by any other object
+8b22c7c5-b004-4514-9edb-be43b2d6b0cb,query,ContactDelete-seg05,HIGH,2018-12-11,Not referenced by any other object
+899af978-4836-429f-9eae-b84598cd36c2,query,ContactDelete-seg06,HIGH,2018-12-11,Not referenced by any other object
+cbe98d2e-6a7d-475e-a54c-105c5480590b,query,ContactDelete-seg07,HIGH,2018-12-11,Not referenced by any other object
+a80e7427-c284-429e-98b0-0627ccce5092,query,ContactDelete-seg08,HIGH,2018-12-11,Not referenced by any other object
+3021d350-2693-4a71-812c-2fec20312367,query,ContactDelete-seg09,HIGH,2018-12-11,Not referenced by any other object
+b34b0d66-513d-4a27-91ba-9e8c651c632c,query,ContactDelete-seg10,HIGH,2018-12-11,Not referenced by any other object
+a8cfb596-74ca-4d6d-bc6e-1da0b7481c34,query,DT Last Purchase Greater Than 2 Years,HIGH,2020-11-05,Not referenced by any other object
+5d6c1c45-883b-4ef7-b89f-312d7892388c,query,DT Last Purchase Less Than 2 Years,HIGH,2020-11-05,Not referenced by any other object
+66d47047-69b1-468f-a530-632e49e0a290,query,DTC 5_32 Tread Sent Last 3 Days,HIGH,2018-01-17,Not referenced by any other object
 2f3e512a-5e2e-4731-9d13-f47a94697587,query,DTC Emails Linked to Customer Sub Keys,HIGH,2016-11-02,Not referenced by any other object
+707b0ef2-b385-479b-9686-6f07bf6628af,query,DTC Subscriber Rotation Sent Last 7 Days,HIGH,2018-01-11,Not referenced by any other object
+32e7c945-0a0e-4cd7-94c1-f49f1794671d,query,DTC_ATC_Customer_Activity_Log_6-1-2017 to Today,HIGH,2017-07-12,Not referenced by any other object
 e45eac5e-b571-46dd-a4b3-d97f858ec984,query,DTC_General_Thank_You_Send_testing_v3,HIGH,2018-01-25,Not referenced by any other object
 996ba6da-b16b-4541-b9bd-4ea61ada891f,query,DTC_Subs_Delete 	,HIGH,2013-07-10,Not referenced by any other object
 6858b3d2-9f4e-4daa-b5ea-9d662c804a57,query,DTC_Subscriber_Profile_Scrub,HIGH,2013-08-01,Not referenced by any other object
 7fefef0d-8663-4bb8-8f67-7f5d7167d015,query,DTC_Subscriber_Stores Ewig Email Update,HIGH,2015-06-02,Not referenced by any other object
 fb9097b3-c313-4536-8c42-1d74b6cd290c,query,DTC_Subscriber_Stores_Scrub,HIGH,2013-08-01,Not referenced by any other object
 ed4563f0-27e0-4388-b3cc-cc497c8ef7e6,query,DTC_Subscriber_Vehicles_Scrub,HIGH,2013-08-01,Not referenced by any other object
+1508247c-c00c-4602-b378-61cb7e13a10a,query,DTC_Subscribers_Vehicles_frequency_data_cleaned,HIGH,2020-03-12,Not referenced by any other object
+be84e909-d4c4-4ce9-b7ba-b94febb0bb7c,query,DTC_Subscribers_Vehicles_frequency_data_cleaned_Update,HIGH,2015-10-21,Not referenced by any other object
+de17c3ac-81b6-466d-a1e6-594d6c1b984d,query,ENT_SendLog_100-200Days_Rolling_Air_and_Rotation,HIGH,2017-04-05,Not referenced by any other object
+626ce74a-03b5-46ab-8215-35f79d9498b4,query,ENT_SendLog_100Days_Rolling_Air_and_Rotation,HIGH,2017-04-05,Not referenced by any other object
+8862ae9b-95bd-4671-84e7-39ea29f98599,query,ENT_SendLog_200-300Days_Rolling_Air_and_Rotation,HIGH,2017-04-05,Not referenced by any other object
+bd57f780-48ee-480a-8bcd-1cd7e1902efb,query,ENT_SendLog_300-365Days_Rolling_Air_and_Rotation,HIGH,2017-04-05,Not referenced by any other object
+cc9c422c-1282-48a2-97d7-dd2e1eede89a,query,ENT_SendLog_LastSend_Air_and_Rotation_Reminders,HIGH,2017-04-06,Not referenced by any other object
+5e29e813-7e7f-4ec0-8122-128e6881c58f,query,ET_Hard_Bounces,HIGH,2013-04-02,Not referenced by any other object
 50eff683-c6f7-4092-913f-b106097cee33,query,Email Mismatch Between All Subs and Sub Vehicles,HIGH,2016-11-03,Not referenced by any other object
+e2424d3f-763e-4146-b8a8-dec889c1f767,query,Link Click Counts,HIGH,2020-06-12,Not referenced by any other object
+8c66ba72-aad2-462b-bfcc-1da99ee5ac54,query,Non Numeric and non DTD Sub Keys 1,HIGH,2021-04-15,Not referenced by any other object
+b1124d46-7644-4487-ba83-8aee2e72d516,query,Non Numeric and non DTD Sub Keys 2,HIGH,2021-04-15,Not referenced by any other object
+724e8900-9eca-412b-8e4a-321a4636e8d7,query,Non Numeric and non DTD Sub Keys 3,HIGH,2021-04-15,Not referenced by any other object
+bf3f7cb4-bc1f-4c28-9f98-4946982b096c,query,Non Numeric and non DTD Sub Keys 4,HIGH,2021-04-15,Not referenced by any other object
+a67d3264-e549-44ae-b60a-dd71368ce670,query,Non Numeric and non DTD Sub Keys 5,HIGH,2021-04-15,Not referenced by any other object
+5264475c-3192-4267-9aca-56d3072ae2c0,query,Non Numeric and non DTD Sub Keys 6,HIGH,2021-04-15,Not referenced by any other object
+20d3060e-64dc-4d72-8b20-233a63fcbc38,query,Non Numeric and non DTD Sub Keys 7,HIGH,2021-04-15,Not referenced by any other object
+7696b461-cedd-482f-9885-66ab614975fd,query,Non Numeric and non DTD Sub Keys 8,HIGH,2021-04-15,Not referenced by any other object
+4893d6b0-2e98-46f8-9830-3db52e4925a1,query,Non Numeric and non DTD Sub Keys Quartile,HIGH,2021-04-15,Not referenced by any other object
+a2b46900-58fe-4dc3-81d6-d1c3ca900eea,query,Opens_Historical,HIGH,2015-08-28,Not referenced by any other object
 aa52e400-7477-4762-8f19-4d2fabcf43b7,query,Populate DTC_Subscriber_Profile without cdncowboy75@gmail.com,HIGH,2015-06-01,Not referenced by any other object
 0a2f4b39-dd67-40aa-8d99-edf8cbfb45f6,query,Populate DTC_Subscriber_Profile_deDupe,HIGH,2015-06-01,Not referenced by any other object
+5aa6bcde-0546-417b-809a-d877ba0c4cbc,query,Populate Store Info TY Catchup,HIGH,2018-09-06,Not referenced by any other object
 1508fb8f-72fa-4b9c-872d-8ce09d3ec3bc,query,Sends-Historical 1-3,HIGH,2015-08-28,Not referenced by any other object
 1dd565f2-9eae-4ff2-8b16-6afdf23b9022,query,Sends-Historical 11-12,HIGH,2015-08-28,Not referenced by any other object
 85f520a8-a83f-473a-9427-77820c0c232d,query,Sends-Historical 12-1,HIGH,2015-08-28,Not referenced by any other object
 378911c4-c444-4fc1-a711-b953ba522997,query,Sends-Historical 3-5,HIGH,2015-08-28,Not referenced by any other object
+aa348646-af68-4e04-aaac-a5ffb3d9d6d9,query,SubStatusNotActive,HIGH,2015-03-12,Not referenced by any other object
+b7ba93df-d3e2-41a0-a981-283f44206592,query,Subscriber_Last_Visited_Store,HIGH,2017-02-01,Not referenced by any other object
+8c872065-9925-4726-83cd-02ba1f47d0a3,query,Subscribers Not Engaged In 18 Months,HIGH,2017-02-01,Not referenced by any other object
+f6101c2b-30e0-46c7-90d0-a128ca333982,query,Thank_You_Survey_URLs_v3_Update_dev,HIGH,2018-01-31,Not referenced by any other object
+0b9976dc-78df-46db-b24a-b4b6ac443ef2,query,Unique Emails from All Subs status Active,HIGH,2018-05-15,Not referenced by any other object
+9796a323-2f7c-4039-9e7c-09792a2cd5cf,query,Unique Emails from Sub Stores Not Unsubscribed,HIGH,2018-05-15,Not referenced by any other object
+f92806c4-1bcd-40e4-b23c-2f0a45f60350,query,Unique Emails from Sub Stores Unsubscribed,HIGH,2018-05-15,Not referenced by any other object
 e9c40d03-7e2c-43c3-8f4f-edc258693f33,query,Vehicles-CO,HIGH,2014-12-22,Not referenced by any other object
+3d339849-9810-452a-8410-b77f1647f7b4,query,Wheel Purchase Within One Year,HIGH,2018-02-24,Not referenced by any other object
 e9dd4828-5172-4bb6-96e0-73a02bfcd1bd,query,ent_sendlog_copy,HIGH,2013-05-09,Not referenced by any other object
 f7e0aeba-017b-4b2b-ad3e-9387a5a72e8b,query,interactivequery-1045947-1616706,HIGH,2019-08-14,Not referenced by any other object
+65a7369a-3168-4817-b577-092e2b3a20ff,query,interactivequery-1045947-722878132,HIGH,2022-12-08,Not referenced by any other object
 e4da657f-2e67-4edf-aeeb-34f890aece29,query,tempquery,HIGH,2012-11-15,Not referenced by any other object
 58b37957-850b-411b-b600-05986b5bff48,query,test bad records,HIGH,2015-10-21,Not referenced by any other object
+424f3c66-1e16-4f50-9641-053aef57d780,query,Backup Vehicle Data,MEDIUM,2024-07-29,Not referenced by any other object
+096ae766-12f2-47c4-8fda-b17e25c82777,query,Generate Distinct DTC Preference Center Year Data,MEDIUM,2024-06-26,Not referenced by any other object
+561059bb-9926-4b04-bc39-9b7dccdc8d80,query,Generate Distinct DTC Preference Center Year Make Data,MEDIUM,2024-06-26,Not referenced by any other object
+9f3029e8-c805-4751-abe4-badac68c7a92,query,Generate Distinct DTC Preference Center Year Make Model Data,MEDIUM,2024-06-26,Not referenced by any other object
+bf377518-4d3c-48ae-ac7a-7a74f73647a5,query,Promote Vehicle Data From Stage To Prod,MEDIUM,2024-07-29,Not referenced by any other object
+2d38e718-146d-4360-8cb8-b48c973bb5cf,query,SLAirRotationLoad,MEDIUM,2024-05-24,Not referenced by any other object
 ce9f447d-ee50-4142-9328-90d30517084b,query,interactivequery-1045947-722778729,MEDIUM,2023-08-30,Not referenced by any other object
-65a7369a-3168-4817-b577-092e2b3a20ff,query,interactivequery-1045947-722878132,MEDIUM,2022-12-08,Not referenced by any other object
 756fbfe2-43c2-4746-8ae6-4c3aaada4bad,query,interactivequery-1045947-722884557,MEDIUM,2023-08-09,Not referenced by any other object
+a6811389-1867-49d7-8dfe-8413546a9ff3,query,memday_subscriberids,MEDIUM,2023-06-12,Not referenced by any other object
+6d20a30f-427f-4a04-b60b-9c91e87d1c1f,query,memorial_STO_reporting,MEDIUM,2023-06-21,Not referenced by any other object
+66603a16-d105-4a68-9f32-f7f9f8e57e97,query,memorial_STO_reporting_rollup,MEDIUM,2023-06-21,Not referenced by any other object
+ad24e612-dc52-40f9-8d1e-954590d98180,query,All Contacts DE reporting OVERWRITE,REVIEW,2025-07-09,Not referenced by any other object
+804311ad-7a42-4572-85fa-08fdc482ec59,query,All Contacts DE reporting with EMAILS and ENT STATUS,REVIEW,2025-07-16,Not referenced by any other object
 5fa983c5-c333-47df-9851-573dbd2279c4,query,BusinessUnitUnsubscribes_1054904_DT,REVIEW,2025-07-09,Not referenced by any other object
 6ec2b31c-a1e6-4272-b3b9-9ca7e73ba29b,query,BusinessUnitUnsubscribes_1067662_AT,REVIEW,2025-07-09,Not referenced by any other object
 4cb9819a-a576-4955-9089-f395e343d2a8,query,BusinessUnitUnsubscribes_MASTER,REVIEW,2025-07-09,Not referenced by any other object
+742cd188-e3d5-418d-af61-21a75d45cc5f,query,Clicks,REVIEW,2025-05-22,Not referenced by any other object
+407a4973-df64-411f-92e2-b119aa63f336,query,Contacts and Subs Report - Cumulative,REVIEW,2025-07-16,Not referenced by any other object
+091407ba-a209-400e-97f2-5b9063f640b2,query,Contacts and Subs Report - This Month,REVIEW,2025-07-16,Not referenced by any other object
+da010192-cb0e-4a17-a4f7-a81f07f7e685,query,DTC_Subscribers_Vehicles_Backup,REVIEW,2025-03-25,Not referenced by any other object
+a91d41b5-96bd-4763-86ca-537b85fdb3da,query,Distinct emails on AllSubs and Subscriber Vehicles,REVIEW,2025-06-12,Not referenced by any other object
+3a0967fb-97ff-47f5-8b46-8169309268fc,query,Distinct emails on Subscriber Vehicles,REVIEW,2025-06-12,Not referenced by any other object
+25e2eeb4-16ec-4cec-8ae6-c06be403086a,query,Held Subscribers,REVIEW,2025-09-05,Not referenced by any other object
+ef26b8d9-6fc2-4de2-8cfe-15873b8169f7,query,Legal_Request_DT_AT_Transaction_Log,REVIEW,2026-01-18,Not referenced by any other object
 475d00b3-305f-49f3-b1f8-b3038e40601d,query,NotSent Extract ARCHIVE,REVIEW,2025-10-21,Not referenced by any other object
+17564723-5431-4ba2-b857-891ad90c6bd0,query,NotSent Extract Archive - AT,REVIEW,2025-11-11,Not referenced by any other object
+24bc3d47-134b-4df2-8f91-a5700955e24f,query,NotSent Extract Archive - DT,REVIEW,2025-11-11,Not referenced by any other object
+9f0f1d09-d4e6-4d1d-94eb-0b744c1f5f69,query,NotSent Extract Staging - AT,REVIEW,2025-11-11,Not referenced by any other object
+94042bd8-6320-4f36-8559-eca347e729c3,query,NotSent Extract Staging - DT,REVIEW,2025-11-11,Not referenced by any other object
+cacaa084-085e-43e4-85c8-db251c816086,query,Opens,REVIEW,2025-05-22,Not referenced by any other object
+41eae807-cf58-41fc-b639-37451e189199,query,SendLog_JobIDs,REVIEW,2026-01-08,Not referenced by any other object
+46dd74b6-cef8-4c07-a86c-bc2ed9144a8f,query,Sends,REVIEW,2025-05-22,Not referenced by any other object
+37925eca-184a-4591-8f69-c09b125cb6b8,query,Tx_Log_2025,REVIEW,2025-12-16,Not referenced by any other object
+abc70a44-19e1-47a0-9fe9-605b8c417c8b,query,Tx_Log_2025_Deduped,REVIEW,2025-12-18,Not referenced by any other object
+b5621ead-489e-4a5a-8910-f43b40f1e56d,query,Tx_Log_2025_NoEmail,REVIEW,2025-12-16,Not referenced by any other object
+366fb86c-e92c-402f-ae0e-fb623cd7fcb1,query,Tx_Log_2025_NoEmailCounts,REVIEW,2025-12-16,Not referenced by any other object
+6334438c-d280-4ce9-8315-ceea86164170,query,Tx_Log_2025_NoEmail_Deduped,REVIEW,2025-12-18,Not referenced by any other object
+e7e1e302-f9c8-493d-ada3-c472b72ece11,query,Ty_Journey_SendLog,REVIEW,2026-01-07,Not referenced by any other object
+476448f5-815b-4d0a-b80c-ab2f4783b7ba,query,Ty_Journey_SendLog_Months,REVIEW,2026-01-07,Not referenced by any other object
+076904de-d46b-4d4d-af90-3817c90c4a4e,query,Update with EmailName - NotSent Extract DAILY - DT and AT,REVIEW,2025-12-10,Not referenced by any other object
 003bd471-3f85-4949-9c21-2def19ba14d3,query,interactivequery-1045947-722778730,REVIEW,2025-07-09,Not referenced by any other object
 e05e5420-a270-4516-ab74-2f016112de0b,query,interactivequery-1045947-722974793,REVIEW,2025-06-11,Not referenced by any other object
 32ddc092-6f45-4e8b-b65d-6886109a72f9,query,interactivequery-1045947-723350015,REVIEW,2025-11-06,Not referenced by any other object
+2f3216f4-e483-4967-bd37-de2cdaa5c508,query,profile_attributes,REVIEW,2025-04-22,Not referenced by any other object
+3692bc7f-64fc-44b9-9f72-3b45c4399545,query,profile_attributes_Update,REVIEW,2025-04-24,Not referenced by any other object
+552c1665-423c-4e9e-9c0b-76017f2b347b,script,Trigger AT Digital Receipt Monitor Automation,REVIEW,2025-10-21,Not referenced by any other object
+8b43ea00-7173-486f-93f5-8dbdba4d1270,script,Trigger Digital Receipts Not Sent Counts automation in DT BU,REVIEW,2025-12-10,Not referenced by any other object

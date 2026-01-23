@@ -21,6 +21,9 @@ class TriggeredSendExtractor(BaseExtractor):
     description = "SFMC Triggered Send Definitions (SOAP)"
     object_type = "TriggeredSendDefinition"
 
+    # Triggered sends can exist on child BUs
+    supports_multi_bu = True
+
     SOAP_OBJECT_TYPE = "TriggeredSendDefinition"
 
     SOAP_PROPERTIES = [
