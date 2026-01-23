@@ -54,8 +54,22 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
         except:
             mod_date = None
 
+        is_sendable = de.get("isSendable", False)
+        row_count = de.get("rowCount", 0)
+
+        # Safety checks for DEs that are likely active even without detected relationships
+        # (e.g., populated via API, Journey SMS, AMPscript, external integrations)
+        is_recently_active = (
+            mod_date and mod_date > cutoff_90_days and row_count and row_count > 1000
+        )
+        is_high_volume = row_count and row_count > 100000  # >100K rows = review required
+
         # Categorize
-        if "test" in name_lower or "_test" in name_lower or "testing" in name_lower:
+        if is_recently_active or is_high_volume:
+            # Override: Active or high-volume DEs should never be HIGH confidence deletes
+            category = "ACTIVE_ORPHAN" if is_recently_active else "HIGH_VOLUME"
+            confidence = "REVIEW"
+        elif "test" in name_lower or "_test" in name_lower or "testing" in name_lower:
             category = "TEST"
             confidence = "HIGH"
         elif "backup" in name_lower or "_bak" in name_lower or "copy of" in name_lower or "archive" in name_lower or "_old" in name_lower:
@@ -70,9 +84,6 @@ def analyze_inventory(inventory_path: Path, output_dir: Path):
         else:
             category = "OTHER"
             confidence = "REVIEW"
-
-        is_sendable = de.get("isSendable", False)
-        row_count = de.get("rowCount", 0)
 
         de_report.append({
             "id": de_id,
