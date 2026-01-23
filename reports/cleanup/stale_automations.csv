@@ -1,0 +1,52 @@
+id,name,status,category,confidence,last_run,schedule_type,activity_count
+591e7698-f7aa-4ccf-bf13-02db7f4f8706,ATC Thank_You_v3_SurveyURL_Import_dev,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+15a8a5ab-0e80-4713-b7ce-834262759205,DTC Thank_You_v3_SurveyURL_Import_dev,PausedSchedule,PAUSED_STALE,HIGH,2022-10-08,,2
+44635b51-9157-4390-af7b-529a38d9e4b1,Omniture Export Metrics and Campaigns 1045947,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+ccb86cca-ae31-47d2-a988-69c809515bc0,Omniture Import Segments 1045947,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+07442671-c14c-42c4-8965-d3d8e4c9c785,Tread Wear Journey,PausedSchedule,PAUSED_STALE,HIGH,Never,,1
+b9e1af46-1f1b-4af8-9a12-a1e9c1b0991f,daily_tracking_process - 2,PausedSchedule,PAUSED_STALE,HIGH,Never,,3
+ce4b1c73-bd1a-4b55-903c-ec191b8c5965,daily_tracking_process_makeup,PausedSchedule,PAUSED_STALE,HIGH,Never,,2
+36250f59-cb6c-4812-898c-ab021c8a2c51,daily_tracking_process_migrated_from_folder_myprograms,PausedSchedule,PAUSED_STALE,HIGH,Never,,7
+a2a88db6-5f41-43ac-aa4b-72b7a131afea,memorial_STO_reporting,PausedSchedule,PAUSED_STALE,HIGH,2023-06-21,,2
+24aa3055-80e5-458e-93b8-3e8709392a6c,1045947-PSHist#01,Ready,READY_VERY_OLD,HIGH,2018-07-12,,7
+8686651d-d385-43d3-a729-72e295ea0fda,1045947-PSHist#02,Ready,READY_VERY_OLD,HIGH,2019-06-18,,7
+a4222400-7917-4dab-97db-001ff83c07b4,18 Month Engaged Subscribers,Ready,READY_VERY_OLD,HIGH,2017-01-10,,1
+84d7b3e8-e912-48d7-abf2-3b6a2d6a8166,4th 2016 Clicks tmp,Ready,READY_VERY_OLD,HIGH,2016-09-20,,2
+4d2c47c2-48f7-4a3d-808d-402e573428c1,Add seed to last send send_log,Ready,READY_VERY_OLD,HIGH,2017-08-22,,1
+20a90b80-673d-4abb-9e3d-1b9e345a9d93,Bad Email Addresses,Ready,READY_VERY_OLD,HIGH,2018-03-13,,1
+b3be009f-b32b-4317-a068-cfb8d4224397,Bad Emails Query,Ready,READY_VERY_OLD,HIGH,2018-03-28,,1
+154c5af7-962c-4fba-94e4-9d2443cc37d4,Co Subscribers,Ready,READY_VERY_OLD,HIGH,2014-12-22,,2
+4180086b-d68c-4699-8b84-b8e091b261a0,DTC ATC Activity Log 6-1-2017 to Today,Ready,READY_VERY_OLD,HIGH,2017-07-12,,1
+094c5b12-ac90-4364-a928-5af911cc7faa,DTC Customer Vehicles Rebuild Import,Ready,READY_VERY_OLD,HIGH,2017-09-22,,1
+03b8bc6b-44ca-46e3-8fb6-b3b384705fa1,Dynamic Branding Demo,Ready,READY_VERY_OLD,HIGH,2015-01-16,,1
+4ff03e49-682c-4ac7-865c-ea2ca191ab0a,Import Seed DAta,Ready,READY_VERY_OLD,HIGH,2017-08-22,,3
+73ee379d-d5f1-4875-b31f-624d4118e81d,Import_6-28-2018-Data,Ready,READY_VERY_OLD,HIGH,2018-07-02,,1
+845c4e3a-d371-4e0c-85ff-e1ff359d4d5b,Last AR Sendlog test,Ready,READY_VERY_OLD,HIGH,2017-04-06,,1
+7703d9dc-0f62-43dd-95bc-fd9bd7e06cd0,Populate TY catchup,Ready,READY_VERY_OLD,HIGH,2018-09-07,,1
+86d3acd0-2180-43ab-a7e4-51565cb0f369,Re-engagement Centralized Data,Ready,READY_VERY_OLD,HIGH,2017-05-10,,2
+bdcc8612-4c1f-41f1-94ca-0ad42c434aaf,Run Tracking Update Queries,Ready,READY_VERY_OLD,HIGH,2015-08-26,,4
+5a2a3e09-296f-4a1c-9736-c9cc56a0cdbe,RunQry,Ready,READY_VERY_OLD,HIGH,2015-08-28,,2
+5b401337-6972-4152-8a3b-66ee748bff81,Segment Contacts to Delete,Ready,READY_VERY_OLD,HIGH,2018-12-13,,4
+7ae6d0a8-27a9-421b-bf97-5ca5c30e172d,Segment Non Numeric and Non DTC records,Ready,READY_VERY_OLD,HIGH,2021-04-15,,5
+ccdd2f7e-431f-49a1-8faa-53a2518536c7,Subscriber not engaged in 18 months one time send,Ready,READY_VERY_OLD,HIGH,2018-03-26,,2
+eec201c6-d949-40ed-903e-3ce20f02b0b0,SubscriberStatusExtract,Ready,READY_VERY_OLD,HIGH,2015-04-29,,3
+0a5c9f10-3722-48c5-a94c-a593daef9ff7,Tracking History Data,Ready,READY_VERY_OLD,HIGH,2015-08-21,,12
+aec8e1b1-f572-46de-86bb-e5bfeda8097c,Unique Subscribes and Unsubscribes Ad Hoc,Ready,READY_VERY_OLD,HIGH,2017-01-17,,2
+b56471f9-1497-4072-be39-d3cb468b7cef,DTD Invoice makeup send 01092024,Building,INCOMPLETE,MEDIUM,Never,,0
+80c57dc4-168f-45a2-9b56-0bf78a6c7c2e,SMS_Account_Summary,Building,INCOMPLETE,MEDIUM,Never,,1
+13804d82-4e06-4256-9e1b-ee8f954e0243,Daily_Tracking_Process,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-04-22,,8
+5206b2c1-3da6-4b9e-a73f-37d629c35edc,Daily_Tracking_Process_CWA,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-06-05,,9
+02cd5ed8-1428-4f8b-ba79-784c051a1b11,ENT_SendLog Air and Rotation Filters,PausedSchedule,PAUSED_RECENT,MEDIUM,2024-05-24,,5
+ac8a37d5-9cb4-4515-b231-8145dbb58e11,"Last purchase greater and less than 2 years
+",PausedSchedule,PAUSED_RECENT,MEDIUM,2025-08-28,,7
+9d22d23e-07a2-4fa3-9cdb-1c91c1d463f1,Subscriber Vehicles Cleaning,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-05-10,,3
+e444d5a5-0523-4345-8777-45fc647afb99,Wheel Purchased Within One Year,PausedSchedule,PAUSED_RECENT,MEDIUM,2025-01-16,,1
+617bcd93-3025-4db2-acc1-4c542965974b,DTC BI Tracking Extract Catchup 12-27-2022,Ready,READY_OLD,MEDIUM,2022-12-27,,10
+281d2ec6-2ef0-4c50-9e71-8df01b845702,DTC BI Tracking Extract Daily Catch up,Ready,READY_OLD,MEDIUM,2023-01-20,,2
+b2600d95-3b39-45a2-a1f8-3409e0346c99,DTC BI Tracking Extract Historical 2021,Ready,READY_OLD,MEDIUM,2023-01-20,,24
+de80d747-c105-4359-92ec-447874d1a3e2,DTC BI Tracking Extract Historical 2022,Ready,READY_OLD,MEDIUM,2023-01-23,,26
+d1428c87-2d6f-4f3c-bfb5-6129f764054d,Emails Collected by Employee 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
+e2d111a0-1c1f-43f5-86fd-45ff61847a95,Emails Collected by Region 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
+65d6722b-7ba4-4fb7-84d7-82689d61d3f9,Emails Collected by Store 2023,Ready,READY_OLD,MEDIUM,2023-12-28,,1
+b641e6cf-6437-41a2-8248-d05456b3d954,VTV Reporting,Ready,READY_OLD,MEDIUM,2023-08-24,,1
+0143e9b2-5d5f-4f36-a659-9c7bff0d95a7,nextactiv - reporting,Ready,READY_OLD,MEDIUM,2023-06-12,,1
