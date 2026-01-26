@@ -32,6 +32,8 @@ def build_workbook(inventory_path: Path, cleanup_path: Path, output_path: Path):
     des = load_csv(cleanup_path / "orphaned_data_extensions.csv")
     autos = load_csv(cleanup_path / "stale_automations.csv")
     others = load_csv(cleanup_path / "other_orphans.csv")
+    triggered_sends = load_csv(cleanup_path / "inactive_triggered_sends.csv")
+    event_defs = load_csv(cleanup_path / "orphaned_event_definitions.csv")
 
     # Load journeys for journey sheet
     journeys = load_ndjson(inventory_path / "objects/journeys.ndjson")
@@ -79,6 +81,12 @@ def build_workbook(inventory_path: Path, cleanup_path: Path, output_path: Path):
     high_autos = [a for a in autos if a['confidence'] == 'HIGH']
     med_autos = [a for a in autos if a['confidence'] == 'MEDIUM']
 
+    high_ts = [t for t in triggered_sends if t['confidence'] == 'HIGH']
+    med_ts = [t for t in triggered_sends if t['confidence'] == 'MEDIUM']
+
+    high_events = [e for e in event_defs if e['confidence'] == 'HIGH']
+    med_events = [e for e in event_defs if e['confidence'] == 'MEDIUM']
+
     high_other = [o for o in others if o['confidence'] == 'HIGH']
     med_other = [o for o in others if o['confidence'] == 'MEDIUM']
 
@@ -96,7 +104,9 @@ def build_workbook(inventory_path: Path, cleanup_path: Path, output_path: Path):
         ('BACKUP/ARCHIVE DEs', len([d for d in high_des if d['category'] == 'BACKUP']), 'HIGH', 'Names contain "backup", "archive"'),
         ('Very Old DEs (pre-2022)', len([d for d in med_des if d['category'] == 'VERY_OLD']), 'MEDIUM', 'Not modified since 2022'),
         ('Old DEs (pre-2024)', len([d for d in des if d['confidence'] == 'LOW']), 'LOW', 'Not modified since 2024'),
-        ('Sendable DEs (review)', len([d for d in low_des if d.get('is_sendable') == 'True']), 'REVIEW', 'Subscriber DEs - careful review'),
+        ('', '', '', ''),
+        ('Inactive Triggered Sends', len(triggered_sends), 'MIXED', f'{len(high_ts)} HIGH, {len(med_ts)} MEDIUM'),
+        ('Orphaned Event Definitions', len(event_defs), 'MIXED', f'{len(high_events)} HIGH, {len(med_events)} MEDIUM'),
         ('', '', '', ''),
         ('Stale Automations (never/old)', len(high_autos), 'HIGH', 'Never run or last run before 2022'),
         ('Stale Automations (paused)', len(med_autos), 'MEDIUM', 'Recently paused'),
@@ -131,8 +141,8 @@ def build_workbook(inventory_path: Path, cleanup_path: Path, output_path: Path):
     ws.write(row, 0, 'PHASE TOTALS', fmt_bold)
     row += 1
 
-    phase1_total = len(high_des) + len(high_autos) + len(high_other)
-    phase2_total = len(med_des) + len(med_autos) + len(draft_journeys) + len(stopped_journeys)
+    phase1_total = len(high_des) + len(high_autos) + len(high_ts) + len(high_events) + len(high_other)
+    phase2_total = len(med_des) + len(med_autos) + len(med_ts) + len(med_events) + len(draft_journeys) + len(stopped_journeys)
     phase3_total = len(low_des) + len([o for o in others if o['confidence'] == 'REVIEW'])
 
     ws.write(row, 0, 'Phase 1 (High Confidence)')
@@ -226,6 +236,72 @@ def build_workbook(inventory_path: Path, cleanup_path: Path, output_path: Path):
 
     ws.freeze_panes(1, 0)
 
+    # ========== TRIGGERED SENDS SHEET ==========
+    ws = wb.add_worksheet("Triggered Sends")
+    ws.set_column('A:A', 12)  # ID
+    ws.set_column('B:B', 50)  # Name
+    ws.set_column('C:C', 15)  # Category
+    ws.set_column('D:D', 12)  # Confidence
+    ws.set_column('E:E', 12)  # Last Sent
+    ws.set_column('F:F', 12)  # Created
+    ws.set_column('G:G', 40)  # Email Name
+
+    headers = ['ID', 'Name', 'Category', 'Confidence', 'Last Sent', 'Created', 'Email Name']
+    for col, h in enumerate(headers):
+        ws.write(0, col, h, fmt_header)
+
+    ws.autofilter(0, 0, len(triggered_sends), len(headers) - 1)
+
+    for row, t in enumerate(triggered_sends, 1):
+        ws.write(row, 0, t['id'][:12] + '...' if len(t['id']) > 12 else t['id'])
+        ws.write(row, 1, t['name'])
+        ws.write(row, 2, t['category'])
+
+        conf = t['confidence']
+        if conf == 'HIGH':
+            ws.write(row, 3, conf, fmt_high)
+        elif conf == 'MEDIUM':
+            ws.write(row, 3, conf, fmt_medium)
+        else:
+            ws.write(row, 3, conf, fmt_low)
+
+        ws.write(row, 4, t.get('last_sent', ''))
+        ws.write(row, 5, t.get('created', ''))
+        ws.write(row, 6, t.get('email_name', ''))
+
+    ws.freeze_panes(1, 0)
+
+    # ========== EVENT DEFINITIONS SHEET ==========
+    ws = wb.add_worksheet("Event Definitions")
+    ws.set_column('A:A', 12)  # ID
+    ws.set_column('B:B', 50)  # Name
+    ws.set_column('C:C', 12)  # Confidence
+    ws.set_column('D:D', 12)  # Last Modified
+    ws.set_column('E:E', 40)  # Reason
+
+    headers = ['ID', 'Name', 'Confidence', 'Last Modified', 'Reason']
+    for col, h in enumerate(headers):
+        ws.write(0, col, h, fmt_header)
+
+    ws.autofilter(0, 0, len(event_defs), len(headers) - 1)
+
+    for row, e in enumerate(event_defs, 1):
+        ws.write(row, 0, e['id'][:12] + '...' if len(e['id']) > 12 else e['id'])
+        ws.write(row, 1, e['name'])
+
+        conf = e['confidence']
+        if conf == 'HIGH':
+            ws.write(row, 2, conf, fmt_high)
+        elif conf == 'MEDIUM':
+            ws.write(row, 2, conf, fmt_medium)
+        else:
+            ws.write(row, 2, conf, fmt_low)
+
+        ws.write(row, 3, e.get('last_modified', ''))
+        ws.write(row, 4, e.get('reason', ''))
+
+    ws.freeze_panes(1, 0)
+
     # ========== OTHER ORPHANS SHEET ==========
     ws = wb.add_worksheet("Other Orphans")
     ws.set_column('A:A', 12)
@@ -311,10 +387,12 @@ This workbook contains analysis of orphaned and stale objects in your SFMC accou
 
 SHEETS:
 1. Summary - Overview of cleanup candidates by category and confidence level
-2. Data Extensions - 947 orphaned DEs with cleanup confidence ratings
-3. Automations - 50 stale automation cleanup candidates
-4. Other Orphans - 128 other orphaned objects (queries, emails, imports, etc.)
-5. Journeys - 46 Draft/Stopped journeys for review
+2. Data Extensions - Orphaned DEs with cleanup confidence ratings
+3. Automations - Stale automation cleanup candidates
+4. Triggered Sends - Inactive triggered sends (not Deleted status)
+5. Event Definitions - Orphaned event definitions not used by journeys
+6. Other Orphans - Other orphaned objects (queries, emails, imports, etc.)
+7. Journeys - Draft/Stopped journeys for review
 
 CONFIDENCE LEVELS:
 • HIGH (Green) - Safe to delete with minimal review
@@ -323,28 +401,32 @@ CONFIDENCE LEVELS:
 
 RECOMMENDED PROCESS:
 
-Phase 1 - Quick Wins (Week 1):
+Phase 1 - Quick Wins:
 1. Filter "Data Extensions" sheet by Confidence = HIGH
 2. Review TEST and BACKUP categories
-3. Get stakeholder sign-off
-4. Delete via SFMC UI or API
+3. Review "Triggered Sends" - NEVER_SENT and OLD_SEND are high confidence
+4. Get stakeholder sign-off
+5. Delete via SFMC UI or API
 
-Phase 2 - Automations (Week 1-2):
+Phase 2 - Automations & Events:
 1. Review "Automations" sheet
 2. Verify no dependencies on PAUSED_STALE items
-3. Pause any running automations first
-4. Delete confirmed unused automations
+3. Review "Event Definitions" for orphaned journey entry points
+4. Pause any running automations first
+5. Delete confirmed unused objects
 
-Phase 3 - Detailed Review (Week 2-4):
+Phase 3 - Detailed Review:
 1. Review MEDIUM confidence items with data governance team
 2. Check if "Very Old" DEs support any active processes
 3. Review Draft/Stopped journeys with Journey Builder team
 
 NOTES:
 • Row counts may be 0 for DEs that couldn't be queried
-• "Sendable" DEs contain subscriber relationships - extra caution needed
+• "Sendable" column is informational only - no confidence penalty applied
+• Triggered Sends with "Deleted" status are excluded (already soft-deleted)
 • Some Classic Emails may be templates - verify before deletion
 • Journeys cannot be deleted via API in most cases - mark as archived
+• Event Definitions are journey entry points - verify no active journey uses them
 
 BEFORE DELETING:
 • Export metadata CSV for audit trail

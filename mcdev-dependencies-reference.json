@@ -1,0 +1,573 @@
+{
+  "_description": "SFMC DevTools (mcdev) dependency definitions extracted from lib/metadataTypes/definitions/",
+  "_usage": "Use dependencyGraph to understand which fields in each object type reference other object types. The field paths use dot notation and 'r__' prefix indicates a resolved reference field.",
+
+  "asset": {
+    "type": "asset",
+    "typeName": "Asset-[Subtype]",
+    "keyField": "customerKey",
+    "idField": "id",
+    "folderIdField": "category.id",
+    "dependencies": ["folder-asset", "folder-asset-shared", "folder-cloudpages"],
+    "dependencyGraph": {
+      "asset": ["views.html.template.r__asset_key"]
+    }
+  },
+
+  "attributeGroup": {
+    "type": "attributeGroup",
+    "typeName": "Data Designer Attribute Groups",
+    "keyField": "definitionKey",
+    "idField": "definitionID",
+    "dependencies": ["attributeSet"],
+    "dependencyGraph": {
+      "attributeSet": ["r__attributeSet_key"]
+    }
+  },
+
+  "attributeSet": {
+    "type": "attributeSet",
+    "typeName": "Data Designer Attribute Sets",
+    "keyField": "definitionKey",
+    "idField": "definitionID",
+    "folderIdField": "categoryID",
+    "dependencies": [
+      "folder-hidden", "folder-dataextension", "folder-salesforcedataextension",
+      "folder-shared_data", "folder-shared_dataextension", "folder-shared_salesforcedataextension",
+      "folder-synchronizeddataextension", "dataExtension"
+    ],
+    "dependencyGraph": {
+      "dataExtension": ["r__dataExtension_key"],
+      "attributeSet": [
+        "relationships.leftItem.identifier.r__attributeSet_key",
+        "relationships.rightItem.identifier.r__attributeSet_key"
+      ],
+      "attributeGroup": [
+        "relationships.leftItem.identifier.r__attributeGroup_key",
+        "relationships.rightItem.identifier.r__attributeGroup_key"
+      ]
+    }
+  },
+
+  "automation": {
+    "type": "automation",
+    "typeName": "Automation",
+    "keyField": "key",
+    "idField": "id",
+    "folderIdField": "categoryId",
+    "dependencies": [
+      "dataExtract", "emailSend", "fileTransfer", "fileLocation",
+      "folder-automations", "importFile", "query", "script", "verification"
+    ],
+    "dependencyGraph": {
+      "dataExtract": ["steps.activities.r__type"],
+      "emailSend": ["steps.activities.r__type"],
+      "fileTransfer": ["steps.activities.r__type"],
+      "importFile": ["steps.activities.r__type"],
+      "query": ["steps.activities.r__type"],
+      "script": ["steps.activities.r__type"],
+      "verification": ["steps.activities.r__type"]
+    },
+    "activityTypeMapping": {
+      "dataExtract": 73,
+      "dataFactoryUtility": 425,
+      "emailSend": 42,
+      "fileTransfer": 53,
+      "filter": 303,
+      "fireEvent": 749,
+      "importFile": 43,
+      "journeyEntry": 952,
+      "journeyEntryOld": 733,
+      "query": 300,
+      "script": 423,
+      "verification": 1000,
+      "wait": 467,
+      "push": 736,
+      "sms": 725,
+      "reportDefinition": 84,
+      "refreshMobileFilteredList": 724,
+      "refreshGroup": 45,
+      "interactions": 1101,
+      "interactionStudioData": 1010,
+      "importMobileContact": 726
+    },
+    "_notes": "Activity references use steps.activities[].r__type and steps.activities[].r__key for type and key lookup"
+  },
+
+  "campaign": {
+    "type": "campaign",
+    "typeName": "Campaign Tag",
+    "keyField": "name",
+    "idField": "id",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "contentArea": {
+    "type": "contentArea",
+    "typeName": "Content Area (Classic)",
+    "keyField": "CustomerKey",
+    "idField": "ID",
+    "folderIdField": "CategoryID",
+    "dependencies": ["folder"],
+    "dependencyGraph": null,
+    "_notes": "DEPRECATED: Old way of saving Content Blocks"
+  },
+
+  "dataExtension": {
+    "type": "dataExtension",
+    "typeName": "Data Extension",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "folderIdField": "CategoryID",
+    "dependencies": [
+      "folder-hidden", "folder-dataextension", "folder-salesforcedataextension",
+      "folder-shared_data", "folder-shared_dataextension", "folder-shared_salesforcedataextension",
+      "folder-synchronizeddataextension", "dataExtensionTemplate"
+    ],
+    "dependencyGraph": null,
+    "_notes": "DEs don't have outbound dependencies tracked, but many other types reference DEs"
+  },
+
+  "dataExtensionField": {
+    "type": "dataExtensionField",
+    "typeName": "Data Extension Field",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": ["dataExtension"],
+    "dependencyGraph": null
+  },
+
+  "dataExtensionTemplate": {
+    "type": "dataExtensionTemplate",
+    "typeName": "Data Extension Template",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "dataExtract": {
+    "type": "dataExtract",
+    "typeName": "Automation: Data Extract Activity",
+    "keyField": "key",
+    "idField": "dataExtractDefinitionId",
+    "dependencies": ["dataExtension", "dataExtractType", "user"],
+    "dependencyGraph": {
+      "dataExtension": ["r__dataExtension_key"]
+    }
+  },
+
+  "dataExtractType": {
+    "type": "dataExtractType",
+    "typeName": "Data Extract Type",
+    "keyField": "name",
+    "idField": "extractId",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "deliveryProfile": {
+    "type": "deliveryProfile",
+    "typeName": "Delivery Profile",
+    "keyField": "key",
+    "idField": "id",
+    "dependencies": [],
+    "dependencyGraph": null,
+    "_notes": "Cannot be fully retrieved via API, only existence check"
+  },
+
+  "domainVerification": {
+    "type": "domainVerification",
+    "typeName": "Domain Verification",
+    "keyField": "domain",
+    "idField": "domain",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "email": {
+    "type": "email",
+    "typeName": "E-Mail (Classic)",
+    "keyField": "CustomerKey",
+    "idField": "ID",
+    "folderIdField": "CategoryID",
+    "dependencies": ["folder-hidden", "folder-email", "folder-shared_email_default"],
+    "dependencyGraph": null,
+    "_notes": "DEPRECATED: Old way of saving E-Mails"
+  },
+
+  "emailSend": {
+    "type": "emailSend",
+    "typeName": "Email Send Definition",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "folderIdField": "CategoryID",
+    "dependencies": [
+      "folder-userinitiatedsends", "email", "asset-message", "dataExtension",
+      "list", "sendClassification", "senderProfile", "deliveryProfile"
+    ],
+    "dependencyGraph": {
+      "asset": ["r__asset_key"],
+      "dataExtension": ["SendDefinitionList.r__dataExtension_key"],
+      "deliveryProfile": ["r__deliveryProfile_key"],
+      "list": ["SendDefinitionList.r__list_PathName"],
+      "sendClassification": ["r__sendClassification_key"],
+      "senderProfile": ["r__senderProfile_key"]
+    }
+  },
+
+  "event": {
+    "type": "event",
+    "typeName": "Journey: Entry Event Definition",
+    "keyField": "eventDefinitionKey",
+    "idField": "id",
+    "dependencies": ["automation", "dataExtension", "dataExtensionField", "user"],
+    "dependencyGraph": {
+      "automation": ["r__automation_key"],
+      "dataExtension": ["r__dataExtension_key"]
+    }
+  },
+
+  "fileLocation": {
+    "type": "fileLocation",
+    "typeName": "File Location",
+    "keyField": "name",
+    "idField": "id",
+    "dependencies": [],
+    "dependencyGraph": null,
+    "locationTypeMapping": {
+      "Enhanced FTP Site Import Directory": 0,
+      "External FTP Site": 1,
+      "External SFTP Site": 2,
+      "External FTPS Site": 3,
+      "Salesforce Objects and Reports": 4,
+      "Safehouse": 5,
+      "Enhanced FTP Site Export Directory": 6,
+      "Legacy Import Directory": 8,
+      "Relative location under FTP Site": 9,
+      "Amazon Simple Storage Service": 13,
+      "Azure Blob Storage": 15,
+      "Google Cloud Storage": 16
+    }
+  },
+
+  "fileTransfer": {
+    "type": "fileTransfer",
+    "typeName": "Automation: File Transfer Activity",
+    "keyField": "customerKey",
+    "idField": "id",
+    "dependencies": ["fileLocation"],
+    "dependencyGraph": {},
+    "_notes": "fileLocation reference at metadata.source.r__fileLocation_name but cannot be deployed"
+  },
+
+  "filter": {
+    "type": "filter",
+    "typeName": "Automation: Filter Activity",
+    "keyField": "customerKey",
+    "idField": "id",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "folder": {
+    "type": "folder",
+    "typeName": "Folder",
+    "keyField": "CustomerKey",
+    "idField": "ID",
+    "dependencies": [],
+    "dependencyGraph": null,
+    "subTypes": [
+      "asset-shared", "asset", "automations", "contextual_suppression_list",
+      "cloudpages", "dataextension", "filteractivity", "filterdefinition",
+      "hidden", "journey", "list", "mysubs", "publication", "queryactivity",
+      "salesforcedataextension", "shared_content", "shared_data",
+      "shared_dataextension", "shared_email", "shared_item", "shared_portfolio",
+      "shared_publication", "shared_salesforcedataextension",
+      "shared_suppression_list", "shared_template", "ssjsactivity",
+      "suppression_list", "synchronizeddataextension"
+    ]
+  },
+
+  "importFile": {
+    "type": "importFile",
+    "typeName": "Automation: Import File Activity",
+    "keyField": "customerKey",
+    "idField": "importDefinitionId",
+    "dependencies": ["fileLocation", "dataExtension", "list", "mobileKeyword"],
+    "dependencyGraph": {
+      "dataExtension": ["destination.r__dataExtension_key", "source.r__dataExtension_key"],
+      "list": ["destination.r__list_PathName"],
+      "mobileKeyword": ["destination.r__mobileKeyword_key"]
+    },
+    "destinationObjectTypeMapping": {
+      "unknown": 783,
+      "DataExtension": 310,
+      "List": 13,
+      "SMS": 584,
+      "Push": 613,
+      "WhatsApp": 2600
+    },
+    "_notes": "fileLocation reference at source.r__fileLocation_name but cannot be deployed"
+  },
+
+  "journey": {
+    "type": "journey",
+    "typeName": "Journey",
+    "keyField": "key",
+    "idField": "id",
+    "folderIdField": "categoryId",
+    "dependencies": [
+      "folder-journey", "triggeredSend", "dataExtension", "deliveryProfile",
+      "event", "mobileMessage", "mobileCode", "mobileKeyword",
+      "asset-asset", "list", "email", "asset-message",
+      "sendClassification", "senderProfile"
+    ],
+    "dependencyGraph": {
+      "event": ["triggers.metaData.r__event_key"],
+      "dataExtension": [
+        "activities.metaData.highThroughput.r__dataExtension_key",
+        "activities.configurationArguments.triggeredSend.r__dataExtension_key.domainExclusions"
+      ],
+      "deliveryProfile": ["activities.configurationArguments.triggeredSend.r__deliveryProfile_key"],
+      "list": [
+        "activities.configurationArguments.triggeredSend.r__list_PathName.publicationList",
+        "activities.configurationArguments.triggeredSend.r__list_PathName.suppressionLists"
+      ],
+      "senderProfile": ["activities.configurationArguments.triggeredSend.r__senderProfile_key"],
+      "sendClassification": ["activities.configurationArguments.triggeredSend.r__sendClassification_key"],
+      "asset": [
+        "activities.configurationArguments.triggeredSend.r__asset_key",
+        "activities.configurationArguments.r__asset_key"
+      ],
+      "mobileMessage": ["activities.configurationArguments.r__mobileMessage_key"],
+      "mobileKeyword": [
+        "activities.configurationArguments.r__mobileKeyword_key.current",
+        "activities.configurationArguments.r__mobileKeyword_key.next"
+      ],
+      "mobileCode": ["activities.configurationArguments.r__mobileCode_key"]
+    }
+  },
+
+  "list": {
+    "type": "list",
+    "typeName": "List",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": ["folder-mysubs", "folder-list", "folder-publication"],
+    "dependencyGraph": null
+  },
+
+  "mobileCode": {
+    "type": "mobileCode",
+    "typeName": "Mobile Code",
+    "keyField": "code",
+    "idField": "id",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "mobileKeyword": {
+    "type": "mobileKeyword",
+    "typeName": "Mobile Keyword",
+    "keyField": "c__codeKeyword",
+    "idField": "id",
+    "dependencies": ["mobileCode"],
+    "dependencyGraph": {
+      "mobileCode": ["r__mobileCode_key"]
+    }
+  },
+
+  "mobileMessage": {
+    "type": "mobileMessage",
+    "typeName": "MobileConnect SMS",
+    "keyField": "id",
+    "idField": "id",
+    "dependencies": ["mobileCode", "mobileKeyword", "campaign"],
+    "dependencyGraph": {
+      "mobileCode": ["r__mobileCode_key"],
+      "mobileKeyword": [
+        "keyword.r__mobileKeyword_key",
+        "subscriptionKeyword.r__mobileKeyword_key",
+        "nextKeyword.r__mobileKeyword_key"
+      ]
+    },
+    "_notes": "campaign reference exists but cannot be deployed"
+  },
+
+  "query": {
+    "type": "query",
+    "typeName": "Automation: SQL Query Activity",
+    "keyField": "key",
+    "idField": "queryDefinitionId",
+    "folderIdField": "categoryId",
+    "dependencies": ["folder-queryactivity", "dataExtension"],
+    "dependencyGraph": {
+      "dataExtension": ["r__dataExtension_key"]
+    },
+    "targetUpdateTypeMapping": {
+      "Append": 2,
+      "Overwrite": 0,
+      "Update": 1
+    },
+    "_notes": "ONLY tracks TARGET DE, does NOT parse SQL for source DE references"
+  },
+
+  "role": {
+    "type": "role",
+    "typeName": "Role",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "script": {
+    "type": "script",
+    "typeName": "Automation: Script Activity",
+    "keyField": "key",
+    "idField": "ssjsActivityId",
+    "folderIdField": "categoryId",
+    "dependencies": ["folder-ssjsactivity"],
+    "dependencyGraph": null,
+    "_notes": "Does NOT parse script content for DE or other references"
+  },
+
+  "sendClassification": {
+    "type": "sendClassification",
+    "typeName": "Send Classification",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": ["senderProfile", "deliveryProfile", "domainVerification"],
+    "dependencyGraph": {
+      "senderProfile": ["r__senderProfile_key"]
+    },
+    "_notes": "deliveryProfile reference exists but cannot be deployed"
+  },
+
+  "senderProfile": {
+    "type": "senderProfile",
+    "typeName": "Sender Profile",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": ["user", "domainVerification"],
+    "dependencyGraph": {
+      "domainVerification": ["FallbackFromAddress", "FromAddress"]
+    }
+  },
+
+  "transactionalEmail": {
+    "type": "transactionalEmail",
+    "typeName": "Transactional Email",
+    "keyField": "definitionKey",
+    "idField": "definitionId",
+    "dependencies": ["asset-message", "dataExtension", "list", "journey", "sendClassification"],
+    "dependencyGraph": {
+      "asset": ["r__asset_key"],
+      "dataExtension": ["subscriptions.r__dataExtension_key"],
+      "list": ["subscriptions.r__list_PathName"],
+      "journey": ["r__journey_key"],
+      "sendClassification": ["r__sendClassification_key"]
+    }
+  },
+
+  "transactionalMessage": {
+    "type": "transactionalMessage",
+    "typeName": "Transactional Message",
+    "keyField": "definitionKey",
+    "idField": "definitionId",
+    "dependencies": [],
+    "dependencyGraph": null
+  },
+
+  "transactionalPush": {
+    "type": "transactionalPush",
+    "typeName": "Transactional Push",
+    "keyField": "definitionKey",
+    "idField": "definitionId",
+    "dependencies": ["asset-asset"],
+    "dependencyGraph": {
+      "asset": ["r__asset_key"]
+    }
+  },
+
+  "transactionalSMS": {
+    "type": "transactionalSMS",
+    "typeName": "Transactional SMS",
+    "keyField": "definitionKey",
+    "idField": "definitionId",
+    "dependencies": ["mobileCode", "mobileKeyword"],
+    "dependencyGraph": {
+      "mobileKeyword": ["subscriptions.r__mobileKeyword_key"],
+      "mobileCode": ["subscriptions.r__mobileCode_key"]
+    }
+  },
+
+  "triggeredSend": {
+    "type": "triggeredSend",
+    "typeName": "Triggered Send",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "folderIdField": "CategoryID",
+    "dependencies": [
+      "folder-hidden", "folder-triggered_send", "folder-triggered_send_journeybuilder",
+      "email", "asset-message", "list", "sendClassification", "senderProfile"
+    ],
+    "dependencyGraph": {
+      "asset": ["r__asset_key"],
+      "list": ["r__list_PathName"],
+      "sendClassification": ["r__sendClassification_key"],
+      "senderProfile": ["r__senderProfile_key"]
+    }
+  },
+
+  "triggeredSendSummary": {
+    "type": "triggeredSendSummary",
+    "typeName": "Triggered Send Summary",
+    "keyField": "CustomerKey",
+    "idField": "ObjectID",
+    "dependencies": ["triggeredSend", "folder-hidden", "folder-triggered_send", "folder-triggered_send_journeybuilder"],
+    "dependencyGraph": {
+      "triggeredSend": ["r__triggeredSend_key"]
+    }
+  },
+
+  "user": {
+    "type": "user",
+    "typeName": "User",
+    "keyField": "CustomerKey",
+    "idField": "AccountUserID",
+    "dependencies": ["role"],
+    "dependencyGraph": {}
+  },
+
+  "verification": {
+    "type": "verification",
+    "typeName": "Automation: Verification Activity",
+    "keyField": "c__automation_step",
+    "idField": "dataVerificationDefinitionId",
+    "dependencies": ["dataExtension", "user"],
+    "dependencyGraph": {
+      "dataExtension": ["r__dataExtension_key"]
+    }
+  },
+
+  "_gaps": {
+    "query_source_des": "mcdev does NOT parse SQL queryText to extract source DEs - only tracks target DE",
+    "script_references": "mcdev does NOT parse SSJS/AMPScript content for DE or other object references",
+    "asset_content": "mcdev does NOT deeply parse asset HTML/AMPScript for embedded references",
+    "fileLocation_deploy": "fileLocation references are tracked but fileLocation cannot be deployed"
+  },
+
+  "_relationshipTypes": {
+    "automation_contains": "automation → query/script/importFile/fileTransfer/dataExtract/emailSend/verification",
+    "query_writes_de": "query → dataExtension (target only)",
+    "import_reads_file": "importFile → fileLocation (source)",
+    "import_writes": "importFile → dataExtension/list/mobileKeyword (destination)",
+    "journey_entry": "journey → event",
+    "journey_email": "journey → triggeredSend/asset/sendClassification/senderProfile/deliveryProfile",
+    "journey_sms": "journey → mobileMessage/mobileCode/mobileKeyword",
+    "event_entry_de": "event → dataExtension"
+  }
+}

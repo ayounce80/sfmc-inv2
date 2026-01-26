@@ -261,10 +261,11 @@ class JourneyExtractor(BaseExtractor):
                 config_args = activity.get("configurationArguments", {})
 
                 # Email activities (EMAILV2)
+                # Based on mcdev dependencyGraph paths for Journey type
                 if "email" in activity_type.lower() or activity_type == "EMAILV2":
                     triggered_send = config_args.get("triggeredSend", {})
 
-                    # Email reference
+                    # Email reference (classic email ID)
                     email_id = triggered_send.get("emailId")
                     if email_id:
                         result.add_relationship(
@@ -274,6 +275,21 @@ class JourneyExtractor(BaseExtractor):
                             target_id=str(email_id),
                             target_type="email",
                             relationship_type=RelationshipType.JOURNEY_USES_EMAIL,
+                        )
+
+                    # Asset reference (Content Builder email)
+                    # mcdev path: activities.configurationArguments.triggeredSend.r__asset_key
+                    asset_id = triggered_send.get("assetId")
+                    asset_key = triggered_send.get("assetKey")
+                    if asset_id or asset_key:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(asset_id or asset_key),
+                            target_type="asset",
+                            relationship_type=RelationshipType.JOURNEY_USES_ASSET,
+                            metadata={"assetKey": asset_key},
                         )
 
                     # Sender profile reference
@@ -312,7 +328,87 @@ class JourneyExtractor(BaseExtractor):
                             relationship_type=RelationshipType.JOURNEY_USES_SEND_CLASSIFICATION,
                         )
 
+                    # Publication list reference
+                    # mcdev path: activities.configurationArguments.triggeredSend.r__list_PathName.publicationList
+                    publication_list_id = triggered_send.get("publicationListId")
+                    if publication_list_id:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(publication_list_id),
+                            target_type="list",
+                            relationship_type=RelationshipType.JOURNEY_USES_LIST,
+                            metadata={"usage": "publication_list"},
+                        )
+
+                    # Suppression lists reference
+                    # mcdev path: activities.configurationArguments.triggeredSend.r__list_PathName.suppressionLists
+                    suppression_lists = triggered_send.get("suppressionLists", [])
+                    for supp_list in suppression_lists:
+                        list_id = supp_list.get("id") if isinstance(supp_list, dict) else supp_list
+                        if list_id:
+                            result.add_relationship(
+                                source_id=str(journey_id),
+                                source_type="journey",
+                                source_name=journey_name,
+                                target_id=str(list_id),
+                                target_type="list",
+                                relationship_type=RelationshipType.JOURNEY_USES_LIST,
+                                metadata={"usage": "suppression_list"},
+                            )
+
+                    # Domain exclusions DE reference
+                    # mcdev path: activities.configurationArguments.triggeredSend.r__dataExtension_key.domainExclusions
+                    domain_exclusions = triggered_send.get("domainExclusions", [])
+                    for excl in domain_exclusions:
+                        de_id = excl.get("id") if isinstance(excl, dict) else excl
+                        if de_id:
+                            result.add_relationship(
+                                source_id=str(journey_id),
+                                source_type="journey",
+                                source_name=journey_name,
+                                target_id=str(de_id),
+                                target_type="data_extension",
+                                relationship_type=RelationshipType.JOURNEY_USES_DE,
+                                metadata={"usage": "domain_exclusion"},
+                            )
+
+                # High throughput DE reference from activity metaData
+                # mcdev path: activities.metaData.highThroughput.r__dataExtension_key
+                activity_meta = activity.get("metaData", {})
+                high_throughput = activity_meta.get("highThroughput", {})
+                ht_de_key = high_throughput.get("dataExtensionKey") or high_throughput.get("deKey")
+                if ht_de_key:
+                    result.add_relationship(
+                        source_id=str(journey_id),
+                        source_type="journey",
+                        source_name=journey_name,
+                        target_id=str(ht_de_key),
+                        target_type="data_extension",
+                        relationship_type=RelationshipType.JOURNEY_USES_DE,
+                        metadata={"usage": "high_throughput"},
+                    )
+
+                # Direct asset reference (non-email activities)
+                # mcdev path: activities.configurationArguments.r__asset_key
+                direct_asset_id = config_args.get("assetId")
+                direct_asset_key = config_args.get("assetKey")
+                if direct_asset_id or direct_asset_key:
+                    # Avoid duplicating email asset relationships
+                    if activity_type not in ("EMAILV2", "EMAIL"):
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(direct_asset_id or direct_asset_key),
+                            target_type="asset",
+                            relationship_type=RelationshipType.JOURNEY_USES_ASSET,
+                            metadata={"assetKey": direct_asset_key, "activityType": activity_type},
+                        )
+
                 # SMS activities (SMSSYNC)
+                # Based on mcdev dependencyGraph paths for Journey type
                 if activity_type == "SMSSYNC" or activity_type == "SMS":
                     # Application extension key for SMS
                     app_ext_key = config_args.get("applicationExtensionKey")
@@ -325,6 +421,63 @@ class JourneyExtractor(BaseExtractor):
                             target_type="sms_definition",
                             relationship_type=RelationshipType.JOURNEY_USES_SMS,
                             metadata={"applicationExtensionKey": app_ext_key},
+                        )
+
+                    # Mobile message reference
+                    # mcdev path: activities.configurationArguments.r__mobileMessage_key
+                    mobile_message_id = config_args.get("mobileMessageId")
+                    mobile_message_key = config_args.get("mobileMessageKey")
+                    if mobile_message_id or mobile_message_key:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(mobile_message_id or mobile_message_key),
+                            target_type="mobile_message",
+                            relationship_type=RelationshipType.JOURNEY_USES_MOBILE_MESSAGE,
+                        )
+
+                    # Mobile keyword references (current and next)
+                    # mcdev paths: activities.configurationArguments.r__mobileKeyword_key.current/next
+                    for kw_field in ["keywordId", "keywordKey", "currentKeywordId", "nextKeywordId"]:
+                        kw_value = config_args.get(kw_field)
+                        if kw_value:
+                            result.add_relationship(
+                                source_id=str(journey_id),
+                                source_type="journey",
+                                source_name=journey_name,
+                                target_id=str(kw_value),
+                                target_type="mobile_keyword",
+                                relationship_type=RelationshipType.JOURNEY_USES_MOBILE_KEYWORD,
+                                metadata={"field": kw_field},
+                            )
+
+                    # Mobile code reference
+                    # mcdev path: activities.configurationArguments.r__mobileCode_key
+                    mobile_code = config_args.get("mobileCode") or config_args.get("code")
+                    if mobile_code:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(mobile_code),
+                            target_type="mobile_code",
+                            relationship_type=RelationshipType.JOURNEY_USES_MOBILE_CODE,
+                        )
+
+                # Push notification activities
+                if activity_type == "PUSH" or "push" in activity_type.lower():
+                    # Push may reference an asset (jsonmessage subtype)
+                    push_asset_id = config_args.get("assetId")
+                    if push_asset_id:
+                        result.add_relationship(
+                            source_id=str(journey_id),
+                            source_type="journey",
+                            source_name=journey_name,
+                            target_id=str(push_asset_id),
+                            target_type="asset",
+                            relationship_type=RelationshipType.JOURNEY_USES_PUSH,
+                            metadata={"assetType": "push"},
                         )
 
                 # Filter/Decision activities

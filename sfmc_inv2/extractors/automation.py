@@ -17,13 +17,14 @@ logger = logging.getLogger(__name__)
 # Activity type ID to name mapping
 # Based on mcdev (sfmc-devtools) authoritative activityTypeMapping
 # Reference: https://github.com/Accenture/sfmc-devtools
+# See: lib/metadataTypes/definitions/Automation.definition.js
 ACTIVITY_TYPE_MAP = {
     42: "Email Send",  # emailSend in mcdev
     43: "Import File",  # importFile in mcdev
-    45: "Transfer File (Legacy)",
+    45: "Refresh Group",  # refreshGroup in mcdev
     53: "File Transfer",  # fileTransfer in mcdev
     73: "Data Extract",  # dataExtract in mcdev
-    84: "Report Definition",
+    84: "Report Definition",  # reportDefinition in mcdev
     300: "Query Activity",  # query in mcdev
     303: "Filter Activity",  # filter in mcdev
     423: "Script Activity",  # script in mcdev
@@ -31,9 +32,9 @@ ACTIVITY_TYPE_MAP = {
     427: "Build Audience",  # UI-only
     467: "Wait Activity",  # wait in mcdev
     667: "Journey Entry Injection",
-    724: "Refresh Group",  # refreshGroup in mcdev
+    724: "Refresh Mobile Filtered List",  # refreshMobileFilteredList in mcdev
     725: "SMS",  # sms in mcdev
-    726: "Predictive Intelligence Recommendations",
+    726: "Import Mobile Contact",  # importMobileContact in mcdev
     733: "Journey Entry (Legacy)",  # journeyEntryOld in mcdev
     736: "Push Notification",  # push in mcdev
     749: "Fire Event",  # fireEvent in mcdev
@@ -41,7 +42,8 @@ ACTIVITY_TYPE_MAP = {
     783: "Send SMS (v2)",  # Alternative SMS activity type
     952: "Journey Entry",  # journeyEntry in mcdev
     1000: "Verification Activity",  # verification in mcdev
-    1101: "Audience Studio Segment Refresh",
+    1010: "Interaction Studio Data",  # interactionStudioData in mcdev
+    1101: "Interactions",  # interactions in mcdev (Audience Studio)
 }
 
 # Automation status ID to name mapping
@@ -57,6 +59,71 @@ AUTOMATION_STATUS_MAP = {
     7: "InactiveTrigger",
     8: "Skipped",
 }
+
+
+def parse_schedule_type(schedule: Optional[dict[str, Any]]) -> str:
+    """Parse schedule data into a human-readable schedule type.
+
+    Parses the icalRecur field (e.g., 'FREQ=DAILY;COUNT=1;INTERVAL=1') and
+    other schedule properties into a readable string.
+    """
+    if not schedule:
+        return ""
+
+    # Check schedule status first
+    status = schedule.get("scheduleStatus", "")
+    if status == "none":
+        return ""  # Not scheduled
+
+    ical = schedule.get("icalRecur", "")
+    if not ical:
+        # Check for trigger-based schedules
+        type_id = schedule.get("typeId")
+        if type_id == 2:  # File drop trigger
+            return "Triggered (File Drop)"
+        return ""
+
+    # Parse icalRecur string into a dict
+    parts = {}
+    for part in ical.split(";"):
+        if "=" in part:
+            key, value = part.split("=", 1)
+            parts[key] = value
+
+    freq = parts.get("FREQ", "").lower()
+    interval = parts.get("INTERVAL", "1")
+    count = parts.get("COUNT")
+    byday = parts.get("BYDAY")
+    bymonthday = parts.get("BYMONTHDAY")
+
+    # Build human-readable string
+    if freq == "minutely":
+        base = f"Every {interval} minute(s)" if interval != "1" else "Every minute"
+    elif freq == "hourly":
+        base = f"Every {interval} hour(s)" if interval != "1" else "Hourly"
+    elif freq == "daily":
+        base = f"Every {interval} day(s)" if interval != "1" else "Daily"
+    elif freq == "weekly":
+        base = f"Every {interval} week(s)" if interval != "1" else "Weekly"
+        if byday:
+            days = {"MO": "Mon", "TU": "Tue", "WE": "Wed", "TH": "Thu",
+                    "FR": "Fri", "SA": "Sat", "SU": "Sun"}
+            day_list = [days.get(d, d) for d in byday.split(",")]
+            base += f" ({', '.join(day_list)})"
+    elif freq == "monthly":
+        base = f"Every {interval} month(s)" if interval != "1" else "Monthly"
+        if bymonthday:
+            base += f" (day {bymonthday})"
+    elif freq == "yearly":
+        base = f"Every {interval} year(s)" if interval != "1" else "Yearly"
+    else:
+        base = freq.capitalize() if freq else "Unknown"
+
+    # Add count if it's a one-time schedule
+    if count == "1":
+        base = "Once"
+
+    return base
 
 
 class AutomationExtractor(BaseExtractor):
@@ -189,6 +256,7 @@ class AutomationExtractor(BaseExtractor):
         transformed = []
 
         for item in items:
+            schedule = item.get("schedule")
             output = {
                 "id": item.get("id"),
                 "name": item.get("name"),
@@ -201,13 +269,14 @@ class AutomationExtractor(BaseExtractor):
                 "isActive": item.get("isActive"),
                 "type": item.get("type"),
                 "typeId": item.get("typeId"),
+                "scheduleType": parse_schedule_type(schedule),
                 "createdDate": item.get("createdDate"),
                 "modifiedDate": item.get("modifiedDate"),
                 "createdBy": item.get("createdBy"),
                 "modifiedBy": item.get("modifiedBy"),
                 "lastRunTime": item.get("lastRunTime"),
                 "lastRunStatus": item.get("lastRunStatus"),
-                "schedule": item.get("schedule"),
+                "schedule": schedule,
                 "notifications": item.get("notifications"),
                 "steps": item.get("steps", []),
                 "stepCount": len(item.get("steps", [])),

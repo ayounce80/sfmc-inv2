@@ -31,15 +31,22 @@ class RelationshipType(str, Enum):
     QUERY_WRITES_DE = "query_writes_de"
 
     # Journey relationships
+    # Based on mcdev (sfmc-devtools) dependencyGraph for Journey type
     JOURNEY_USES_DE = "journey_uses_de"
     JOURNEY_USES_EMAIL = "journey_uses_email"
+    JOURNEY_USES_ASSET = "journey_uses_asset"  # Content Builder assets
     JOURNEY_USES_FILTER = "journey_uses_filter"
     JOURNEY_USES_AUTOMATION = "journey_uses_automation"
     JOURNEY_USES_EVENT = "journey_uses_event"
     JOURNEY_USES_SENDER_PROFILE = "journey_uses_sender_profile"
     JOURNEY_USES_DELIVERY_PROFILE = "journey_uses_delivery_profile"
     JOURNEY_USES_SEND_CLASSIFICATION = "journey_uses_send_classification"
+    JOURNEY_USES_LIST = "journey_uses_list"  # Publication/suppression lists
     JOURNEY_USES_SMS = "journey_uses_sms"
+    JOURNEY_USES_MOBILE_MESSAGE = "journey_uses_mobile_message"
+    JOURNEY_USES_MOBILE_KEYWORD = "journey_uses_mobile_keyword"
+    JOURNEY_USES_MOBILE_CODE = "journey_uses_mobile_code"
+    JOURNEY_USES_PUSH = "journey_uses_push"
 
     # Import relationships
     IMPORT_WRITES_DE = "import_writes_de"
@@ -60,11 +67,24 @@ class RelationshipType(str, Enum):
     ASSET_USES_CONTENT_BLOCK = "asset_uses_content_block"
 
     # Triggered Send relationships
+    # Based on mcdev (sfmc-devtools) dependencyGraph for TriggeredSend type
     TRIGGERED_SEND_USES_EMAIL = "triggered_send_uses_email"
+    TRIGGERED_SEND_USES_ASSET = "triggered_send_uses_asset"  # Content Builder email asset
     TRIGGERED_SEND_USES_LIST = "triggered_send_uses_list"
     TRIGGERED_SEND_USES_SENDER_PROFILE = "triggered_send_uses_sender_profile"
     TRIGGERED_SEND_USES_DELIVERY_PROFILE = "triggered_send_uses_delivery_profile"
     TRIGGERED_SEND_USES_SEND_CLASSIFICATION = "triggered_send_uses_send_classification"
+
+    # Transactional message relationships
+    # Based on mcdev (sfmc-devtools) dependencyGraph for Transactional* types
+    TRANSACTIONAL_EMAIL_USES_ASSET = "transactional_email_uses_asset"
+    TRANSACTIONAL_EMAIL_USES_DE = "transactional_email_uses_de"
+    TRANSACTIONAL_EMAIL_USES_LIST = "transactional_email_uses_list"
+    TRANSACTIONAL_EMAIL_USES_JOURNEY = "transactional_email_uses_journey"
+    TRANSACTIONAL_EMAIL_USES_SEND_CLASSIFICATION = "transactional_email_uses_send_classification"
+    TRANSACTIONAL_SMS_USES_MOBILE_KEYWORD = "transactional_sms_uses_mobile_keyword"
+    TRANSACTIONAL_SMS_USES_MOBILE_CODE = "transactional_sms_uses_mobile_code"
+    TRANSACTIONAL_PUSH_USES_ASSET = "transactional_push_uses_asset"
 
     # Send Classification relationships
     SEND_CLASSIFICATION_USES_SENDER_PROFILE = "send_classification_uses_sender_profile"
