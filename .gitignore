@@ -62,3 +62,6 @@ inventory_*/
 .DS_Store
 Thumbs.db
 reports/cleanup/.~lock.*
+
+# Reports (generated analysis files)
+reports/
